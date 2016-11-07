@@ -2,9 +2,7 @@ package com.codecool.shop.dao.implementation;
 
 import com.codecool.shop.model.Product;
 
-/**
- * Created by handris on 11/7/16.
- */
+
 public class LineItem {
     private Product product;
     private int quantity;
