@@ -37,4 +37,8 @@ public class LineItem {
     public int getQuantity() {
         return quantity;
     }
+
+    public String toString(){
+        return "Product name: " + this.product.getName() + ", quantity: " + this.quantity;
+    }
 }
