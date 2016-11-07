@@ -19,12 +19,15 @@ public class Cart {
     }
 
     public void add(LineItem item){
+        System.out.println("Entering add method...");
         for(LineItem currentItem : this.items){
-            if(item.getProduct() == currentItem.getProduct())
+            if(item.getProduct().getName() == currentItem.getProduct().getName()){
                 currentItem.incrementQuantity();
-            else
-                this.items.add(item);
+                System.out.println("if ág");
+                return;
+            }
         }
+        this.items.add(item);
     }
 
     public void remove(LineItem item){
