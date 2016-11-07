@@ -19,11 +19,9 @@ public class Cart {
     }
 
     public void add(LineItem item){
-        System.out.println("Entering add method...");
         for(LineItem currentItem : this.items){
             if(item.getProduct().getName() == currentItem.getProduct().getName()){
                 currentItem.incrementQuantity();
-                System.out.println("if ág");
                 return;
             }
         }
@@ -31,7 +29,12 @@ public class Cart {
     }
 
     public void remove(LineItem item){
-        this.remove(item);
+        for(LineItem currentItem : this.items){
+            if(item.getProduct().getName() == currentItem.getProduct().getName()){
+                currentItem.decrementQuantity();
+                return;
+            }
+        }
     }
 
     public void process(){
