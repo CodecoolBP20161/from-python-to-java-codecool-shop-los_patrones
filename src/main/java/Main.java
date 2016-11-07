@@ -10,15 +10,18 @@ public class Main {
 
     public static void main(String[] args) {
 
-        // default server settings
-        exception(Exception.class, (e, req, res) -> e.printStackTrace());
-        staticFileLocation("/public");
-        port(8888);
+        Cart cart = new Cart();
+        System.out.println(cart);
 
-        populateData();
-
-        get("/", ProductController::renderProducts, new ThymeleafTemplateEngine());
-        get("/hello", (req, res) -> "Hello World");
+//        // default server settings
+//        exception(Exception.class, (e, req, res) -> e.printStackTrace());
+//        staticFileLocation("/public");
+//        port(8888);
+//
+//        populateData();
+//
+//        get("/", ProductController::renderProducts, new ThymeleafTemplateEngine());
+//        get("/hello", (req, res) -> "Hello World");
 
     }
 
