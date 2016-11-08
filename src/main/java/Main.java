@@ -4,6 +4,10 @@ import com.codecool.shop.controller.ProductController;
 import com.codecool.shop.dao.*;
 import com.codecool.shop.dao.implementation.*;
 import com.codecool.shop.model.*;
+import com.google.gson.Gson;
+import spark.Request;
+import spark.Response;
+import spark.Route;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
 
 public class Main {
@@ -19,7 +23,13 @@ public class Main {
 
         get("/", ProductController::renderProducts, new ThymeleafTemplateEngine());
         get("/hello", (req, res) -> "Hello World");
-
+        get("/search:searchParam", ProductController::renderProducts, new ThymeleafTemplateEngine());
+        get("/cart", new Route(){
+            @Override
+            public Gson handle(Request request, Response response) throws Exception {
+                return ProductController.buildJSON(request, response);
+            }
+        });
     }
 
     public static void populateData() {
@@ -37,11 +47,17 @@ public class Main {
         //setting up a new product category
         ProductCategory tablet = new ProductCategory("Tablet", "Hardware", "A tablet computer, commonly shortened to tablet, is a thin, flat mobile computer with a touchscreen display.");
         productCategoryDataStore.add(tablet);
+        ProductCategory laptop = new ProductCategory("Laptop", "Hardware", "A tablet computer, commonly shortened to tablet, is a thin, flat mobile computer with a touchscreen display.");
+        productCategoryDataStore.add(laptop);
+        ProductCategory PC = new ProductCategory("PC", "Hardware", "A tablet computer, commonly shortened to tablet, is a thin, flat mobile computer with a touchscreen display.");
+        productCategoryDataStore.add(PC);
 
         //setting up products and printing it
         productDataStore.add(new Product("Amazon Fire", 49.9f, "USD", "Fantastic price. Large content ecosystem. Good parental controls. Helpful technical support.", tablet, amazon));
         productDataStore.add(new Product("Lenovo IdeaPad Miix 700", 479, "USD", "Keyboard cover is included. Fanless Core m5 processor. Full-size USB ports. Adjustable kickstand.", tablet, lenovo));
         productDataStore.add(new Product("Amazon Fire HD 8", 89, "USD", "Amazon's latest Fire HD 8 tablet is a great value for media consumption.", tablet, amazon));
+        productDataStore.add(new Product("Whatever", 10000, "HUF", "Whatever", laptop, amazon));
+        productDataStore.add(new Product("Somethingelse", 10000, "HUF", "Something", PC, lenovo));
 
     }
 
