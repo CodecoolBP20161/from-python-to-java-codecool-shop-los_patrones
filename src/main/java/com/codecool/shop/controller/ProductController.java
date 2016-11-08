@@ -34,10 +34,10 @@ public class ProductController {
         ProductDao productDataStore = ProductDaoMem.getInstance();
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
         Cart cart = Cart.getInstance();
+
         int id = parseInt(req.params(":id"));
         LineItem item = new LineItem(productDataStore.find(id));
         cart.add(item);
-        cart.process();
 
         Map params = new HashMap<>();
 

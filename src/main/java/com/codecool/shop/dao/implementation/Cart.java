@@ -30,19 +30,23 @@ public class Cart {
         for(LineItem currentItem : this.items){
             if(item.getProduct().getName() == currentItem.getProduct().getName()){
                 currentItem.incrementQuantity();
+                this.process();
                 return;
             }
         }
         this.items.add(item);
+        this.process();
     }
 
     public void remove(LineItem item){
         for(LineItem currentItem : this.items){
             if(item.getProduct().getName() == currentItem.getProduct().getName()){
                 currentItem.decrementQuantity();
+                this.process();
                 return;
             }
         }
+        this.process();
     }
 
     public void process(){
