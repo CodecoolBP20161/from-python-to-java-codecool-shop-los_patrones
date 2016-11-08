@@ -42,7 +42,7 @@ public class Cart {
         this.totalPrice = 0;
         for(LineItem item : this.items){
             if(item.getQuantity() == 0){
-                this.remove(item);
+                this.items.remove(item);
             }else{
                 this.totalQantity += item.getQuantity();
                 this.totalPrice += item.getQuantity() * item.getProduct().getDefaultPrice();

@@ -10,16 +10,6 @@ public class Main {
 
     public static void main(String[] args) {
 
-//        Cart cart1 = new Cart();
-//        Cart cart2 = new Cart();
-//
-//        cart1.add(new LineItem(new Product("cica", "aranyos, kis állat")));
-//        cart1.add(new LineItem(new Product("cica", "aranyos, kis állat")));
-//        cart1.add(new LineItem(new Product("kutya", "aranyos, nagy állat")));
-//
-//        System.out.println(cart1);
-//        System.out.println(cart2);
-
         // default server settings
         exception(Exception.class, (e, req, res) -> e.printStackTrace());
         staticFileLocation("/public");
