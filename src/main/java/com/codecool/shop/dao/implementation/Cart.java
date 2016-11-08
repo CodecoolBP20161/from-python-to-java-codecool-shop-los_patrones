@@ -10,12 +10,20 @@ public class Cart {
     private static int counter = 0;
     private int totalQantity;
     private float totalPrice;
+    private static Cart instance = null;
 
     public Cart(){
         this.id = ++counter;
         this.status = "New";
         this.totalQantity = 0;
         this.totalPrice = 0;
+    }
+
+    public static Cart getInstance() {
+        if (instance == null) {
+            instance = new Cart();
+        }
+        return instance;
     }
 
     public void add(LineItem item){

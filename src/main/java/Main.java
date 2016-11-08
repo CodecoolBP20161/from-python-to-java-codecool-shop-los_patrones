@@ -1,10 +1,19 @@
-import static spark.Spark.*;
-
+import com.codecool.shop.controller.JsonTransformer;
 import com.codecool.shop.controller.ProductController;
-import com.codecool.shop.dao.*;
-import com.codecool.shop.dao.implementation.*;
-import com.codecool.shop.model.*;
+import com.codecool.shop.dao.ProductCategoryDao;
+import com.codecool.shop.dao.ProductDao;
+import com.codecool.shop.dao.SupplierDao;
+import com.codecool.shop.dao.implementation.Cart;
+import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
+import com.codecool.shop.dao.implementation.ProductDaoMem;
+import com.codecool.shop.dao.implementation.SupplierDaoMem;
+import com.codecool.shop.model.Product;
+import com.codecool.shop.model.ProductCategory;
+import com.codecool.shop.model.Supplier;
+import com.google.gson.Gson;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
+
+import static spark.Spark.*;
 
 public class Main {
 
@@ -18,12 +27,20 @@ public class Main {
         populateData();
 
         get("/", ProductController::renderProducts, new ThymeleafTemplateEngine());
-        get("/hello", (req, res) -> "Hello World");
+        get("/tocart/:id", ProductController::getToCart, new ThymeleafTemplateEngine());
+//        get("/hello", (req, res) -> "Hello World");
+        Gson gson = new Gson();
+        Supplier amazon = new Supplier("Amazon", "Digital content and services");
+        get("/hello", (request, response) -> amazon, gson::toJson);
+//        get("/tocart/:id", (req, res) -> "Hello World");
+
 
     }
 
     public static void populateData() {
 
+
+        Cart cart = Cart.getInstance();
         ProductDao productDataStore = ProductDaoMem.getInstance();
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
         SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
