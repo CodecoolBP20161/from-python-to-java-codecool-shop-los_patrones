@@ -1,8 +1,5 @@
-$('document').ready(function(){
-    $.ajax({url: "/cart", success: function(result){
-        // $("#div1").html(result);
-        console.log("Result: ");
-        console.log(JSON.parse(result));
-
-    }});
+$(document).ready(function(){
+    $('#resident_modal').on('show.bs.modal', function (event) {
+        console.log("modal clicked");
+    })
 });
