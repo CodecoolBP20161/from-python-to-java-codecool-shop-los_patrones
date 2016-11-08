@@ -1,6 +1,9 @@
 package com.codecool.shop.dao.implementation;
 
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public class Cart {
@@ -64,6 +67,27 @@ public class Cart {
 
     public String toString(){
         return "Id: " + this.id + ", status: " + this.status + ", items: " + this.items;
+    }
+
+    public String toJson(){
+        ArrayList<String> names = new ArrayList<>();
+        ArrayList<String> prices = new ArrayList<>();
+        ArrayList<Integer> quantities = new ArrayList<>();
+
+        for(LineItem item : this.items){
+            names.add(item.getProduct().getName());
+            prices.add(item.getProduct().getPrice());
+            quantities.add(item.getQuantity());
+        }
+
+        HashMap<String, ArrayList> result = new HashMap<>();
+        result.put("names", names);
+        result.put("prices", prices);
+        result.put("quantites", quantities);
+
+        Gson gson = new Gson();
+
+        return gson.toJson(result);
     }
 }
 

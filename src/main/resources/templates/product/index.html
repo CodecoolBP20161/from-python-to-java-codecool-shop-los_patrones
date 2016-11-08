@@ -40,7 +40,16 @@
             </div>
 
             <div class="modal-body">
-
+                <table id="items-table" class="table table-bordered table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>Product name</th>
+                            <th>Desired quantity</th>
+                            <th>Price per item</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cicamica"></tbody>
+                </table>
             </div>
 
             <div class="modal-footer">
@@ -59,7 +68,7 @@
 <div class="container">
 
     <div class="basketcontainer">
-        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#cartModal">
+        <button id="cartModalButton" type="button" class="btn btn-info" data-toggle="modal" data-target="#cartModal">
             <span class="glyphicon glyphicon-shopping-cart"></span> Your shopping cart
         </button>
     </div>

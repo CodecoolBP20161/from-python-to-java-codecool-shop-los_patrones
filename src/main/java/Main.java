@@ -4,6 +4,7 @@ import com.codecool.shop.controller.ProductController;
 import com.codecool.shop.dao.*;
 import com.codecool.shop.dao.implementation.*;
 import com.codecool.shop.model.*;
+import com.google.gson.Gson;
 import spark.Request;
 import spark.Response;
 import spark.Route;
@@ -20,6 +21,13 @@ public class Main {
 
         populateData();
 
+        Cart cart = new Cart();
+        LineItem item = new LineItem(new Product("Kiscica", "description"));
+        LineItem item2 = new LineItem(new Product("Kiskutya", "description"));
+        cart.add(item);
+        cart.add(item);
+        cart.add(item2);
+
         get("/", ProductController::renderProducts, new ThymeleafTemplateEngine());
         get("/hello", (req, res) -> "Hello World");
 
@@ -29,11 +37,8 @@ public class Main {
         get("/cart", new Route(){
 
             @Override
-            public Supplier handle(Request request, Response response) throws Exception {
-                String answer = "valami";
-                Supplier amazon = new Supplier("Amazon", "Digital content and services");
-                System.out.println(amazon);
-                return amazon;
+            public String handle(Request request, Response response) throws Exception {
+                return cart.toJson();
             }
         });
 
