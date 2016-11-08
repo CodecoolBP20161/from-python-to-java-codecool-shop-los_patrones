@@ -4,6 +4,9 @@ import com.codecool.shop.controller.ProductController;
 import com.codecool.shop.dao.*;
 import com.codecool.shop.dao.implementation.*;
 import com.codecool.shop.model.*;
+import spark.Request;
+import spark.Response;
+import spark.Route;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
 
 public class Main {
@@ -19,6 +22,21 @@ public class Main {
 
         get("/", ProductController::renderProducts, new ThymeleafTemplateEngine());
         get("/hello", (req, res) -> "Hello World");
+
+
+        get("/oke", (req, res) -> "okéka");
+
+        get("/cart", new Route(){
+
+            @Override
+            public Supplier handle(Request request, Response response) throws Exception {
+                String answer = "valami";
+                Supplier amazon = new Supplier("Amazon", "Digital content and services");
+                System.out.println(amazon);
+                return amazon;
+            }
+        });
+
 
     }
 
