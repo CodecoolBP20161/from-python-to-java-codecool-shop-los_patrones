@@ -25,7 +25,6 @@ public class LineItem {
 
     void incrementQuantity(){
         this.quantity++;
-
     }
 
     void decrementQuantity(){

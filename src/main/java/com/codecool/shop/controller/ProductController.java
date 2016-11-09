@@ -66,11 +66,13 @@ public class ProductController {
         ProductDao productDataStore = ProductDaoMem.getInstance();
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
         Cart cart = Cart.getInstance();
+        System.out.println(cart.getItems());
         ArrayList<String> names = new ArrayList<>();
         ArrayList<String> prices = new ArrayList<>();
         ArrayList<Integer> quantities = new ArrayList<>();
         ArrayList<Float> totalprice = new ArrayList<>();
         ArrayList<Integer> totalquantity = new ArrayList<>();
+
         if(req.params(":id") != null){
             int id = parseInt(req.params(":id"));
             Product product = productDataStore.find(id);
@@ -80,8 +82,11 @@ public class ProductController {
         }
         if(req.params(":symbol") != null){
             if (req.params(":symbol").equals("+"))
+                System.out.println("+");
+                System.out.println(cart.getItems());
                 cart.increaseQuantity(parseInt(req.params(":id")));
             if (req.params(":symbol").equals("-"))
+                System.out.println("-");
                 cart.decreaseQuantity(parseInt(req.params(":id")));
         }
 

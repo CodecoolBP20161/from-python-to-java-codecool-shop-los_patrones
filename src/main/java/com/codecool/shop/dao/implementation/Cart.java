@@ -19,8 +19,18 @@ public class Cart {
         this.totalPrice = 0;
     }
 
-    public void increaseQuantity(int i){
-        this.items.get(i).incrementQuantity();
+    public String increaseQuantity(int i){
+        System.out.println(this.items);
+        try{
+            this.items.get(i).incrementQuantity();
+            return "Successful";
+        }
+
+        catch(IndexOutOfBoundsException e){
+            e.printStackTrace();
+            return "No such LineItem exists!";
+        }
+
 
     }
 
