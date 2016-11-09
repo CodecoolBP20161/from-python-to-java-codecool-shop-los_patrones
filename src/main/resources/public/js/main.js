@@ -13,23 +13,17 @@ $('document').ready(function(){
                 row.id = "valami";
                 row.innerHTML = "<td>" + result.names[i] + "</td>" +
                                 "<td>" + result.prices[i]+"</td>" +
-                                "<td>" + result.quantites[i] + "</td>";
-                                // "<td><span class='glyphicon glyphicon-plus'></span></td>" +
-                                // "<td><span class='glyphicon glyphicon-minus'></span></td>";
+                                "<td>" + result.quantites[i] + "</td>" +
+                                "<td><button type='button' class='button glyphicon glyphicon-minus' id='+"+ i +"'></button></td>" +
+                                "<td><button type='button' class='button glyphicon glyphicon-plus' id='-" + i + "'></button></td>";
                 table_body.appendChild(row);
 
-                var $button = $('<button/>', {
-                    type: 'button',
-                    'class': 'glyphicon glyphicon-plus',
-                    id: result.names[i],
-                    text: 'Here!',
-                    click: function() {
-                        window.alert('Hello! My id is '+ this.id);
-                    }
-                });
-
-                $button.appendTo('#valami');
             }
+            $('button').click(function(){
+                console.log(this.id);
+            });
         }});
+
     });
+
 });

@@ -21,6 +21,10 @@ public class Cart {
         this.totalPrice = 0;
     }
 
+    public ArrayList<LineItem> getItems() {
+        return items;
+    }
+
     public void add(LineItem item){
         for(LineItem currentItem : this.items){
             if(item.getProduct().getName() == currentItem.getProduct().getName()){

@@ -1,14 +1,17 @@
-import static spark.Spark.*;
-
 import com.codecool.shop.controller.ProductController;
-import com.codecool.shop.dao.*;
+import com.codecool.shop.dao.ProductCategoryDao;
+import com.codecool.shop.dao.ProductDao;
+import com.codecool.shop.dao.SupplierDao;
 import com.codecool.shop.dao.implementation.*;
-import com.codecool.shop.model.*;
-import com.google.gson.Gson;
+import com.codecool.shop.model.Product;
+import com.codecool.shop.model.ProductCategory;
+import com.codecool.shop.model.Supplier;
 import spark.Request;
 import spark.Response;
 import spark.Route;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
+
+import static spark.Spark.*;
 
 public class Main {
 
@@ -42,8 +45,17 @@ public class Main {
             }
         });
 
+        post("/+quantity/:id", (req, res) -> cart.getItems(),);
+
+        put("/users/:id", (req, res) -> userService.updateUser(
+                req.params(":id"),
+                req.queryParams("name"),
+                req.queryParams("email")
+        ), json());
+
 
     }
+
 
     public static void populateData() {
 
