@@ -62,5 +62,10 @@
 }
 
 .thumbnail {
-    background-color: red;
+    padding: 10px;
+}
+
+span {
+    margin-left: 10px;
+    margin-right: 10px;
 }

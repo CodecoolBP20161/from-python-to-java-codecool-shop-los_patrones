@@ -86,6 +86,7 @@ public class Product extends BaseModel {
         returnDict.put("currency", defaultCurrency.toString());
         returnDict.put("category", productCategory.getName());
         returnDict.put("supplier", supplier.getName());
+        returnDict.put("description", description);
         return returnDict;
     }
 }
