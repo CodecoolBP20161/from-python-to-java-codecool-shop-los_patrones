@@ -14,13 +14,21 @@ $('document').ready(function(){
                 row.innerHTML = "<td>" + result.names[i] + "</td>" +
                                 "<td>" + result.prices[i]+"</td>" +
                                 "<td>" + result.quantites[i] + "</td>" +
-                                "<td><button type='button' class='button glyphicon glyphicon-minus' id='+"+ i +"'></button></td>" +
-                                "<td><button type='button' class='button glyphicon glyphicon-plus' id='-" + i + "'></button></td>";
+                                "<td><button type='button' class='button glyphicon glyphicon-minus' id='-"+ i +"'></button></td>" +
+                                "<td><button type='button' class='button glyphicon glyphicon-plus' id='+" + i + "'></button></td>";
                 table_body.appendChild(row);
 
             }
             $('button').click(function(){
-                console.log(this.id);
+                if(this.id[0] == '-'){
+                    $.ajax({url: "/-quantity/" + this.id[1], success: function(result){
+
+                    }});
+                }else if(this.id[0] == '+'){
+                    $.ajax({url: "/+quantity/" + this.id[1], success: function(result){
+
+                    }});
+                }
             });
         }});
 
