@@ -45,13 +45,15 @@ public class Main {
             }
         });
 
-        post("/+quantity/:id", (req, res) -> cart.getItems(),);
+        post("/+quantity/:id", (request, response) -> {
+            System.out.println(request.params(":id"));
+            return "";
+        });
 
-        put("/users/:id", (req, res) -> userService.updateUser(
-                req.params(":id"),
-                req.queryParams("name"),
-                req.queryParams("email")
-        ), json());
+        post("/-quantity/:id", (request, response) -> {
+            System.out.println(request.params(":id"));
+            return "";
+        });
 
 
     }
