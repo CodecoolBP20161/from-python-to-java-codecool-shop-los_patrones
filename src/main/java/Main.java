@@ -22,11 +22,21 @@ public class Main {
         populateData();
 
         get("/", ProductController::renderProducts, new ThymeleafTemplateEngine());
-        get("/hello", (req, res) -> "Hello World");
-        get("/search:searchParam", ProductController::renderProducts, new ThymeleafTemplateEngine());
-        get("/cart", new Route(){
+        get("/initMain", new Route(){
             @Override
-            public Gson handle(Request request, Response response) throws Exception {
+            public String handle(Request request, Response response) throws Exception {
+                return ProductController.indexMainResponse(request, response);
+            }
+        });
+        get("/indexSearch", new Route(){
+            @Override
+            public String handle(Request request, Response response) throws Exception {
+                return ProductController.indexSearch(request, response);
+            }
+        });
+        get("/example", new Route(){
+            @Override
+            public String handle(Request request, Response response) throws Exception {
                 return ProductController.buildJSON(request, response);
             }
         });
