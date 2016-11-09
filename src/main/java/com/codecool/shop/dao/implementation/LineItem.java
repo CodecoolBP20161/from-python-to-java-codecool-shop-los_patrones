@@ -15,7 +15,7 @@ public class LineItem {
         this.quantity = 1;
     }
 
-    public Product getProduct() {
+    Product getProduct() {
         return product;
     }
 
@@ -23,16 +23,16 @@ public class LineItem {
         this.product = product;
     }
 
-    public void incrementQuantity(){
+    void incrementQuantity(){
         this.quantity++;
 
     }
 
-    public void decrementQuantity(){
+    void decrementQuantity(){
         this.quantity--;
     }
 
-    public int getQuantity() {
+    int getQuantity() {
         return quantity;
     }
 

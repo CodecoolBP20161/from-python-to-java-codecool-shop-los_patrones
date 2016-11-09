@@ -12,7 +12,7 @@ public class Cart {
     private float totalPrice;
     private static Cart instance = null;
 
-    public Cart(){
+    Cart(){
         this.id = ++counter;
         this.status = "New";
         this.totalQantity = 0;
@@ -49,7 +49,7 @@ public class Cart {
         this.process();
     }
 
-    public void process(){
+    private void process(){
         this.totalQantity = 0;
         this.totalPrice = 0;
         for(LineItem item : this.items){

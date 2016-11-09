@@ -36,7 +36,8 @@ public class ProductController {
         Cart cart = Cart.getInstance();
 
         int id = parseInt(req.params(":id"));
-        LineItem item = new LineItem(productDataStore.find(id));
+        Product product = productDataStore.find(id);
+        LineItem item = new LineItem(product);
         cart.add(item);
 
         Map params = new HashMap<>();
