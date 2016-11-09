@@ -11,6 +11,9 @@ import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
 import com.google.gson.Gson;
+import spark.Request;
+import spark.Response;
+import spark.Route;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
 
 import static spark.Spark.*;
@@ -27,12 +30,19 @@ public class Main {
         populateData();
 
         get("/", ProductController::renderProducts, new ThymeleafTemplateEngine());
-        get("/tocart/:id", ProductController::getToCart, new ThymeleafTemplateEngine());
+//        post("/tocart/:id", ProductController::getToCart, new ThymeleafTemplateEngine());
 //        get("/hello", (req, res) -> "Hello World");
 //        Gson gson = new Gson();
+//        Cart cart = Cart.getInstance();
 //        Supplier amazon = new Supplier("Amazon", "Digital content and services");
-//        get("/hello", (request, response) -> amazon, gson::toJson);
+//        get("/hello", (request, response) -> cart, gson::toJson);
 //        get("/tocart/:id", (req, res) -> "Hello World");
+        get("/tocart/:id", new Route(){
+            @Override
+            public String handle(Request request, Response response) throws Exception {
+                return ProductController.CarttoJson(request, response);
+            }
+        });
 
 
     }

@@ -1,6 +1,11 @@
 package com.codecool.shop.dao.implementation;
 
+import com.google.gson.Gson;
+import spark.Request;
+import spark.Response;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public class Cart {
@@ -62,12 +67,16 @@ public class Cart {
         }
     }
 
+    public ArrayList<LineItem> getItems() {
+        return items;
+    }
+
     public int getTotalItemNumber(){
         return this.totalQantity;
     }
 
     public float getTotalPrice(){
-        return this.totalQantity;
+        return this.totalPrice;
     }
 
     public void checkOut(){
@@ -77,5 +86,6 @@ public class Cart {
     public String toString(){
         return "Id: " + this.id + ", status: " + this.status + ", items: " + this.items;
     }
+
 }
 
