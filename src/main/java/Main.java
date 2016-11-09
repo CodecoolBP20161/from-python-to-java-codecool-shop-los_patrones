@@ -6,6 +6,10 @@ import com.codecool.shop.dao.implementation.*;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
+import com.codecool.shop.dao.implementation.Cart;
+import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
+import com.codecool.shop.dao.implementation.ProductDaoMem;
+import com.codecool.shop.dao.implementation.SupplierDaoMem;
 import spark.Request;
 import spark.Response;
 import spark.Route;
@@ -24,35 +28,38 @@ public class Main {
 
         populateData();
 
-        Cart cart = new Cart();
-        LineItem item = new LineItem(new Product("Kiscica", "description"));
-        LineItem item2 = new LineItem(new Product("Kiskutya", "description"));
-        cart.add(item);
-        cart.add(item);
-        cart.add(item2);
 
         get("/", ProductController::renderProducts, new ThymeleafTemplateEngine());
-        get("/hello", (req, res) -> "Hello World");
-
-
-        get("/oke", (req, res) -> "okéka");
-
-        get("/cart", new Route(){
-
+//        post("/tocart/:id", ProductController::getToCart, new ThymeleafTemplateEngine());
+//        get("/hello", (req, res) -> "Hello World");
+//        Gson gson = new Gson();
+        Cart cart = Cart.getInstance();
+//        Supplier amazon = new Supplier("Amazon", "Digital content and services");
+//        get("/hello", (request, response) -> cart, gson::toJson);
+//        get("/tocart/:id", (req, res) -> "Hello World");
+        get("/tocart/:id", new Route(){
             @Override
             public String handle(Request request, Response response) throws Exception {
-                return cart.toJson();
+                return ProductController.cartToJson(request, response);
+            }
+        });
+
+
+        get("/tocart", new Route(){
+            @Override
+            public String handle(Request request, Response response) throws Exception {
+                return ProductController.cartToJson(request, response);
             }
         });
 
         post("/+quantity/:id", (request, response) -> {
             cart.increaseQuantity((int) Integer.parseInt(request.params(":id")));
-            return "";
+            return ProductController.cartToJson(request, response);
         });
 
         post("/-quantity/:id", (request, response) -> {
             cart.decreaseQuantity((int) Integer.parseInt(request.params(":id")));
-            return "";
+            return ProductController.cartToJson(request, response);
         });
 
 
@@ -61,6 +68,8 @@ public class Main {
 
     public static void populateData() {
 
+
+        Cart cart = Cart.getInstance();
         ProductDao productDataStore = ProductDaoMem.getInstance();
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
         SupplierDao supplierDataStore = SupplierDaoMem.getInstance();

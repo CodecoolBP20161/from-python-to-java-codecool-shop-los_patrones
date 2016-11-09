@@ -1,9 +1,6 @@
 package com.codecool.shop.dao.implementation;
 
-import com.google.gson.Gson;
-
 import java.util.ArrayList;
-import java.util.HashMap;
 
 
 public class Cart {
@@ -13,8 +10,9 @@ public class Cart {
     private static int counter = 0;
     private int totalQantity;
     private float totalPrice;
+    private static Cart instance = null;
 
-    public Cart(){
+    Cart(){
         this.id = ++counter;
         this.status = "New";
         this.totalQantity = 0;
@@ -34,26 +32,37 @@ public class Cart {
         return items;
     }
 
+    public static Cart getInstance() {
+        if (instance == null) {
+            instance = new Cart();
+        }
+        return instance;
+    }
+
     public void add(LineItem item){
         for(LineItem currentItem : this.items){
             if(item.getProduct().getName() == currentItem.getProduct().getName()){
                 currentItem.incrementQuantity();
+                this.process();
                 return;
             }
         }
         this.items.add(item);
+        this.process();
     }
 
     public void remove(LineItem item){
         for(LineItem currentItem : this.items){
             if(item.getProduct().getName() == currentItem.getProduct().getName()){
                 currentItem.decrementQuantity();
+                this.process();
                 return;
             }
         }
+        this.process();
     }
 
-    public void process(){
+    private void process(){
         this.totalQantity = 0;
         this.totalPrice = 0;
         for(LineItem item : this.items){
@@ -71,7 +80,7 @@ public class Cart {
     }
 
     public float getTotalPrice(){
-        return this.totalQantity;
+        return this.totalPrice;
     }
 
     public void checkOut(){
@@ -80,27 +89,6 @@ public class Cart {
 
     public String toString(){
         return "Id: " + this.id + ", status: " + this.status + ", items: " + this.items;
-    }
-
-    public String toJson(){
-        ArrayList<String> names = new ArrayList<>();
-        ArrayList<String> prices = new ArrayList<>();
-        ArrayList<Integer> quantities = new ArrayList<>();
-
-        for(LineItem item : this.items){
-            names.add(item.getProduct().getName());
-            prices.add(item.getProduct().getPrice());
-            quantities.add(item.getQuantity());
-        }
-
-        HashMap<String, ArrayList> result = new HashMap<>();
-        result.put("names", names);
-        result.put("prices", prices);
-        result.put("quantites", quantities);
-
-        Gson gson = new Gson();
-
-        return gson.toJson(result);
     }
 }
 

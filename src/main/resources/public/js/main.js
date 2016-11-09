@@ -1,9 +1,12 @@
 $('document').ready(function(){
 
+
+
     $('#cartModalButton').click(function(){
-        $.ajax({url: "/cart", success: function(result){
+        $.ajax({url: "/tocart", success: function(result){
 
             result = JSON.parse(result);
+            console.log(result);
             var table_body = document.getElementById("modal-tbody")
             table_body.innerHTML = "";
 
@@ -31,7 +34,5 @@ $('document').ready(function(){
                 }
             });
         }});
-
     });
-
 });
