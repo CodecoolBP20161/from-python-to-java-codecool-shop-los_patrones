@@ -32,7 +32,7 @@ var displayHandler = {
         container.innerHTML = "";
         for (i in products) {
             var thumbnail = document.createElement("DIV");
-            thumbnail.className = "item col-xs-4 col-sm-4 col-md-4 col-lg-4";
+            thumbnail.className = "item col-xs-4 col-sm-4 col-md-4 col-lg-4 thumbnail";
             var picture = document.createElement("IMG");
             picture.src = "http://placehold.it/400x250/000/fff";
             picture.className = "group list-group-image";
@@ -116,7 +116,7 @@ var inputHandler = {
 
 // init
 
-apiHandler.initApp();
+// apiHandler.initApp();
 
 
 // event handling
@@ -134,5 +134,17 @@ document.body.addEventListener("click", function(event) {
     if (inputHandler.convertId(event.target.id)[0] == "getProduct") {
         idToSend = inputHandler.convertId(event.target.id)[1];
         apiHandler.getProduct(idToSend);
+    }
+    else {
+        console.log(1);
+        var request = new XMLHttpRequest();
+        request.open("POST", "http://127.0.0.1:8888/hello", false);
+        request.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                console.log(1);
+            }
+        };
+        request.setRequestHeader('Content-Type', 'application/json')
+        request.send(JSON.stringify({id: "1"}));
     }
 })

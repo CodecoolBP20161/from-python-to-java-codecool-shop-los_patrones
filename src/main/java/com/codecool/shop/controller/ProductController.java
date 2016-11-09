@@ -20,24 +20,9 @@ import static java.lang.Integer.parseInt;
 
 public class ProductController {
 
-    public static ModelAndView renderProducts(Request req, Response res) {
-        ProductDao productDataStore = ProductDaoMem.getInstance();
-        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
-        SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
-
-        Map params = new HashMap<>();
-        ArrayList pclist = new ArrayList<ProductCategory>();
-        for (int i=0; i<ProductCategoryDaoMem.getDATA().size(); i++) {
-            pclist.add(ProductCategoryDaoMem.getDATA().get(i));
-        }
-        ArrayList suplist = new ArrayList<Supplier>();
-        for (int i=0; i<SupplierDaoMem.getDATA().size(); i++) {
-            suplist.add(SupplierDaoMem.getDATA().get(i));
-        }
-
+    public static ModelAndView renderIndex(Request req, Response res) {
+        HashMap params = new HashMap();
         return new ModelAndView(params, "product/index");
-
-
     }
 
     public static ModelAndView getToCart(Request req, Response res) {
@@ -127,7 +112,7 @@ public class ProductController {
         return gson.toJson(map);
     }
 
-    public static String indexMainResponse (Request req, Response res) {
+    public static String getCategories (Request req, Response res) {
         Gson gson = new GsonBuilder().disableHtmlEscaping().create();
         Map responseData = new HashMap<>();
         ArrayList categoryParams = new ArrayList<ProductCategory>();
@@ -137,19 +122,25 @@ public class ProductController {
             oneCategory.put("id", ProductCategoryDaoMem.getDATA().get(i).getId());
             categoryParams.add(oneCategory);
         }
-        ArrayList suplierParams = new ArrayList<Supplier>();
+        responseData.put("Category", categoryParams);
+        return gson.toJson(responseData);
+    }
+
+    public static String getSuppliers (Request req, Response res) {
+        Gson gson = new GsonBuilder().disableHtmlEscaping().create();
+        Map responseData = new HashMap<>();
+        ArrayList supplierParams = new ArrayList<Supplier>();
         for (int i=0; i<SupplierDaoMem.getDATA().size(); i++) {
             Map oneSupplier = new HashMap<>();
             oneSupplier.put("name", SupplierDaoMem.getDATA().get(i).getName());
             oneSupplier.put("id", SupplierDaoMem.getDATA().get(i).getId());
-            suplierParams.add(oneSupplier);
+            supplierParams.add(oneSupplier);
         }
-        responseData.put("Category", categoryParams);
-        responseData.put("Supplier", suplierParams);
+        responseData.put("Supplier", supplierParams);
         return gson.toJson(responseData);
     }
 
-    public static String indexSearch (Request req, Response res) {
+    public static String getProducts (Request req, Response res) {
         Gson gson = new GsonBuilder().disableHtmlEscaping().create();
         Map allParams = new HashMap();
         if (req.queryParams("category") != null) {
