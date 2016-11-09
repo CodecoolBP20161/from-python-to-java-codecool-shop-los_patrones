@@ -25,31 +25,7 @@ public class ProductController {
         return new ModelAndView(params, "product/index");
     }
 
-    public static ModelAndView getToCart(Request req, Response res) {
-        ProductDao productDataStore = ProductDaoMem.getInstance();
-        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
-        Cart cart = Cart.getInstance();
-
-        int id = parseInt(req.params(":id"));
-        Product product = productDataStore.find(id);
-        LineItem item = new LineItem(product);
-        cart.add(item);
-
-        Map params = new HashMap<>();
-
-        System.out.println(productDataStore.find(id));
-        params.put("category", productCategoryDataStore.find(1));
-        params.put("products", productDataStore.getBy(productCategoryDataStore.find(1)));
-        params.put("cart", cart.getTotalItemNumber());
-        System.out.println(cart.toString());
-        return new ModelAndView(params, "product/index");
-
-
-    }
-
-    public static String cartToJson(Request req, Response res){
-        ProductDao productDataStore = ProductDaoMem.getInstance();
-        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
+    public static String cart(Request req, Response res){
         Cart cart = Cart.getInstance();
         System.out.println(cart.getItems());
         ArrayList<String> names = new ArrayList<>();
@@ -58,31 +34,14 @@ public class ProductController {
         ArrayList<Float> totalprice = new ArrayList<>();
         ArrayList<Integer> totalquantity = new ArrayList<>();
 
-        if(req.params(":id") != null){
-            int id = parseInt(req.params(":id"));
-            Product product = productDataStore.find(id);
-            LineItem item = new LineItem(product);
-            System.out.println("asdasd");
-            cart.add(item);
-        }
-        if(req.params(":symbol") != null){
-            if (req.params(":symbol").equals("+"))
-                System.out.println("+");
-                System.out.println(cart.getItems());
-                cart.increaseQuantity(parseInt(req.params(":id")));
-            if (req.params(":symbol").equals("-"))
-                System.out.println("-");
-                cart.decreaseQuantity(parseInt(req.params(":id")));
-        }
-
 
         for(LineItem Item : cart.getItems()){
             names.add(Item.getProduct().getName());
             prices.add(Item.getProduct().getPrice());
             quantities.add(Item.getQuantity());
         }
+
         totalprice.add(cart.getTotalPrice());
-        System.out.println(cart.getTotalPrice());
         totalquantity.add(cart.getTotalItemNumber());
 
 
@@ -96,20 +55,29 @@ public class ProductController {
         Gson gson = new Gson();
 
         return gson.toJson(result);
+
     }
 
-    public static void increaseQuantity(Request req, Response res){
+    public static void toCart(HashMap json){
+        ProductDao productDataStore = ProductDaoMem.getInstance();
         Cart cart = Cart.getInstance();
-        cart.increaseQuantity((int) Integer.parseInt(req.params(":id")));
-        cartToJson(req, res);
+        int id = 0;
+        for (Object value : json.values()) {
+            id = Integer.parseInt(value.toString());
+        }
+        Product product = productDataStore.find(id);
+        LineItem item = new LineItem(product);
+        cart.add(item);
+        System.out.println(cart);
     }
 
-    public static String buildJSON (Request req, Response res) {
-        HashMap<String, String[]> map = new HashMap();
-        String[] myList = {"lajos", "kazmer"};
-        Gson gson = new GsonBuilder().disableHtmlEscaping().create();
-        map.put("bela", myList);
-        return gson.toJson(map);
+    public static void fromCart(HashMap json){
+        Cart cart = Cart.getInstance();
+        int id = 0;
+        for (Object value : json.values()) {
+            id = Integer.parseInt(value.toString());
+        }
+        cart.decreaseQuantity(id);
     }
 
     public static String getCategories (Request req, Response res) {

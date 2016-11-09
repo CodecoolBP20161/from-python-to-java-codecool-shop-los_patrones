@@ -138,10 +138,10 @@ document.body.addEventListener("click", function(event) {
     else {
         console.log(1);
         var request = new XMLHttpRequest();
-        request.open("POST", "http://127.0.0.1:8888/hello", false);
+        request.open("POST", "http://127.0.0.1:8888/tocart", false);
         request.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
-                console.log(1);
+                console.log(this.responseText);
             }
         };
         request.setRequestHeader('Content-Type', 'application/json')
