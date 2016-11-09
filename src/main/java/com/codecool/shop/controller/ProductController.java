@@ -73,7 +73,7 @@ public class ProductController {
         ArrayList<Float> totalprice = new ArrayList<>();
         ArrayList<Integer> totalquantity = new ArrayList<>();
 
-        if(req.params(":id") != null){
+        if(req.params(":id") != null && req.params(":symbol") == null){
             int id = parseInt(req.params(":id"));
             Product product = productDataStore.find(id);
             LineItem item = new LineItem(product);

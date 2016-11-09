@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta name="author" content="Codecool" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Codecool Shop</title>
+
+
+
+    <!-- Latest compiled and minified Jquery -->
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous" />
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="/css/custom.css" />
+</head>
+
+<body>
+
+<!--/*-------------------------------------------------------------------------------------------------------------*/-->
+
+<div id="cartModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Cart summary:</h4>
+            </div>
+
+            <div class="modal-body">
+                <table id="items-table" class="table table-bordered table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>Product name</th>
+                            <th>Desired quantity</th>
+                            <th>Price per item</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="modal-tbody"></tbody>
+                </table>
+            </div>
+
+            <div class="modal-footer">
+                Total:
+                <div class="totalPrice"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--/*-------------------------------------------------------------------------------------------------------------*/-->
+
+
+<div class="container">
+    <button type="button">Click Me!</button>
+
+    <div class="basketcontainer">
+        <button id="cartModalButton" type="button" class="btn btn-info" data-toggle="modal" data-target="#cartModal">
+            <span class="glyphicon glyphicon-shopping-cart"></span> Your shopping cart
+        </button>
+    </div>
+
+
+    <select id="searchCategory">
+        <option value="category/all">All</option>
+    </select>
+    <select id="searchSupplier">
+        <option value="supplier/all">All</option>
+    </select>
+
+
+    <div id="products" class="row list-group">
+    </div>
+
+</div>
+
+<script src="js/main.js"></script>
+<script src="js/index.js"></script>
+
+</body>
+</html>

@@ -2,16 +2,13 @@ import com.codecool.shop.controller.ProductController;
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.SupplierDao;
-import com.codecool.shop.model.Product;
-import com.codecool.shop.model.ProductCategory;
-import com.codecool.shop.model.Supplier;
 import com.codecool.shop.dao.implementation.Cart;
 import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.dao.implementation.SupplierDaoMem;
-import spark.Request;
-import spark.Response;
-import spark.Route;
+import com.codecool.shop.model.Product;
+import com.codecool.shop.model.ProductCategory;
+import com.codecool.shop.model.Supplier;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
 
 import static spark.Spark.*;
@@ -25,58 +22,58 @@ public class Main {
         staticFileLocation("/public");
         port(8888);
 
-        populateData();
+//        populateData();
 
 
         get("/", ProductController::renderProducts, new ThymeleafTemplateEngine());
 
         Cart cart = Cart.getInstance();
 
-        get("/tocart/:id", new Route(){
-            @Override
-            public String handle(Request request, Response response) throws Exception {
-                return ProductController.cartToJson(request, response);
-            }
-        });
-
-
-        get("/tocart", new Route(){
-            @Override
-            public String handle(Request request, Response response) throws Exception {
-                return ProductController.cartToJson(request, response);
-            }
-        });
-
-        get("/tocart/:id/:symbol", new Route(){
-            @Override
-            public String handle(Request request, Response response) throws Exception {
-                return ProductController.cartToJson(request, response);
-            }
-        });
-
-//        post("/-quantity/:id", (request, response) -> {
-//            cart.decreaseQuantity((int) Integer.parseInt(request.params(":id")));
-//            return ProductController.cartToJson(request, response);
+//        get("/tocart/:id", new Route(){
+//            @Override
+//            public String handle(Request request, Response response) throws Exception {
+//                return ProductController.cartToJson(request, response);
+//            }
 //        });
-
-        get("/initMain", new Route(){
-            @Override
-            public String handle(Request request, Response response) throws Exception {
-                return ProductController.indexMainResponse(request, response);
-            }
-        });
-        get("/indexSearch", new Route(){
-            @Override
-            public String handle(Request request, Response response) throws Exception {
-                return ProductController.indexSearch(request, response);
-            }
-        });
-        get("/example", new Route(){
-            @Override
-            public String handle(Request request, Response response) throws Exception {
-                return ProductController.buildJSON(request, response);
-            }
-        });
+//
+//
+//        get("/tocart", new Route(){
+//            @Override
+//            public String handle(Request request, Response response) throws Exception {
+//                return ProductController.cartToJson(request, response);
+//            }
+//        });
+//
+//        get("/tocart/:id/:symbol", new Route(){
+//            @Override
+//            public String handle(Request request, Response response) throws Exception {
+//                return ProductController.cartToJson(request, response);
+//            }
+//        });
+//
+////        post("/-quantity/:id", (request, response) -> {
+////            cart.decreaseQuantity((int) Integer.parseInt(request.params(":id")));
+////            return ProductController.cartToJson(request, response);
+////        });
+//
+//        get("/initMain", new Route(){
+//            @Override
+//            public String handle(Request request, Response response) throws Exception {
+//                return ProductController.indexMainResponse(request, response);
+//            }
+//        });
+//        get("/indexSearch", new Route(){
+//            @Override
+//            public String handle(Request request, Response response) throws Exception {
+//                return ProductController.indexSearch(request, response);
+//            }
+//        });
+//        get("/example", new Route(){
+//            @Override
+//            public String handle(Request request, Response response) throws Exception {
+//                return ProductController.buildJSON(request, response);
+//            }
+//        });
     }
 
 
