@@ -21,6 +21,15 @@ public class Cart {
         this.totalPrice = 0;
     }
 
+    public void increaseQuantity(int i){
+        this.items.get(i).incrementQuantity();
+
+    }
+
+    public void decreaseQuantity(int i){
+        this.items.get(i).decrementQuantity();
+    }
+
     public ArrayList<LineItem> getItems() {
         return items;
     }

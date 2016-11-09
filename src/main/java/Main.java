@@ -46,12 +46,12 @@ public class Main {
         });
 
         post("/+quantity/:id", (request, response) -> {
-            System.out.println(request.params(":id"));
+            cart.increaseQuantity((int) Integer.parseInt(request.params(":id")));
             return "";
         });
 
         post("/-quantity/:id", (request, response) -> {
-            System.out.println(request.params(":id"));
+            cart.decreaseQuantity((int) Integer.parseInt(request.params(":id")));
             return "";
         });
 
