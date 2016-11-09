@@ -2,6 +2,7 @@ package com.codecool.shop.model;
 
 
 import java.lang.reflect.Field;
+import java.util.HashMap;
 
 public class BaseModel {
 
@@ -60,5 +61,10 @@ public class BaseModel {
         }
         return sb.toString();
     }
+
+    public HashMap toDict() {
+        HashMap returnDict = new HashMap();
+        return returnDict;
+    };
 
 }

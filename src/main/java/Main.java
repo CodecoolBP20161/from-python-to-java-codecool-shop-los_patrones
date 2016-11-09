@@ -2,7 +2,6 @@ import com.codecool.shop.controller.ProductController;
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.SupplierDao;
-import com.codecool.shop.dao.implementation.*;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
@@ -30,13 +29,9 @@ public class Main {
 
 
         get("/", ProductController::renderProducts, new ThymeleafTemplateEngine());
-//        post("/tocart/:id", ProductController::getToCart, new ThymeleafTemplateEngine());
-//        get("/hello", (req, res) -> "Hello World");
-//        Gson gson = new Gson();
+
         Cart cart = Cart.getInstance();
-//        Supplier amazon = new Supplier("Amazon", "Digital content and services");
-//        get("/hello", (request, response) -> cart, gson::toJson);
-//        get("/tocart/:id", (req, res) -> "Hello World");
+
         get("/tocart/:id", new Route(){
             @Override
             public String handle(Request request, Response response) throws Exception {
@@ -52,17 +47,36 @@ public class Main {
             }
         });
 
-        post("/+quantity/:id", (request, response) -> {
-            cart.increaseQuantity((int) Integer.parseInt(request.params(":id")));
-            return ProductController.cartToJson(request, response);
+        get("/tocart/:id/:symbol", new Route(){
+            @Override
+            public String handle(Request request, Response response) throws Exception {
+                return ProductController.cartToJson(request, response);
+            }
         });
 
-        post("/-quantity/:id", (request, response) -> {
-            cart.decreaseQuantity((int) Integer.parseInt(request.params(":id")));
-            return ProductController.cartToJson(request, response);
+//        post("/-quantity/:id", (request, response) -> {
+//            cart.decreaseQuantity((int) Integer.parseInt(request.params(":id")));
+//            return ProductController.cartToJson(request, response);
+//        });
+
+        get("/initMain", new Route(){
+            @Override
+            public String handle(Request request, Response response) throws Exception {
+                return ProductController.indexMainResponse(request, response);
+            }
         });
-
-
+        get("/indexSearch", new Route(){
+            @Override
+            public String handle(Request request, Response response) throws Exception {
+                return ProductController.indexSearch(request, response);
+            }
+        });
+        get("/example", new Route(){
+            @Override
+            public String handle(Request request, Response response) throws Exception {
+                return ProductController.buildJSON(request, response);
+            }
+        });
     }
 
 
@@ -85,12 +99,19 @@ public class Main {
         ProductCategory tablet2 = new ProductCategory("Tablet", "Hardware", "A tablet computer, commonly shortened to tablet, is a thin, flat mobile computer with a touchscreen display.");
         productCategoryDataStore.add(tablet);
         productCategoryDataStore.add(tablet2);
+        ProductCategory laptop = new ProductCategory("Laptop", "Hardware", "A tablet computer, commonly shortened to tablet, is a thin, flat mobile computer with a touchscreen display.");
+        productCategoryDataStore.add(laptop);
+        ProductCategory PC = new ProductCategory("PC", "Hardware", "A tablet computer, commonly shortened to tablet, is a thin, flat mobile computer with a touchscreen display.");
+        productCategoryDataStore.add(PC);
 
         //setting up products and printing it
         productDataStore.add(new Product("Amazon Fire", 49.9f, "USD", "Fantastic price. Large content ecosystem. Good parental controls. Helpful technical support.", tablet, amazon));
         productDataStore.add(new Product("Lenovo IdeaPad Miix 700", 479, "USD", "Keyboard cover is included. Fanless Core m5 processor. Full-size USB ports. Adjustable kickstand.", tablet, lenovo));
         productDataStore.add(new Product("Amazon Fire HD 8", 89, "USD", "Amazon's latest Fire HD 8 tablet is a great value for media consumption.", tablet, amazon));
+
         productDataStore.add(new Product("Amazon Fire HD 8", 89, "USD", "Amazon's latest Fire HD 8 tablet is a great value for media consumption.", tablet2, amazon));
+        productDataStore.add(new Product("Whatever", 10000, "HUF", "Whatever", laptop, amazon));
+        productDataStore.add(new Product("Somethingelse", 10000, "HUF", "Something", PC, lenovo));
 
     }
 

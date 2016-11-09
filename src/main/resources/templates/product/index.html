@@ -13,7 +13,6 @@
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"
             integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 
-    <script src="js/main.js"></script>
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -67,9 +66,6 @@
 </div>
 <!--/*-------------------------------------------------------------------------------------------------------------*/-->
 
-<div class="jumbotron text-center">
-    <h1>Codecool Shop</h1>
-</div>
 
 <div class="container">
     <button type="button">Click Me!</button>
@@ -80,40 +76,22 @@
         </button>
     </div>
 
-    <div class="well well-sm">
-        <strong th:text="${category.name}">Category Title</strong>
-    </div>
+
+    <select id="searchCategory">
+        <option value="category/all">All</option>
+    </select>
+    <select id="searchSupplier">
+        <option value="supplier/all">All</option>
+    </select>
+
 
     <div id="products" class="row list-group">
-
-        <div class="item col-xs-4 col-lg-4" th:each="prod,iterStat : ${products}">
-            <div class="thumbnail">
-                <img class="group list-group-image" src="http://placehold.it/400x250/000/fff" th:attr="src='/img/product_' + ${prod.id} + '.jpg'" alt="" />
-                <div class="caption">
-                    <h4 class="group inner list-group-item-heading" th:text="${prod.name}">Product name</h4>
-                    <p class="group inner list-group-item-text" th:text="${prod.description}">Product description... </p>
-                    <div class="row">
-                        <div class="col-xs-12 col-md-6">
-                            <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
-                        </div>
-                        <div class="col-xs-12 col-md-6">
-                            <a class="btn btn-success" th:href="'/tocart/'+${prod.id}">Add to cart</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 
 </div>
+
 <script src="js/main.js"></script>
-<!--<script th:inline="javascript">-->
-    <!--/*<![CDATA[*/-->
-
-    <!--console.log("cica");-->
-
-    <!--/*]]>*/-->
-<!--</script>-->
+<script src="js/index.js"></script>
 
 </body>
 </html>

@@ -24,11 +24,11 @@ $('document').ready(function(){
             }
             $('button').click(function(){
                 if(this.id[0] == '-'){
-                    $.ajax({url: "/-quantity/" + this.id[1], success: function(result){
+                    $.ajax({url: "/tocart/" + this.id[1] + "/+", success: function(result){
 
                     }});
                 }else if(this.id[0] == '+'){
-                    $.ajax({url: "/+quantity/" + this.id[1], success: function(result){
+                    $.ajax({url: "/tocart/" + this.id[1] + "/-", success: function(result){
 
                     }});
                 }
