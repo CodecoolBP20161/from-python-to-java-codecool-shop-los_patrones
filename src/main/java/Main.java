@@ -9,16 +9,20 @@ import com.codecool.shop.dao.implementation.Cart;
 import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.dao.implementation.SupplierDaoMem;
+import com.google.gson.Gson;
 import spark.Request;
 import spark.Response;
 import spark.Route;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
+
+import java.util.HashMap;
 
 import static spark.Spark.*;
 
 public class Main {
 
     public static void main(String[] args) {
+        Gson gson = new Gson();
 
         // default server settings
         exception(Exception.class, (e, req, res) -> e.printStackTrace());
@@ -32,25 +36,26 @@ public class Main {
 
         Cart cart = Cart.getInstance();
 
-        get("/tocart/:id", new Route(){
+        post("/tocart", new Route(){
             @Override
             public String handle(Request request, Response response) throws Exception {
-                return ProductController.cartToJson(request, response);
+                ProductController.toCart(gson.fromJson(request.body(), HashMap.class));
+                return ProductController.cart(request, response);
             }
         });
 
-
-        get("/tocart", new Route(){
+        get("/cart", new Route(){
             @Override
             public String handle(Request request, Response response) throws Exception {
-                return ProductController.cartToJson(request, response);
+                return ProductController.cart(request, response);
             }
         });
 
-        get("/tocart/:id/:symbol", new Route(){
+        post("/fromcart", new Route(){
             @Override
             public String handle(Request request, Response response) throws Exception {
-                return ProductController.cartToJson(request, response);
+                ProductController.fromCart(gson.fromJson(request.body(), HashMap.class));
+                return ProductController.cart(request, response);
             }
         });
 
