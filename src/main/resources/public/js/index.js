@@ -74,9 +74,18 @@ var displayHandler = {
             container.appendChild(thumbnail);
         }
     }
-}
+};
 
 var apiHandler = {
+    sendCheckout : function (data) {
+        var request = new XMLHttpRequest();
+        var url = "/createorder";
+
+        request.open("POST", url, true);
+        request.setRequestHeader("Content-Type", "application/json");
+        request.send(data);
+    },
+
     initApp: function () {
         var requestCategories = new XMLHttpRequest();
         var requestSuppliers = new XMLHttpRequest();
@@ -167,13 +176,13 @@ var apiHandler = {
             }
         };
     }
-}
+};
 
 var inputHandler = {
     convertId: function (id) {
         return id.split("/");
     }
-}
+};
 
 
 // init
@@ -210,7 +219,29 @@ document.body.addEventListener("click", function(event) {
         apiHandler.getProduct(String(globalresult.id[event.target.id[1]]));
         refreshModal();
     }
-})
+
+    if(event.target.id == 'pay'){
+        var list = checkInput.checkform();
+        if (list.length == 12) {
+            var returnData = {
+                firstName : list[0],
+                lasttName : list[1],
+                email : list[2],
+                phoneNumber : list[3],
+                billingCountry : list[4],
+                billingCity : list[5],
+                billingZip : list[6],
+                billingAddress : list[7],
+                shippingCountry : list[8],
+                shippingCity : list[9],
+                ShippingZip : list[10],
+                ShippingAddress : list[11]
+            }
+            apiHandler.sendCheckout(JSON.stringify(returnData));
+        }
+
+    }
+});
 
 var globalresult = "";
 
@@ -245,6 +276,7 @@ var globalresult = "";
     $('#cartModalButton').click(function(){
         refreshModal();
     });
+
 
     // $('button').click(function(){
     //     if(this.id[0] == '-'){

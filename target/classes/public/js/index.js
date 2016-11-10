@@ -167,13 +167,13 @@ var apiHandler = {
             }
         };
     }
-}
+};
 
 var inputHandler = {
     convertId: function (id) {
         return id.split("/");
     }
-}
+};
 
 
 // init
@@ -210,7 +210,11 @@ document.body.addEventListener("click", function(event) {
         apiHandler.getProduct(String(globalresult.id[event.target.id[1]]));
         refreshModal();
     }
-})
+
+    if(event.target.id == 'pay'){
+         checkInput.checkform();
+    }
+});
 
 var globalresult = "";
 
@@ -245,6 +249,7 @@ var globalresult = "";
     $('#cartModalButton').click(function(){
         refreshModal();
     });
+
 
     // $('button').click(function(){
     //     if(this.id[0] == '-'){
