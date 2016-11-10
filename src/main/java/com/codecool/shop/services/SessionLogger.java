@@ -1,9 +1,6 @@
 package com.codecool.shop.services;
 
 
-import com.codecool.shop.controller.ProductController;
-import com.codecool.shop.model.Product;
-
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.PrintWriter;

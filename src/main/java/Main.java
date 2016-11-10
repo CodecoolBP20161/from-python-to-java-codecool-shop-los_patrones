@@ -10,7 +10,6 @@ import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.dao.implementation.SupplierDaoMem;
 import com.google.gson.Gson;
-import com.codecool.shop.services.SessionLogger;
 import spark.Request;
 import spark.Response;
 import spark.Route;
