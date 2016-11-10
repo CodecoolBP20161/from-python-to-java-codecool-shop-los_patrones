@@ -2,13 +2,13 @@ import com.codecool.shop.controller.ProductController;
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.SupplierDao;
-import com.codecool.shop.model.Product;
-import com.codecool.shop.model.ProductCategory;
-import com.codecool.shop.model.Supplier;
 import com.codecool.shop.dao.implementation.Cart;
 import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.dao.implementation.SupplierDaoMem;
+import com.codecool.shop.model.Product;
+import com.codecool.shop.model.ProductCategory;
+import com.codecool.shop.model.Supplier;
 import com.google.gson.Gson;
 import spark.Request;
 import spark.Response;
@@ -54,6 +54,7 @@ public class Main {
         post("/fromcart", new Route(){
             @Override
             public String handle(Request request, Response response) throws Exception {
+                System.out.println(gson.fromJson(request.body(), HashMap.class));
                 ProductController.fromCart(gson.fromJson(request.body(), HashMap.class));
                 return ProductController.cart(request, response);
             }

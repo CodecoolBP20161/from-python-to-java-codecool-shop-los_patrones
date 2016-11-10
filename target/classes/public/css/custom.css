@@ -72,18 +72,18 @@ span {
     margin-right: 10px;
 }
 
-.btn-lg {
-    width: 100%;
+.btn-group {
+    width: 49%;
 }
 
 .sub {
     width: 100%;
 }
 
-.btn-group {
+.selectpicker {
     margin-top: 10px;
     margin-bottom: 10px;
-    width: 49%;
+    width: 100%;
 }
 
 .modal-header {

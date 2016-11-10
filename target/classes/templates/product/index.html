@@ -49,6 +49,7 @@
                 <li>
                 <div class="basketcontainer">
                     <button id="cartModalButton" type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#cartModal">
+                        <span id="items"></span>
                         <span class="glyphicon glyphicon-shopping-cart"></span>
                     </button>
                 </div>
@@ -85,7 +86,7 @@
 
             <div class="modal-footer">
                 Total:
-                <div class="totalPrice"></div>
+                <div id="totalPrice"></div>
             </div>
         </div>
     </div>
@@ -97,6 +98,7 @@
 
 
 
+
     <!--<div class="btn-group">-->
         <!--<button id="searchdCategory" class="btn btn-secondary btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
             <!--<option value="category/all">All</option>-->
@@ -105,22 +107,14 @@
 
         <div class="dropdown">
             <div class="btn-group">
-                <button class="btn btn-warning btn-lg dropdown-toggle" type="button" data-toggle="dropdown">All
-                    <span class="caret"></span></button>
-                <ul id="searchCategory" class="dropdown-menu">
-                    <li><a class="sub" href="#">HTML</a></li>
-                    <li><a class="sub" href="#">CSS</a></li>
-                    <li><a class="sub" href="#">JavaScript</a></li>
-                </ul>
+                <select class="selectpicker" id="searchCategory" type="button" data-toggle="dropdown">
+                    <option value="category/all">All Categories</option>
+                    <span class="caret"></span></select>
             </div>
             <div class="btn-group">
-                <button class="btn btn-warning btn-lg dropdown-toggle" type="button" data-toggle="dropdown">All
-                    <span class="caret"></span></button>
-                <ul id="searchSupplier" class="dropdown-menu">
-                    <li><a class="sub" href="#">HTML</a></li>
-                    <li><a class="sub" href="#">CSS</a></li>
-                    <li><a class="sub" href="#">JavaScript</a></li>
-                </ul>
+                <select class="selectpicker" id="searchSupplier" type="button" data-toggle="dropdown">
+                    <option value="supplier/all">All Suppliers</option>
+                    <span class="caret"></span></select>
             </div>
         <!--<button id="searchSupplier" class="btn btn-secondary btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
             <!--<option value="supplier/all">All</option>-->
@@ -133,9 +127,11 @@
     </div>
 
 
-<script src="js/main.js"></script>
 <script src="js/index.js"></script>
+
 <script src="js/freelancer.js"></script>
+
+
 
 </body>
 </html>

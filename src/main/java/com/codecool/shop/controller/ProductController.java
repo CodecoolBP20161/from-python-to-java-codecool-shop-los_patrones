@@ -5,17 +5,17 @@ import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.SupplierDao;
 import com.codecool.shop.dao.implementation.*;
 import com.codecool.shop.model.Product;
-import com.google.gson.Gson;
-import spark.ModelAndView;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
-import com.google.gson.*;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import static java.lang.Integer.parseInt;
 
 
 public class ProductController {
@@ -33,12 +33,13 @@ public class ProductController {
         ArrayList<Integer> quantities = new ArrayList<>();
         ArrayList<Float> totalprice = new ArrayList<>();
         ArrayList<Integer> totalquantity = new ArrayList<>();
-
+        ArrayList<Integer> id = new ArrayList<>();
 
         for(LineItem Item : cart.getItems()){
             names.add(Item.getProduct().getName());
             prices.add(Item.getProduct().getPrice());
             quantities.add(Item.getQuantity());
+            id.add(Item.getProduct().getId());
         }
 
         totalprice.add(cart.getTotalPrice());
@@ -51,6 +52,7 @@ public class ProductController {
         result.put("quantites", quantities);
         result.put("totalprice", totalprice);
         result.put("totalquantity", totalquantity);
+        result.put("id", id);
 
         Gson gson = new Gson();
 
@@ -59,6 +61,7 @@ public class ProductController {
     }
 
     public static void toCart(HashMap json){
+        System.out.println(json);
         ProductDao productDataStore = ProductDaoMem.getInstance();
         Cart cart = Cart.getInstance();
         int id = 0;
@@ -72,12 +75,15 @@ public class ProductController {
     }
 
     public static void fromCart(HashMap json){
+        ProductDao productDataStore = ProductDaoMem.getInstance();
         Cart cart = Cart.getInstance();
         int id = 0;
         for (Object value : json.values()) {
             id = Integer.parseInt(value.toString());
         }
-        cart.decreaseQuantity(id);
+        Product product = productDataStore.find(id);
+        LineItem item = new LineItem(product);
+        cart.remove(item);
     }
 
     public static String getCategories (Request req, Response res) {
