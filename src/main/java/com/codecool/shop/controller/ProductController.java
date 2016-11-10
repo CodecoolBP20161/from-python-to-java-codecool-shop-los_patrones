@@ -81,6 +81,7 @@ public class ProductController {
         for (Object value : json.values()) {
             id = Integer.parseInt(value.toString());
         }
+
         Product product = productDataStore.find(id);
         LineItem item = new LineItem(product);
         cart.remove(item);
