@@ -28,11 +28,37 @@
             crossorigin="anonymous"></script>
 
     <link rel="stylesheet" type="text/css" href="/css/custom.css" />
+    <link rel="stylesheet" type="text/css" href="/css/freelancer.css" />
 </head>
 
-<body>
 
 <!--/*-------------------------------------------------------------------------------------------------------------*/-->
+<body id="page-top" class="index">
+
+<!-- Navigation -->
+<nav id="mainNav" class="navbar navbar-default navbar-fixed-top navbar-custom">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <a class="navbar-brand" href="#top">Codecool Shop</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                <div class="basketcontainer">
+                    <button id="cartModalButton" type="button" class="btn btn-info" data-toggle="modal" data-target="#cartModal">
+                        <span class="glyphicon glyphicon-shopping-cart"></span> Your shopping cart
+                    </button>
+                </div>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+</nav>
 
 <div id="cartModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
@@ -67,22 +93,18 @@
 <!--/*-------------------------------------------------------------------------------------------------------------*/-->
 
 
-<div class="container">
-    <button type="button">Click Me!</button>
+<div class="container main">
 
-    <div class="basketcontainer">
-        <button id="cartModalButton" type="button" class="btn btn-info" data-toggle="modal" data-target="#cartModal">
-            <span class="glyphicon glyphicon-shopping-cart"></span> Your shopping cart
+    <div class="btn-group">
+        <button id="searchCategory" class="btn btn-secondary btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <option value="category/all">All</option>
         </button>
     </div>
-
-
-    <select id="searchCategory">
-        <option value="category/all">All</option>
-    </select>
-    <select id="searchSupplier">
-        <option value="supplier/all">All</option>
-    </select>
+    <div class="btn-group">
+        <button id="searchSupplier" class="btn btn-secondary btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <option value="supplier/all">All</option>
+        </button>
+    </div>
 
 
     <div id="products" class="row list-group">
@@ -92,6 +114,7 @@
 
 <script src="js/main.js"></script>
 <script src="js/index.js"></script>
+<script src="js/freelancer.js"></script>
 
 </body>
 </html>

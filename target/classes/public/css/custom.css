@@ -1,3 +1,7 @@
+.main {
+    margin-top: 100px;
+}
+
 .glyphicon {
     margin-right:5px;
 }
@@ -8,6 +12,7 @@
     -webkit-border-radius: 0px;
     -moz-border-radius: 0px;
     border-radius: 0px;
+    height: 450px;
 }
 .thumbnail img
 {
@@ -69,3 +74,12 @@ span {
     margin-left: 10px;
     margin-right: 10px;
 }
+
+.btn-lg {
+    width: 100%;
+}
+
+.btn-group {
+    width: 49%;
+}
+
