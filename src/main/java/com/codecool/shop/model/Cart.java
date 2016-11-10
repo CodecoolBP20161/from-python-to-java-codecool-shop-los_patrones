@@ -21,7 +21,7 @@ public class Cart {
         return id;
     }
 
-    Cart(){
+    public Cart(){
         this.status = "New";
         this.totalQantity = 0;
         this.totalPrice = 0;

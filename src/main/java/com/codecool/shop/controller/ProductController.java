@@ -21,6 +21,16 @@ import java.util.Map;
 
 public class ProductController {
 
+    public static Cart setCart(Request request) {
+        if(request.session().attribute("cart") == null){
+            Cart cart = new Cart();
+            request.session().attribute("cart", cart);
+            return cart;
+        }else{
+            return request.session().attribute("cart");
+        }
+    }
+
     public static ModelAndView renderIndex(Request req, Response res) {
         HashMap params = new HashMap();
         return new ModelAndView(params, "product/index");
@@ -31,22 +41,11 @@ public class ProductController {
         return new ModelAndView(params, "product/pay");
     }
 
-    public static void createOrder(HashMap data) {
-//        Order order = new Order(
-//                data.get("id"),
-//                data.cart,
-//                data.get("firstName"),
-//                data.get("lastName"),
-//                data.get("email"),
-//                data.get("phoneNumber"),
-//                data.get("billingAddress"),
-//                data.get("shippingAddress")
-//        );
-    }
 
     public static String cart(Request req, Response res){
-        Cart cart = Cart.getInstance();
-        System.out.println(cart.getItems());
+
+        Cart cart = ProductController.setCart(req);
+
         ArrayList<String> names = new ArrayList<>();
         ArrayList<String> prices = new ArrayList<>();
         ArrayList<Integer> quantities = new ArrayList<>();
@@ -79,10 +78,10 @@ public class ProductController {
 
     }
 
-    public static void toCart(HashMap json){
+    public static void toCart(Request req, HashMap json){
         System.out.println(json);
         ProductDao productDataStore = ProductDaoMem.getInstance();
-        Cart cart = Cart.getInstance();
+        Cart cart = ProductController.setCart(req);
         int id = 0;
         for (Object value : json.values()) {
             id = Integer.parseInt(value.toString());
@@ -93,9 +92,9 @@ public class ProductController {
         System.out.println(cart);
     }
 
-    public static void fromCart(HashMap json){
+    public static void fromCart(Request req, HashMap json){
         ProductDao productDataStore = ProductDaoMem.getInstance();
-        Cart cart = Cart.getInstance();
+        Cart cart = ProductController.setCart(req);
         int id = 0;
         for (Object value : json.values()) {
             id = Integer.parseInt(value.toString());

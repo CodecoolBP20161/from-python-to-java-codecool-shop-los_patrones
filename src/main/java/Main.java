@@ -1,3 +1,4 @@
+import com.codecool.shop.controller.CartController;
 import com.codecool.shop.controller.ProductController;
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
@@ -31,26 +32,31 @@ public class Main {
 
         populateData();
 
+        get("/session", (req, res) -> {
+            return "Hello: " + req.session().attribute("count");
+        });
 
-        get("/", ProductController::renderIndex, new ThymeleafTemplateEngine());
+        get("/session/:counter", (req, res) -> {
+            req.session().attribute("count", req.params(":counter"));
+            return "Hello: " + req.session().attribute("count");
+        });
 
         get("/pay", ProductController::renderPay, new ThymeleafTemplateEngine());
 
         get("/createOrder", new Route(){
             @Override
             public String handle(Request request, Response response) throws Exception {
-                ProductController.createOrder(gson.fromJson(request.body(), HashMap.class));
+                CartController.createOrder(gson.fromJson(request.body(), HashMap.class));
                 response.redirect("/pay");
                 return "";
             }
         });
 
-        Cart cart = Cart.getInstance();
 
         post("/tocart", new Route(){
             @Override
             public String handle(Request request, Response response) throws Exception {
-                ProductController.toCart(gson.fromJson(request.body(), HashMap.class));
+                ProductController.toCart(request, gson.fromJson(request.body(), HashMap.class));
                 return ProductController.cart(request, response);
             }
         });
@@ -65,8 +71,7 @@ public class Main {
         post("/fromcart", new Route(){
             @Override
             public String handle(Request request, Response response) throws Exception {
-                System.out.println(gson.fromJson(request.body(), HashMap.class));
-                ProductController.fromCart(gson.fromJson(request.body(), HashMap.class));
+                ProductController.fromCart(request, gson.fromJson(request.body(), HashMap.class));
                 return ProductController.cart(request, response);
             }
         });
@@ -89,21 +94,15 @@ public class Main {
                 return ProductController.getProducts(request, response);
             }
         });
-        post("/hello", new Route(){
-            @Override
-            public Request handle(Request request, Response response) throws Exception {
-                Gson gson = new Gson();
-                System.out.println(gson.fromJson(request.body(), HashMap.class));
-                return request;
-            }
-        });
+
+        get("/", ProductController::renderIndex, new ThymeleafTemplateEngine());
+
+
     }
 
 
     public static void populateData() {
 
-
-        Cart cart = Cart.getInstance();
         ProductDao productDataStore = ProductDaoMem.getInstance();
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
         SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
