@@ -1,29 +1,42 @@
 // controller objects
+$('document').ready(function(){
 
 var dataManager = {
     currentCategory: "all",
     currentSupplier: "all",
-    allSearchParams: null,
-    allProducts: null
+    allCategories: null,
+    allSuppliers: null,
+    allProducts: null,
+    cart: null
 }
 
 var displayHandler = {
-    renderSearchBar: function () {
-        var categoryBar = document.getElementById("searchCategory");
-        var categories = dataManager.allSearchParams["Category"];
-        for (i in categories) {
-            var option = document.createElement("OPTION");
-            option.innerHTML = categories[i]["name"];
-            option.value = "category/" + categories[i]["id"];
-            categoryBar.appendChild(option);
-        }
+
+    renderCartItems: function () {
+        var carticon = document.getElementById("items");
+        console.log(dataManager.cart);
+        carticon.innerHTML = dataManager.cart.totalquantity[0];
+    },
+
+    renderSupplierBar: function(){
         var supplierBar = document.getElementById("searchSupplier");
-        var supplier = dataManager.allSearchParams["Supplier"];
+        var supplier = dataManager.allSuppliers["Supplier"];
         for (i in supplier) {
             var option = document.createElement("OPTION");
             option.innerHTML = supplier[i]["name"];
             option.value = "supplier/" + supplier[i]["id"];
             supplierBar.appendChild(option);
+        }
+    },
+
+    renderCategoryBar: function(){
+        var categoryBar = document.getElementById("searchCategory");
+        var categories = dataManager.allCategories["Category"];
+        for (i in categories) {
+            var option = document.createElement("OPTION");
+            option.innerHTML = categories[i]["name"];
+            option.value = "category/" + categories[i]["id"];
+            categoryBar.appendChild(option);
         }
     },
     renderProducts: function () {
@@ -34,7 +47,7 @@ var displayHandler = {
             var thumbnail = document.createElement("DIV");
             thumbnail.className = "item col-xs-4 col-sm-4 col-md-4 col-lg-4 thumbnail";
             var picture = document.createElement("IMG");
-            picture.src = "http://placehold.it/400x250/000/fff";
+            picture.src = "/img/product_" + products[i]["id"] + ".jpg";
             picture.className = "group list-group-image";
             var textField = document.createElement("DIV");
             textField.className = "caption";
@@ -65,15 +78,37 @@ var displayHandler = {
 
 var apiHandler = {
     initApp: function () {
-        // var request = new XMLHttpRequest();
-        // request.open("GET", "http://127.0.0.1:8888/initMain", false);
-        // request.onreadystatechange = function () {
-        //     if (this.readyState == 4 && this.status == 200) {
-        //         dataManager.allSearchParams = JSON.parse(this.responseText);
-        //         displayHandler.renderSearchBar();
-        //     }
-        // };
-        // request.send();
+        var requestCategories = new XMLHttpRequest();
+        var requestSuppliers = new XMLHttpRequest();
+        var requestCart = new XMLHttpRequest();
+        requestCategories.open("GET", "/categories", false);
+        requestSuppliers.open("GET", "/suppliers", false);
+        requestCart.open("GET", "/cart", false);
+
+        requestCategories.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                dataManager.allCategories = JSON.parse(this.responseText);
+                displayHandler.renderCategoryBar();
+            }
+        };
+
+
+        requestSuppliers.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                dataManager.allSuppliers = JSON.parse(this.responseText);
+                displayHandler.renderSupplierBar();
+            }
+        };
+
+        requestCart.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                dataManager.cart = JSON.parse(this.responseText);
+                displayHandler.renderCartItems();
+            }
+        };
+        requestCategories.send();
+        requestSuppliers.send();
+        requestCart.send();
         this.getByParams();
     },
     getByParams: function () {
@@ -100,10 +135,37 @@ var apiHandler = {
         request.send();
     },
     getProduct: function (productId) {
+
         var request = new XMLHttpRequest();
-        var url = "http://127.0.0.1:8888/tocart/" + productId;
-        request.open("GET", url, true);
-        request.send();
+        var url = "/tocart";
+
+        request.open("POST", url, true);
+        request.setRequestHeader("Content-Type", "application/json");
+        request.send(JSON.stringify({id: productId}));
+        request.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                dataManager.cart = JSON.parse(this.responseText);
+                console.log(dataManager.cart);
+                displayHandler.renderCartItems();
+            }
+        };
+    },
+
+    removeProduct: function(productId){
+
+        var request = new XMLHttpRequest();
+        var url = "/fromcart";
+
+        request.open("POST", url, true);
+        request.setRequestHeader("Content-Type", "application/json");
+        request.send(JSON.stringify({id: productId}));
+        request.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                dataManager.cart = JSON.parse(this.responseText);
+                console.log(dataManager.cart);
+                displayHandler.renderCartItems();
+            }
+        };
     }
 }
 
@@ -132,19 +194,56 @@ document.body.addEventListener("click", function(event) {
         apiHandler.getByParams()
     }
     if (inputHandler.convertId(event.target.id)[0] == "getProduct") {
-        idToSend = inputHandler.convertId(event.target.id)[1];
-        apiHandler.getProduct(idToSend);
+        console.log(inputHandler.convertId(event.target.id)[1]);
+        console.log(typeof inputHandler.convertId(event.target.id)[1]);
+        apiHandler.getProduct(inputHandler.convertId(event.target.id)[1]);
     }
-    else {
-        console.log(1);
-        var request = new XMLHttpRequest();
-        request.open("POST", "/tocart", false);
-        request.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {
-                console.log(this.responseText);
-            }
-        };
-        request.setRequestHeader('Content-Type', 'application/json')
-        request.send(JSON.stringify({id: "1"}));
+
+
+    if(event.target.id[0] == '-'){
+        console.log(globalresult.id[event.target.id[1]]);
+        console.log(typeof globalresult.id[event.target.id[1]]);
+        apiHandler.removeProduct(String(globalresult.id[event.target.id[1]]));
+        refreshModal();
+    }
+
+    if(event.target.id[0] == '+'){
+        apiHandler.getProduct(String(globalresult.id[event.target.id[1]]));
+        refreshModal();
     }
 })
+
+var globalresult = "";
+
+    function refreshModal(){
+        $.ajax({url: "/cart", success: function(result){
+
+            result = JSON.parse(result);
+            globalresult = result;
+            var table_body = document.getElementById("modal-tbody");
+            var total_price = document.getElementById("totalPrice");
+            total_price.innerHTML = "";
+            table_body.innerHTML = "";
+            total_price.innerHTML = result.totalprice[0] + " USD";
+            displayHandler.renderCartItems();
+
+            for(var i = 0; i < result.prices.length; i++){
+
+                var row = document.createElement("tr");
+                row.innerHTML = "<td>" + result.names[i] + "</td>" +
+                    "<td>" + result.quantites[i]+"</td>" +
+                    "<td id='quant'>" + result.prices[i] + "</td>" +
+                    "<td><button type='button' class='button glyphicon glyphicon-minus' id='-"+ i +"'></button></td>" +
+                    "<td><button type='button' class='button glyphicon glyphicon-plus' id='+" + i + "'></button></td>";
+                table_body.appendChild(row);
+
+            }
+        }});
+
+
+    }
+
+    $('#cartModalButton').click(function(){
+        refreshModal();
+    });
+});

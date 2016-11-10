@@ -13,7 +13,6 @@
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"
             integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 
-
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
@@ -28,11 +27,38 @@
             crossorigin="anonymous"></script>
 
     <link rel="stylesheet" type="text/css" href="/css/index.css" />
+    <link rel="stylesheet" type="text/css" href="/css/freelancer.css" />
 </head>
 
-<body>
 
 <!--/*-------------------------------------------------------------------------------------------------------------*/-->
+<body id="page-top" class="index">
+
+<!-- Navigation -->
+<nav id="mainNav" class="navbar navbar-default navbar-fixed-top navbar-custom">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <a class="navbar-brand" href="#top">Codecool Shop</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                <div class="basketcontainer">
+                    <button id="cartModalButton" type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#cartModal">
+                        <span id="items"></span>
+                        <span class="glyphicon glyphicon-shopping-cart"></span>
+                    </button>
+                </div>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+</nav>
 
 <div id="cartModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
@@ -58,39 +84,112 @@
             </div>
 
             <div class="modal-footer">
+                <div>
+                    <button class="btn btn-success checkout" type="button" data-toggle="modal" data-dismiss="modal" data-target="#checkoutModal">Checkout</button>
+                </div>
                 Total:
-                <div class="totalPrice"></div>
+                <div id="totalPrice"></div>
             </div>
+        </div>
+    </div>
+</div>
+<!--/*-------------------------------------CHECKOUT MODAL-----------------------------------------------*/-->
+
+<div id="checkoutModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Checkout</h4>
+            </div>
+
+            <div class="modal-body">
+                <form>
+                <div class="form-group">
+                        <label for="email">E-mail</label>
+                        <input id="email" name="email" type="text" placeholder="email@email.com" class="form-control input-md" required="" />
+                </div>
+
+                <div class="form-group">
+                        <label for="number">Phone number</label>
+                        <input id="number" name="number" type="text" placeholder="06301234567" class="form-control input-md" required="" />
+                </div>
+
+                    <h3>Billing address</h3>
+
+                <div class="form-group">
+                    <label for="billingcountry">Country</label>
+                    <input id="billingcountry" name="billingcountry" type="text" placeholder="Hungary" class="form-control input-md" required="" />
+                </div>
+
+                <div class="form-group">
+                    <label for="billingcity">City</label>
+                    <input id="billingcity" name="billingcity" type="text" placeholder="Budapest" class="form-control input-md" required="" />
+                </div>
+
+                <div class="form-group">
+                    <label for="billingzip">Zip code</label>
+                    <input id="billingzip" name="billingzip" type="text" placeholder="1234" class="form-control input-md" required="" />
+                </div>
+
+                <div class="form-group">
+                    <label for="billingaddress">Address</label>
+                    <input id="billingaddress" name="billingaddress" type="text" placeholder="Benedek u. 12" class="form-control input-md" required="" />
+                </div>
+                </form>
+            </div>
+
+
+
+            <div class="modal-footer">
+                <div>
+                    <button class="btn btn-success pay" type="button" data-dismiss="modal">Pay</button>
+            </div>
+             </div>
         </div>
     </div>
 </div>
 <!--/*-------------------------------------------------------------------------------------------------------------*/-->
 
 
-<div class="container">
-    <button type="button">Click Me!</button>
+<div class="container main">
 
-    <div class="basketcontainer">
-        <button id="cartModalButton" type="button" class="btn btn-info" data-toggle="modal" data-target="#cartModal">
-            <span class="glyphicon glyphicon-shopping-cart"></span> Your shopping cart
-        </button>
+
+
+
+    <!--<div class="btn-group">-->
+        <!--<button id="searchdCategory" class="btn btn-secondary btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+            <!--<option value="category/all">All</option>-->
+        <!--</button>-->
+    <!--</div>-->
+
+        <div class="dropdown">
+            <div class="btn-group">
+                <select class="selectpicker btn-warning" id="searchCategory" data-toggle="dropdown">
+                    <option value="category/all">All Categories</option>
+                    <span class="caret"></span></select>
+            </div>
+            <div class="btn-group">
+                <select class="selectpicker btn-warning" id="searchSupplier" data-toggle="dropdown">
+                    <option value="supplier/all">All Suppliers</option>
+                    <span class="caret"></span></select>
+            </div>
+        <!--<button id="searchSupplier" class="btn btn-secondary btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+            <!--<option value="supplier/all">All</option>-->
+        <!--</button>-->
+            </div>
     </div>
-
-
-    <select id="searchCategory">
-        <option value="category/all">All</option>
-    </select>
-    <select id="searchSupplier">
-        <option value="supplier/all">All</option>
-    </select>
 
 
     <div id="products" class="row list-group">
     </div>
 
-</div>
 
 <script src="js/index.js"></script>
+
+<script src="js/freelancer.js"></script>
+
+
 
 </body>
 </html>
