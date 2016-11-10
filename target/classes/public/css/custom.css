@@ -2,9 +2,6 @@
     margin-top: 100px;
 }
 
-.glyphicon {
-    margin-right:5px;
-}
 .thumbnail
 {
     margin-bottom: 20px;
@@ -79,7 +76,19 @@ span {
     width: 100%;
 }
 
+.sub {
+    width: 100%;
+}
+
 .btn-group {
+    margin-top: 10px;
+    margin-bottom: 10px;
     width: 49%;
 }
+
+.modal-header {
+    background-color: #2C3E50;
+    color: white;
+}
+
 
