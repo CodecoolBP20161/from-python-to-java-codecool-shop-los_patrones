@@ -100,3 +100,14 @@ select {
 .checkout {
     float: left;
 }
+
+.modal-dialog{
+    overflow-y: initial !important
+}
+.modal-body{
+    height: 400px;
+    overflow-y: auto;
+}
+.plcholder::-webkit-input-placeholder {
+    color: #e00000
+}

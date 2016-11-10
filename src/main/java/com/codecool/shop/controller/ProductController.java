@@ -39,6 +39,7 @@ public class ProductController {
     }
 
     public static ModelAndView renderPay(Request req, Response res) {
+        System.out.println("vege");
         HashMap params = new HashMap();
         return new ModelAndView(params, "product/pay");
     }

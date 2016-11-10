@@ -32,11 +32,10 @@ public class Main {
 
         populateData();
 
-        get("/createOrder", new Route(){
+        post("/createOrder", new Route(){
             @Override
             public String handle(Request request, Response response) throws Exception {
                 CartController.createOrder(request, gson.fromJson(request.body(), HashMap.class));
-                response.redirect("/pay");
                 return "";
             }
 

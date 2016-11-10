@@ -13,10 +13,14 @@ public class CartController {
     public static SessionLogger logger = new SessionLogger("log.txt");
 
     public static void createOrder(Request request, HashMap data) {
+        System.out.println(1);
         Cart cart = ProductController.setCart(request);
-
+        System.out.println(2);
+        System.out.println(data.get("id").toString());
+        System.out.println(Float.parseFloat(data.get("id").toString()));
+        System.out.println((int) Float.parseFloat(data.get("id").toString()));
         Order order = new Order(
-            Integer.parseInt(data.get("id").toString()),
+            (int) Float.parseFloat(data.get("id").toString()),
             cart,
             data.get("firstName").toString(),
             data.get("lastName").toString(),
@@ -27,8 +31,9 @@ public class CartController {
             data.get("shippingAddress").toString() + data.get("shippingCountry").toString() +
                     data.get("shippingCity").toString() + data.get("shippingZip").toString()
         );
-
+        System.out.println(3);
         logger.logCheckoutEvent(request.session().id());
+        System.out.println(4);
     }
 
 }
