@@ -6,12 +6,11 @@ import com.codecool.shop.dao.SupplierDao;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
-import com.codecool.shop.model.Cart;
 import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.dao.implementation.SupplierDaoMem;
 import com.google.gson.Gson;
-import services.SessionLogger;
+import com.codecool.shop.services.SessionLogger;
 import spark.Request;
 import spark.Response;
 import spark.Route;
@@ -24,7 +23,6 @@ import static spark.Spark.*;
 public class Main {
 
     public static void main(String[] args) {
-        SessionLogger logger = new SessionLogger("log.txt");
         Gson gson = new Gson();
 
         // default server settings
@@ -100,7 +98,7 @@ public class Main {
         SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
 
         //setting up a new supplier
-        Supplier amazon = new Supplier("Amazon", "Digital content and services");
+        Supplier amazon = new Supplier("Amazon", "Digital content and com.codecool.shop.services");
         supplierDataStore.add(amazon);
         Supplier lenovo = new Supplier("Lenovo", "Computers");
         supplierDataStore.add(lenovo);

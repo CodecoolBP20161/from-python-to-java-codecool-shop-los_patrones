@@ -5,6 +5,7 @@ import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.SupplierDao;
 import com.codecool.shop.dao.implementation.*;
 import com.codecool.shop.model.*;
+import com.codecool.shop.services.SessionLogger;
 import com.google.gson.Gson;
 import spark.ModelAndView;
 import com.codecool.shop.model.Product;
@@ -20,6 +21,7 @@ import java.util.Map;
 
 
 public class ProductController {
+    public static SessionLogger logger = new SessionLogger("log.txt");
 
     public static Cart setCart(Request request) {
         if(request.session().attribute("cart") == null){
@@ -78,7 +80,7 @@ public class ProductController {
     }
 
     public static void toCart(Request req, HashMap json){
-        System.out.println(json);
+
         ProductDao productDataStore = ProductDaoMem.getInstance();
         Cart cart = ProductController.setCart(req);
         int id = 0;
@@ -88,7 +90,7 @@ public class ProductController {
         Product product = productDataStore.find(id);
         LineItem item = new LineItem(product);
         cart.add(item);
-        System.out.println(cart);
+        logger.logPutIntoCartEvent(req.body() ,req.session().id());
     }
 
     public static void fromCart(Request req, HashMap json){
@@ -102,6 +104,7 @@ public class ProductController {
         Product product = productDataStore.find(id);
         LineItem item = new LineItem(product);
         cart.remove(item);
+        logger.logDeleteFromCartEvent(req.body() ,req.session().id());
     }
 
     public static String getCategories (Request req, Response res) {
