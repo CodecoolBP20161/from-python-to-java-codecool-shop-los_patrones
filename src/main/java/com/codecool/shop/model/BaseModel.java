@@ -10,6 +10,10 @@ public class BaseModel {
     protected String name;
     protected String description;
 
+    public BaseModel(int id) {
+        this.id = id;
+    }
+
     public BaseModel(String name) {
         this.name = name;
     }
