@@ -32,21 +32,10 @@ public class Main {
 
         populateData();
 
-        get("/session", (req, res) -> {
-            return "Hello: " + req.session().attribute("count");
-        });
-
-        get("/session/:counter", (req, res) -> {
-            req.session().attribute("count", req.params(":counter"));
-            return "Hello: " + req.session().attribute("count");
-        });
-
-        get("/pay", ProductController::renderPay, new ThymeleafTemplateEngine());
-
         get("/createOrder", new Route(){
             @Override
             public String handle(Request request, Response response) throws Exception {
-                CartController.createOrder(gson.fromJson(request.body(), HashMap.class));
+                CartController.createOrder(request, gson.fromJson(request.body(), HashMap.class));
                 response.redirect("/pay");
                 return "";
             }
@@ -97,6 +86,7 @@ public class Main {
 
         get("/", ProductController::renderIndex, new ThymeleafTemplateEngine());
 
+        get("/pay", ProductController::renderPay, new ThymeleafTemplateEngine());
 
     }
 

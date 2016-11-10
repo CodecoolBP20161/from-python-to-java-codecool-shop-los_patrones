@@ -41,7 +41,6 @@ public class ProductController {
         return new ModelAndView(params, "product/pay");
     }
 
-
     public static String cart(Request req, Response res){
 
         Cart cart = ProductController.setCart(req);

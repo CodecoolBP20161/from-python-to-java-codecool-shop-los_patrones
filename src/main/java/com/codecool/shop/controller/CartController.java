@@ -4,12 +4,13 @@ package com.codecool.shop.controller;
 import com.codecool.shop.dao.implementation.CartDaoMem;
 import com.codecool.shop.model.Cart;
 import com.codecool.shop.model.Order;
+import spark.Request;
 
 import java.util.HashMap;
 
 public class CartController {
-    public static void createOrder(HashMap data) {
-        Cart cart = CartDaoMem.getInstance().find(Integer.parseInt(data.get("cartid").toString()));
+    public static void createOrder(Request request, HashMap data) {
+        Cart cart = ProductController.setCart(request);
 
         Order order = new Order(
                 Integer.parseInt(data.get("id").toString()),
