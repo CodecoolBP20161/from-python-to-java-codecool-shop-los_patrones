@@ -14,9 +14,6 @@ import spark.Response;
 import spark.Route;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
 import static spark.Spark.*;
 
 public class Main {
@@ -28,111 +25,58 @@ public class Main {
         staticFileLocation("/public");
         port(8888);
 
-        get("/", ProductController::renderProducts, new ThymeleafTemplateEngine());
-
-        ArrayList<HashMap> tasks = new ArrayList<>();
-
-        HashMap<String, String> task = new HashMap<>();
-        task.put("id", "1");
-        task.put("title", "Buy groceries");
-        task.put("description", "Milk, Cheese, Pizza, Fruit, Tylenol");
-        task.put("done", "false");
-        tasks.add(task);
-
-        task = new HashMap<>();
-        task.put("id", "2");
-        task.put("title", "Buy groceries");
-        task.put("description", "Milk, Cheese, Pizza, Fruit, Tylenol");
-        task.put("done", "false");
-        tasks.add(task);
-
         populateData();
+
+
+        get("/", ProductController::renderProducts, new ThymeleafTemplateEngine());
 
         Cart cart = Cart.getInstance();
 
-
-//        megfelelő a formátum, make public tasket implementálni kell?
-        get("/todo/api/v1.0/tasks", new Route(){
+        get("/tocart/:id", new Route(){
             @Override
             public String handle(Request request, Response response) throws Exception {
-                return tasks.toString();
+                return ProductController.cartToJson(request, response);
             }
         });
 
-        get("todo/api/v1.0/tasks/:id", new Route(){
+
+        get("/tocart", new Route(){
             @Override
-            public Object handle(Request request, Response response) throws Exception {
-                return null;
+            public String handle(Request request, Response response) throws Exception {
+                return ProductController.cartToJson(request, response);
             }
         });
 
+        get("/tocart/:id/:symbol", new Route(){
+            @Override
+            public String handle(Request request, Response response) throws Exception {
+                return ProductController.cartToJson(request, response);
+            }
+        });
 
+        post("/-quantity/:id", (request, response) -> {
+            cart.decreaseQuantity((int) Integer.parseInt(request.params(":id")));
+            return ProductController.cartToJson(request, response);
+        });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-//        populateData();
-
-
-//        get("/", ProductController::renderProducts, new ThymeleafTemplateEngine());
-
-//        Cart cart = Cart.getInstance();
-
-//        get("/tocart/:id", new Route(){
-//            @Override
-//            public String handle(Request request, Response response) throws Exception {
-//                return ProductController.cartToJson(request, response);
-//            }
-//        });
-//
-//
-//        get("/tocart", new Route(){
-//            @Override
-//            public String handle(Request request, Response response) throws Exception {
-//                return ProductController.cartToJson(request, response);
-//            }
-//        });
-//
-//        get("/tocart/:id/:symbol", new Route(){
-//            @Override
-//            public String handle(Request request, Response response) throws Exception {
-//                return ProductController.cartToJson(request, response);
-//            }
-//        });
-//
-////        post("/-quantity/:id", (request, response) -> {
-////            cart.decreaseQuantity((int) Integer.parseInt(request.params(":id")));
-////            return ProductController.cartToJson(request, response);
-////        });
-//
-//        get("/initMain", new Route(){
-//            @Override
-//            public String handle(Request request, Response response) throws Exception {
-//                return ProductController.indexMainResponse(request, response);
-//            }
-//        });
-//        get("/indexSearch", new Route(){
-//            @Override
-//            public String handle(Request request, Response response) throws Exception {
-//                return ProductController.indexSearch(request, response);
-//            }
-//        });
-//        get("/example", new Route(){
-//            @Override
-//            public String handle(Request request, Response response) throws Exception {
-//                return ProductController.buildJSON(request, response);
-//            }
-//        });
+        get("/initMain", new Route(){
+            @Override
+            public String handle(Request request, Response response) throws Exception {
+                return ProductController.indexMainResponse(request, response);
+            }
+        });
+        get("/indexSearch", new Route(){
+            @Override
+            public String handle(Request request, Response response) throws Exception {
+                return ProductController.indexSearch(request, response);
+            }
+        });
+        get("/example", new Route(){
+            @Override
+            public String handle(Request request, Response response) throws Exception {
+                return ProductController.buildJSON(request, response);
+            }
+        });
     }
 
 

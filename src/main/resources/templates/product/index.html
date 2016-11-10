@@ -27,107 +27,71 @@
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous"></script>
 
-    <script src="http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js"></script>
-
     <link rel="stylesheet" type="text/css" href="/css/custom.css" />
 </head>
 
 <body>
+
 <!--/*-------------------------------------------------------------------------------------------------------------*/-->
-<div class="navbar">
-    <div class="navbar-inner">
-        <a class="brand" href="#">ToDo API Client Demo</a>
+
+<div id="cartModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Cart summary:</h4>
+            </div>
+
+            <div class="modal-body">
+                <table id="items-table" class="table table-bordered table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>Product name</th>
+                            <th>Desired quantity</th>
+                            <th>Price per item</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="modal-tbody"></tbody>
+                </table>
+            </div>
+
+            <div class="modal-footer">
+                Total:
+                <div class="totalPrice"></div>
+            </div>
+        </div>
     </div>
 </div>
 <!--/*-------------------------------------------------------------------------------------------------------------*/-->
-<div id="main" class="container">
-    <table class="table table-striped">
-        <tr><td style="width: 1px;"></td><td><b>Task</b></td><td><b>Options</b></td></tr>
-        <!-- ko foreach: tasks -->
-        <tr>
-            <td>
-                <span data-bind="visible: done" class="label label-success">Done</span>
-                <span data-bind="visible: !done()" class="label label-important">In Progress</span>
-            </td>
-            <td><p><b data-bind="text: title"></b></p><p data-bind="text: description"></p></td>
-            <td>
-                <button data-bind="click: $parent.beginEdit" class="btn">Edit</button>
-                <button data-bind="click: $parent.remove" class="btn">Delete</button>
-                <span data-bind="visible: done">
-                        <button data-bind="click: $parent.markInProgress" class="btn">Mark In Progress</button>
-                    </span>
-                <span data-bind="visible: !done()">
-                        <button data-bind="click: $parent.markDone" class="btn">Mark Done</button>
-                    </span>
-            </td>
-        </tr>
-        <!-- /ko -->
-    </table>
-    <button data-bind="click: beginAdd" class="btn">Add Task</button>
+
+
+<div class="container">
+    <button type="button">Click Me!</button>
+
+    <div class="basketcontainer">
+        <button id="cartModalButton" type="button" class="btn btn-info" data-toggle="modal" data-target="#cartModal">
+            <span class="glyphicon glyphicon-shopping-cart"></span> Your shopping cart
+        </button>
+    </div>
+
+
+    <select id="searchCategory">
+        <option value="category/all">All</option>
+    </select>
+    <select id="searchSupplier">
+        <option value="supplier/all">All</option>
+    </select>
+
+
+    <div id="products" class="row list-group">
+    </div>
+
 </div>
-<!--/*-------------------------------------------------------------------------------------------------------------*/-->
-<div id="add" class="modal hide fade" tabindex="=1" role="dialog" aria-labelledby="addDialogLabel" aria-hidden="true">
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h3 id="addDialogLabel">Add Task</h3>
-    </div>
-    <div class="modal-body">
-        <form class="form-horizontal">
-            <div class="control-group">
-                <label class="control-label" for="inputTask">Task</label>
-                <div class="controls">
-                    <input data-bind="value: title" type="text" id="inputTask" placeholder="Task title" style="width: 150px;"/>
-                </div>
-            </div>
-            <div class="control-group">
-                <label class="control-label" for="inputDescription">Description</label>
-                <div class="controls">
-                    <input data-bind="value: description" type="text" id="inputDescription" placeholder="Description" style="width: 300px;"/>
-                </div>
-            </div>
-        </form>
-    </div>
-    <div class="modal-footer">
-        <button data-bind="click: addTask" class="btn btn-primary">Add Task</button>
-        <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
-    </div>
-</div>
-<!--/*-------------------------------------------------------------------------------------------------------------*/-->
-<div id="edit" class="modal hide fade" tabindex="=1" role="dialog" aria-labelledby="editDialogLabel" aria-hidden="true">
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h3 id="editDialogLabel">Add Task</h3>
-    </div>
-    <div class="modal-body">
-        <form class="form-horizontal">
-            <div class="control-group">
-                <label class="control-label" for="inputTask">Task</label>
-                <div class="controls">
-                    <input data-bind="value: title" type="text" id="inputTask" placeholder="Task title" style="width: 150px;"/>
-                </div>
-            </div>
-            <div class="control-group">
-                <label class="control-label" for="inputDescription">Description</label>
-                <div class="controls">
-                    <input data-bind="value: description" type="text" id="inputDescription" placeholder="Description" style="width: 300px;"/>
-                </div>
-            </div>
-            <div class="control-group">
-                <div class="controls">
-                    <label class="checkbox">
-                        <input data-bind="checked: done" type="checkbox"/> Done
-                    </label>
-                </div>
-            </div>
-        </form>
-    </div>
-    <div class="modal-footer">
-        <button data-bind="click:editTask" class="btn btn-primary">Update Task</button>
-        <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
-    </div>
-</div>
-<!--/*-------------------------------------------------------------------------------------------------------------*/-->
+
 <script src="js/main.js"></script>
+<script src="js/index.js"></script>
 
 </body>
 </html>
