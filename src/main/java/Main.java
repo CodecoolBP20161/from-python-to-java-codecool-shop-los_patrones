@@ -39,7 +39,6 @@ public class Main {
         post("/tocart", new Route(){
             @Override
             public String handle(Request request, Response response) throws Exception {
-                System.out.println(1);
                 ProductController.toCart(gson.fromJson(request.body(), HashMap.class));
                 return ProductController.cart(request, response);
             }
@@ -55,6 +54,7 @@ public class Main {
         post("/fromcart", new Route(){
             @Override
             public String handle(Request request, Response response) throws Exception {
+                System.out.println(gson.fromJson(request.body(), HashMap.class));
                 ProductController.fromCart(gson.fromJson(request.body(), HashMap.class));
                 return ProductController.cart(request, response);
             }

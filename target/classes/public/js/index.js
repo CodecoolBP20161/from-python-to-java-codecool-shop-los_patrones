@@ -1,4 +1,5 @@
 // controller objects
+$('document').ready(function(){
 
 var dataManager = {
     currentCategory: "all",
@@ -118,7 +119,7 @@ var apiHandler = {
         request.send();
     },
     getProduct: function (productId) {
-        console.log(productId);
+
         var request = new XMLHttpRequest();
         var url = "/tocart";
 
@@ -131,7 +132,23 @@ var apiHandler = {
                 console.log(dataManager.cart);
             }
         };
-    }
+    },
+
+    removeProduct: function(productId){
+
+        var request = new XMLHttpRequest();
+        var url = "/fromcart";
+
+        request.open("POST", url, true);
+        request.setRequestHeader("Content-Type", "application/json");
+        request.send(JSON.stringify({id: productId}));
+        request.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                dataManager.cart = JSON.parse(this.responseText);
+                console.log(dataManager.cart);
+            }
+        };
+    },
 }
 
 var inputHandler = {
@@ -159,20 +176,67 @@ document.body.addEventListener("click", function(event) {
         apiHandler.getByParams()
     }
     if (inputHandler.convertId(event.target.id)[0] == "getProduct") {
-        idToSend = inputHandler.convertId(event.target.id)[1];
-        apiHandler.getProduct(idToSend);
-    }
-    else {
+        console.log(inputHandler.convertId(event.target.id)[1]);
+        console.log(typeof inputHandler.convertId(event.target.id)[1]);
         apiHandler.getProduct(inputHandler.convertId(event.target.id)[1]);
-        // console.log(1);
-        // var request = new XMLHttpRequest();
-        // request.open("POST", "/tocart", false);
-        // request.onreadystatechange = function () {
-        //     if (this.readyState == 4 && this.status == 200) {
-        //         console.log(this.responseText);
-        //     }
-        // };
-        // request.setRequestHeader('Content-Type', 'application/json')
-        // request.send(JSON.stringify({id: "1"}));
+    }
+
+    if(event.target.id[0] == '-'){
+        console.log(globalresult.id[event.target.id[1]]);
+        console.log(typeof globalresult.id[event.target.id[1]]);
+        apiHandler.removeProduct(String(globalresult.id[event.target.id[1]]));
+        refreshModal();
+    }
+
+    if(event.target.id[0] == '+'){
+        apiHandler.getProduct(String(globalresult.id[event.target.id[1]]));
+        refreshModal();
     }
 })
+
+var globalresult = "";
+
+    function refreshModal(){
+        $.ajax({url: "/cart", success: function(result){
+
+            result = JSON.parse(result);
+            globalresult = result;
+            var table_body = document.getElementById("modal-tbody");
+            table_body.innerHTML = "";
+
+            for(var i = 0; i < result.prices.length; i++){
+
+                var row = document.createElement("tr");
+                row.innerHTML = "<td>" + result.names[i] + "</td>" +
+                    "<td>" + result.prices[i]+"</td>" +
+                    "<td id='quant'>" + result.quantites[i] + "</td>" +
+                    "<td><button type='button' class='button glyphicon glyphicon-minus' id='-"+ i +"'></button></td>" +
+                    "<td><button type='button' class='button glyphicon glyphicon-plus' id='+" + i + "'></button></td>";
+                table_body.appendChild(row);
+
+            }
+        }});
+
+
+    }
+
+    $('#cartModalButton').click(function(){
+        refreshModal();
+    });
+
+    // $('button').click(function(){
+    //     if(this.id[0] == '-'){
+    //         console.log("-");
+    //         console.log(this.id);
+    //         apiHandler.removeProduct(result.id[id]);
+    //
+    //     }else if(this.id[0] == '+'){
+    //         console.log("+");
+    //         console.log(this.id);
+    //         apiHandler.getProduct(result.id[id]);
+    //         // console.log($('#quant').html("cica"));
+    //         console.log(result.quantites);
+    //
+    //     }
+    // });
+});
