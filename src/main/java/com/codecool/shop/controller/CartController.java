@@ -22,8 +22,10 @@ public class CartController {
             data.get("lastName").toString(),
             data.get("email").toString(),
             data.get("phoneNumber").toString(),
-            data.get("billingAddress").toString(),
-            data.get("shippingAddress").toString()
+            data.get("billingAddress").toString() + data.get("billingCountry").toString() +
+                data.get("billingCity").toString() + data.get("billingZip").toString(),
+            data.get("shippingAddress").toString() + data.get("shippingCountry").toString() +
+                    data.get("shippingCity").toString() + data.get("shippingZip").toString()
         );
 
         logger.logCheckoutEvent(request.session().id());
