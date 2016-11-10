@@ -2,6 +2,7 @@ package com.codecool.shop.model;
 
 
 import com.codecool.shop.dao.implementation.Cart;
+import com.codecool.shop.dao.implementation.OrderDaoMem;
 import com.sun.jndi.cosnaming.IiopUrl;
 
 public class Order extends BaseModel {
@@ -24,5 +25,7 @@ public class Order extends BaseModel {
         this.phoneNumber = phoneNumber;
         this.billingAddress = billingAddress;
         this.shippingAddress = shippingAddress;
+        OrderDaoMem.getInstance().add(this);
+
     }
 }

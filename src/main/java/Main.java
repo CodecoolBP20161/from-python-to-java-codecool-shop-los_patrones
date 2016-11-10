@@ -36,6 +36,15 @@ public class Main {
 
         get("/pay", ProductController::renderPay, new ThymeleafTemplateEngine());
 
+        get("/createOrder", new Route(){
+            @Override
+            public String handle(Request request, Response response) throws Exception {
+                ProductController.createOrder(gson.fromJson(request.body(), HashMap.class));
+                response.redirect("/pay");
+                return "";
+            }
+        });
+
         Cart cart = Cart.getInstance();
 
         post("/tocart", new Route(){

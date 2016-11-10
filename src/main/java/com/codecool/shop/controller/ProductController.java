@@ -4,6 +4,7 @@ import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.SupplierDao;
 import com.codecool.shop.dao.implementation.*;
+import com.codecool.shop.model.Order;
 import com.codecool.shop.model.Product;
 import com.google.gson.Gson;
 import spark.ModelAndView;
@@ -28,6 +29,19 @@ public class ProductController {
     public static ModelAndView renderPay(Request req, Response res) {
         HashMap params = new HashMap();
         return new ModelAndView(params, "product/pay");
+    }
+
+    public static void createOrder(HashMap data) {
+        Order order = new Order(
+                data.get("id"),
+                data.cart,
+                data.get("firstName"),
+                data.get("lastName"),
+                data.get("email"),
+                data.get("phoneNumber"),
+                data.get("billingAddress"),
+                data.get("shippingAddress")
+        );
     }
 
     public static String cart(Request req, Response res){

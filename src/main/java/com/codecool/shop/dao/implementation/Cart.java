@@ -93,10 +93,6 @@ public class Cart {
         return this.totalPrice;
     }
 
-    public void checkOut(){
-        this.status = "Checked out";
-    }
-
     public String toString(){
         return "Id: " + this.id + ", status: " + this.status + ", items: " + this.items;
     }
