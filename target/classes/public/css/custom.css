@@ -80,15 +80,19 @@ span {
     width: 100%;
 }
 
+select {
+    text-indent: 40%;
+}
+
 .selectpicker {
     margin-top: 10px;
     margin-bottom: 10px;
+    height: 40px;
     width: 100%;
+    border-radius: 5px;
 }
 
 .modal-header {
     background-color: #2C3E50;
     color: white;
 }
-
-

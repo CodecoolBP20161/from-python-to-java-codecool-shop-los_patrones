@@ -47,7 +47,7 @@ var displayHandler = {
             var thumbnail = document.createElement("DIV");
             thumbnail.className = "item col-xs-4 col-sm-4 col-md-4 col-lg-4 thumbnail";
             var picture = document.createElement("IMG");
-            picture.src = "http://placehold.it/400x250/000/fff";
+            picture.src = "/img/product_" + products[i]["id"] + ".jpg";
             picture.className = "group list-group-image";
             var textField = document.createElement("DIV");
             textField.className = "caption";
@@ -81,9 +81,9 @@ var apiHandler = {
         var requestCategories = new XMLHttpRequest();
         var requestSuppliers = new XMLHttpRequest();
         var requestCart = new XMLHttpRequest();
-        requestCategories.open("GET", "/categories", true);
-        requestSuppliers.open("GET", "/suppliers", true);
-        requestCart.open("GET", "/cart", true);
+        requestCategories.open("GET", "/categories", false);
+        requestSuppliers.open("GET", "/suppliers", false);
+        requestCart.open("GET", "/cart", false);
 
         requestCategories.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
@@ -230,8 +230,8 @@ var globalresult = "";
 
                 var row = document.createElement("tr");
                 row.innerHTML = "<td>" + result.names[i] + "</td>" +
-                    "<td>" + result.prices[i]+"</td>" +
-                    "<td id='quant'>" + result.quantites[i] + "</td>" +
+                    "<td>" + result.quantites[i]+"</td>" +
+                    "<td id='quant'>" + result.prices[i] + "</td>" +
                     "<td><button type='button' class='button glyphicon glyphicon-minus' id='-"+ i +"'></button></td>" +
                     "<td><button type='button' class='button glyphicon glyphicon-plus' id='+" + i + "'></button></td>";
                 table_body.appendChild(row);
