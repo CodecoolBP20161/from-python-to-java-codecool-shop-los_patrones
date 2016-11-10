@@ -9,7 +9,13 @@ import com.codecool.shop.dao.implementation.SupplierDaoMem;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
+import spark.Request;
+import spark.Response;
+import spark.Route;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import static spark.Spark.*;
 
@@ -22,12 +28,65 @@ public class Main {
         staticFileLocation("/public");
         port(8888);
 
+        get("/", ProductController::renderProducts, new ThymeleafTemplateEngine());
+
+        ArrayList<HashMap> tasks = new ArrayList<>();
+
+        HashMap<String, String> task = new HashMap<>();
+        task.put("id", "1");
+        task.put("title", "Buy groceries");
+        task.put("description", "Milk, Cheese, Pizza, Fruit, Tylenol");
+        task.put("done", "false");
+        tasks.add(task);
+
+        task = new HashMap<>();
+        task.put("id", "2");
+        task.put("title", "Buy groceries");
+        task.put("description", "Milk, Cheese, Pizza, Fruit, Tylenol");
+        task.put("done", "false");
+        tasks.add(task);
+
+        populateData();
+
+        Cart cart = Cart.getInstance();
+
+
+//        megfelelő a formátum, make public tasket implementálni kell?
+        get("/todo/api/v1.0/tasks", new Route(){
+            @Override
+            public String handle(Request request, Response response) throws Exception {
+                return tasks.toString();
+            }
+        });
+
+        get("todo/api/v1.0/tasks/:id", new Route(){
+            @Override
+            public Object handle(Request request, Response response) throws Exception {
+                return null;
+            }
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //        populateData();
 
 
-        get("/", ProductController::renderProducts, new ThymeleafTemplateEngine());
+//        get("/", ProductController::renderProducts, new ThymeleafTemplateEngine());
 
-        Cart cart = Cart.getInstance();
+//        Cart cart = Cart.getInstance();
 
 //        get("/tocart/:id", new Route(){
 //            @Override

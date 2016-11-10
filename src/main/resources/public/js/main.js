@@ -124,4 +124,3 @@ var editTaskViewModel = new EditTaskViewModel();
 ko.applyBindings(tasksViewModel, $('#main')[0]);
 ko.applyBindings(addTaskViewModel, $('#add')[0]);
 ko.applyBindings(editTaskViewModel, $('#edit')[0]);
-</script>
