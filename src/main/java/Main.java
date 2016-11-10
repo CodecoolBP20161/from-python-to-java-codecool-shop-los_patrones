@@ -9,16 +9,20 @@ import com.codecool.shop.dao.implementation.SupplierDaoMem;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
+import com.google.gson.Gson;
 import spark.Request;
 import spark.Response;
 import spark.Route;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
+
+import java.util.HashMap;
 
 import static spark.Spark.*;
 
 public class Main {
 
     public static void main(String[] args) {
+        Gson gson = new Gson();
 
         // default server settings
         exception(Exception.class, (e, req, res) -> e.printStackTrace());
@@ -28,53 +32,58 @@ public class Main {
         populateData();
 
 
-        get("/", ProductController::renderProducts, new ThymeleafTemplateEngine());
+        get("/", ProductController::renderIndex, new ThymeleafTemplateEngine());
 
         Cart cart = Cart.getInstance();
 
-        get("/tocart/:id", new Route(){
+        post("/tocart", new Route(){
             @Override
             public String handle(Request request, Response response) throws Exception {
-                return ProductController.cartToJson(request, response);
+                System.out.println(1);
+                ProductController.toCart(gson.fromJson(request.body(), HashMap.class));
+                return ProductController.cart(request, response);
             }
         });
 
-
-        get("/tocart", new Route(){
+        get("/cart", new Route(){
             @Override
             public String handle(Request request, Response response) throws Exception {
-                return ProductController.cartToJson(request, response);
+                return ProductController.cart(request, response);
             }
         });
 
-        get("/tocart/:id/:symbol", new Route(){
+        post("/fromcart", new Route(){
             @Override
             public String handle(Request request, Response response) throws Exception {
-                return ProductController.cartToJson(request, response);
+                ProductController.fromCart(gson.fromJson(request.body(), HashMap.class));
+                return ProductController.cart(request, response);
             }
         });
 
-        post("/-quantity/:id", (request, response) -> {
-            cart.decreaseQuantity((int) Integer.parseInt(request.params(":id")));
-            return ProductController.cartToJson(request, response);
-        });
-
-        get("/initMain", new Route(){
+        get("/categories", new Route(){
             @Override
             public String handle(Request request, Response response) throws Exception {
-                return ProductController.indexMainResponse(request, response);
+                return ProductController.getCategories(request, response);
             }
         });
-        get("/indexSearch", new Route(){
+        get("/suppliers", new Route(){
             @Override
             public String handle(Request request, Response response) throws Exception {
-                return ProductController.indexSearch(request, response);
+                return ProductController.getSuppliers(request, response);
             }
         });
-        get("/example", new Route(){
+        get("/products", new Route(){
             @Override
             public String handle(Request request, Response response) throws Exception {
-                return ProductController.buildJSON(request, response);
+                return ProductController.getProducts(request, response);
+            }
+        });
+        post("/hello", new Route(){
+            @Override
+            public Request handle(Request request, Response response) throws Exception {
+                Gson gson = new Gson();
+                System.out.println(gson.fromJson(request.body(), HashMap.class));
+                return request;
             }
         });
     }
