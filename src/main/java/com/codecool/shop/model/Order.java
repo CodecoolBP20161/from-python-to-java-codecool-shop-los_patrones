@@ -1,9 +1,7 @@
 package com.codecool.shop.model;
 
 
-import com.codecool.shop.dao.implementation.Cart;
 import com.codecool.shop.dao.implementation.OrderDaoMem;
-import com.sun.jndi.cosnaming.IiopUrl;
 
 public class Order extends BaseModel {
 

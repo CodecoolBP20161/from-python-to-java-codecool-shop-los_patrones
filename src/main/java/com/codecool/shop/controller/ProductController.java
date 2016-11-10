@@ -4,12 +4,9 @@ import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.SupplierDao;
 import com.codecool.shop.dao.implementation.*;
-import com.codecool.shop.model.Order;
-import com.codecool.shop.model.Product;
+import com.codecool.shop.model.*;
 import com.google.gson.Gson;
 import spark.ModelAndView;
-import com.codecool.shop.model.ProductCategory;
-import com.codecool.shop.model.Supplier;
 import com.google.gson.*;
 import spark.Request;
 import spark.Response;
@@ -32,16 +29,16 @@ public class ProductController {
     }
 
     public static void createOrder(HashMap data) {
-        Order order = new Order(
-                data.get("id"),
-                data.cart,
-                data.get("firstName"),
-                data.get("lastName"),
-                data.get("email"),
-                data.get("phoneNumber"),
-                data.get("billingAddress"),
-                data.get("shippingAddress")
-        );
+//        Order order = new Order(
+//                data.get("id"),
+//                data.cart,
+//                data.get("firstName"),
+//                data.get("lastName"),
+//                data.get("email"),
+//                data.get("phoneNumber"),
+//                data.get("billingAddress"),
+//                data.get("shippingAddress")
+//        );
     }
 
     public static String cart(Request req, Response res){

@@ -23,11 +23,11 @@ public class LineItem {
         this.product = product;
     }
 
-    void incrementQuantity(){
+    public void incrementQuantity(){
         this.quantity++;
     }
 
-    void decrementQuantity(){
+    public void decrementQuantity(){
         this.quantity--;
     }
 

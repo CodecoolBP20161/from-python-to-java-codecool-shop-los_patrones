@@ -1,4 +1,6 @@
-package com.codecool.shop.dao.implementation;
+package com.codecool.shop.model;
+
+import com.codecool.shop.dao.implementation.LineItem;
 
 import java.util.ArrayList;
 
