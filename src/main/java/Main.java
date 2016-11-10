@@ -11,6 +11,7 @@ import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.dao.implementation.SupplierDaoMem;
 import com.google.gson.Gson;
+import services.SessionLogger;
 import spark.Request;
 import spark.Response;
 import spark.Route;
@@ -23,6 +24,7 @@ import static spark.Spark.*;
 public class Main {
 
     public static void main(String[] args) {
+        SessionLogger logger = new SessionLogger("log.txt");
         Gson gson = new Gson();
 
         // default server settings
