@@ -2,6 +2,7 @@ package com.codecool.shop.dao.implementation;
 
 
 import com.codecool.shop.dao.OrderDao;
+import com.codecool.shop.model.Cart;
 import com.codecool.shop.model.Order;
 import com.codecool.shop.model.Product;
 
@@ -31,8 +32,12 @@ public class OrderDaoMem implements OrderDao {
 
     @Override
     public Order find(String email) {
-//        TODO!!
-        return this.DATA.get(0);
+        for(Order order : this.DATA){
+            if(order.getEmail() == email){
+                return order;
+            }
+        }
+        return null;
     }
 
 }

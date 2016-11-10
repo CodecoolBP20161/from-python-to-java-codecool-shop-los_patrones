@@ -26,4 +26,8 @@ public class Order extends BaseModel {
         OrderDaoMem.getInstance().add(this);
 
     }
+
+    public String getEmail() {
+        return email;
+    }
 }

@@ -9,13 +9,19 @@ public class Cart {
     private ArrayList<LineItem> items = new ArrayList<>();
     private String status;
     private int id;
-    private static int counter = 0;
     private int totalQantity;
     private float totalPrice;
     private static Cart instance = null;
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
     Cart(){
-        this.id = ++counter;
         this.status = "New";
         this.totalQantity = 0;
         this.totalPrice = 0;
