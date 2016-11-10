@@ -74,15 +74,20 @@ public class Cart {
     }
 
     private void process(){
+        LineItem removable = null;
         this.totalQantity = 0;
         this.totalPrice = 0;
+        System.out.println(this.items);
         for(LineItem item : this.items){
             if(item.getQuantity() == 0){
-                this.items.remove(item);
+                removable = item;
             }else{
                 this.totalQantity += item.getQuantity();
                 this.totalPrice += item.getQuantity() * item.getProduct().getDefaultPrice();
             }
+        }
+        if(removable != null){
+            this.items.remove(removable);
         }
     }
 
