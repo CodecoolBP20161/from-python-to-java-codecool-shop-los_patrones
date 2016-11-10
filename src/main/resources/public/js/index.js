@@ -83,14 +83,9 @@ var apiHandler = {
 
         request.open("POST", url, true);
         request.setRequestHeader("Content-Type", "application/json");
-        request.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {
-                var newPageRequest = new XMLHttpRequest();
-                newPageRequest.open("GET", "/pay", true);
-                newPageRequest.send();
-            }
-        };
         request.send(data);
+        window.location.href="/pay";
+
     },
 
     initApp: function () {

@@ -15,12 +15,14 @@ var validator = {
         if (validator.isEmpty(selector, str)) {
             selector.removeClass('plcholder');
             selector.css('color', 'black');
-            return /^[a-zA-Z()]+$/.test(str);
-        } else {
+            if(/^[a-zA-Z()]+$/.test(str)) {
+                return true;
+            } else {
             selector.attr("placeholder", "Invalid!");
             selector.addClass('plcholder');
             selector.css('color', 'red');
             return false;
+            }
         }
     },
 
@@ -35,7 +37,6 @@ var validator = {
             selector.attr("placeholder", "Invalid!");
             selector.addClass('plcholder');
             selector.css('color', 'red');
-            console.log(typeof num);
             return false;
             }
         }
