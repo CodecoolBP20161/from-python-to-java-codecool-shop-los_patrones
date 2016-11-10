@@ -25,6 +25,11 @@ public class ProductController {
         return new ModelAndView(params, "product/index");
     }
 
+    public static ModelAndView renderPay(Request req, Response res) {
+        HashMap params = new HashMap();
+        return new ModelAndView(params, "product/pay");
+    }
+
     public static String cart(Request req, Response res){
         Cart cart = Cart.getInstance();
         System.out.println(cart.getItems());

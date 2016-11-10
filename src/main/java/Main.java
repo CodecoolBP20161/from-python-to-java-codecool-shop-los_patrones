@@ -34,6 +34,8 @@ public class Main {
 
         get("/", ProductController::renderIndex, new ThymeleafTemplateEngine());
 
+        get("/pay", ProductController::renderPay, new ThymeleafTemplateEngine());
+
         Cart cart = Cart.getInstance();
 
         post("/tocart", new Route(){

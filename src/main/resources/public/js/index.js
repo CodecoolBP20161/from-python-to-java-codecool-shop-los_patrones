@@ -65,20 +65,20 @@ var displayHandler = {
 
 var apiHandler = {
     initApp: function () {
-        var request = new XMLHttpRequest();
-        request.open("GET", "http://127.0.0.1:8888/initMain", false);
-        request.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {
-                dataManager.allSearchParams = JSON.parse(this.responseText);
-                displayHandler.renderSearchBar();
-            }
-        };
-        request.send();
+        // var request = new XMLHttpRequest();
+        // request.open("GET", "http://127.0.0.1:8888/initMain", false);
+        // request.onreadystatechange = function () {
+        //     if (this.readyState == 4 && this.status == 200) {
+        //         dataManager.allSearchParams = JSON.parse(this.responseText);
+        //         displayHandler.renderSearchBar();
+        //     }
+        // };
+        // request.send();
         this.getByParams();
     },
     getByParams: function () {
         var request = new XMLHttpRequest();
-        var url = "http://127.0.0.1:8888/indexSearch";
+        var url = "/products";
         if (dataManager.currentSupplier != "all" || dataManager.currentCategory != "all") {
             url = url + "?";
         }
@@ -116,7 +116,7 @@ var inputHandler = {
 
 // init
 
-// apiHandler.initApp();
+apiHandler.initApp();
 
 
 // event handling
@@ -138,7 +138,7 @@ document.body.addEventListener("click", function(event) {
     else {
         console.log(1);
         var request = new XMLHttpRequest();
-        request.open("POST", "http://127.0.0.1:8888/tocart", false);
+        request.open("POST", "/tocart", false);
         request.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
                 console.log(this.responseText);
