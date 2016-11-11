@@ -21,7 +21,7 @@ import java.util.Map;
 
 
 public class ProductController {
-    public static SessionLogger logger = new SessionLogger("log.txt");
+    private static SessionLogger logger = new SessionLogger("log.txt");
 
     public static Cart setCart(Request request) {
         if(request.session().attribute("cart") == null){
@@ -43,9 +43,11 @@ public class ProductController {
         return new ModelAndView(params, "product/pay");
     }
 
-    public static String cart(Request req, Response res){
+    public static String cart(Request req){
 
         Cart cart = ProductController.setCart(req);
+
+
 
         ArrayList<String> names = new ArrayList<>();
         ArrayList<String> prices = new ArrayList<>();
@@ -75,6 +77,7 @@ public class ProductController {
 
         Gson gson = new Gson();
 
+        System.out.println(gson.toJson(result));
         return gson.toJson(result);
 
     }
