@@ -45,7 +45,7 @@ var displayHandler = {
         container.innerHTML = "";
         for (i in products) {
             var thumbnail = document.createElement("DIV");
-            thumbnail.className = "item col-xs-4 col-sm-4 col-md-4 col-lg-4 thumbnail";
+            thumbnail.className = "item col-xs-12 col-sm-6 col-md-4 thumbnail";
             var picture = document.createElement("IMG");
             picture.src = "/img/product_" + products[i]["id"] + ".jpg";
             picture.className = "group list-group-image";
@@ -221,6 +221,13 @@ document.body.addEventListener("click", function(event) {
     if(event.target.id[0] == '+'){
         apiHandler.getProduct(String(globalresult.id[event.target.id[1]]));
         refreshModal();
+    }
+    if(event.target.id == 'checkoutstart') {
+        console.log(dataManager.cart.prices)
+        if (dataManager.cart.prices.length > 0) {
+            $('#cartModal').modal('hide');
+            $('#checkoutModal').modal('show');
+        }
     }
 
     if(event.target.id == 'pay'){

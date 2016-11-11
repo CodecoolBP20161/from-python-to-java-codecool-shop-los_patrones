@@ -267,3 +267,31 @@ Put product into the cart from id: 1d8ldak5z0aw11gtbcpbw8d8q6 {"id":"3"}
 Put product into the cart from id: l46jzbgdo07kreor3vofsak0 {"id":"3"}
 
 Put product into the cart from id: 1d1qdnvyqonuw1m07iyqua2qk6 {"id":"3"}
+
+Put product into the cart from id: kuyxn0al77ondolidzvyb4le {"id":"1"}
+
+User checked out with id: kuyxn0al77ondolidzvyb4le
+
+Put product into the cart from id: ryclkqgrau441bmosvlix5lty {"id":"1"}
+
+
+Put product into the cart from id: 1k8cwjwppzkllzpjcxslgp0gn {"id":"1"}
+Put product into the cart from id: 1k8cwjwppzkllzpjcxslgp0gn {"id":"1"}
+
+User checked out with id: 1k8cwjwppzkllzpjcxslgp0gn
+
+
+
+
+
+
+
+
+
+
+Put product into the cart from id: 15bvl8ebu3dt01ff1uakypth4a {"id":"2"}
+Deleted product into the cart from id: 15bvl8ebu3dt01ff1uakypth4a {"id":"2"}
+Put product into the cart from id: 15bvl8ebu3dt01ff1uakypth4a {"id":"6"}
+Put product into the cart from id: 15bvl8ebu3dt01ff1uakypth4a {"id":"6"}
+Deleted product into the cart from id: 15bvl8ebu3dt01ff1uakypth4a {"id":"6"}
+Deleted product into the cart from id: 15bvl8ebu3dt01ff1uakypth4a {"id":"6"}

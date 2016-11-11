@@ -123,7 +123,6 @@ var checkInput = {
         if (validator.isEmpty($('#shippingaddress'), saddress)) {
             output.push(saddress);
         }
-        console.log(output);
         return output;
 
     }
