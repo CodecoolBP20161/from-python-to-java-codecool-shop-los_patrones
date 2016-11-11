@@ -1,0 +1,23 @@
+#pageTitle {
+    width: 100%;
+    height: 50px;
+}
+
+#navbar {
+    width: 100%;
+    height: 50px;
+}
+
+.container {
+    margin-top: 10px;
+}
+
+#pay {
+    width: 100%;
+    height: 80px;
+}
+
+#payPlace {
+    text-align: center;
+    padding: 10px;
+}
