@@ -2,12 +2,17 @@ package com.codecool.shop.model;
 
 
 import java.lang.reflect.Field;
+import java.util.HashMap;
 
 public class BaseModel {
 
     protected int id;
     protected String name;
     protected String description;
+
+    public BaseModel(int id) {
+        this.id = id;
+    }
 
     public BaseModel(String name) {
         this.name = name;
@@ -60,5 +65,10 @@ public class BaseModel {
         }
         return sb.toString();
     }
+
+    public HashMap toDict() {
+        HashMap returnDict = new HashMap();
+        return returnDict;
+    };
 
 }

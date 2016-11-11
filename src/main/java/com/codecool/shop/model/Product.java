@@ -1,6 +1,7 @@
 package com.codecool.shop.model;
 
 import java.util.Currency;
+import java.util.HashMap;
 
 public class Product extends BaseModel {
 
@@ -15,6 +16,11 @@ public class Product extends BaseModel {
         this.setPrice(defaultPrice, currencyString);
         this.setSupplier(supplier);
         this.setProductCategory(productCategory);
+    }
+
+    public Product(String name, String description){
+        super(name, description);
+        this.setPrice(49.9f, "USD");
     }
 
     public float getDefaultPrice() {
@@ -74,5 +80,18 @@ public class Product extends BaseModel {
                 this.defaultCurrency.toString(),
                 this.productCategory.getName(),
                 this.supplier.getName());
+    }
+
+    @Override
+    public HashMap toDict() {
+        HashMap returnDict = new HashMap<>();
+        returnDict.put("id", id);
+        returnDict.put("name", name);
+        returnDict.put("price", defaultPrice);
+        returnDict.put("currency", defaultCurrency.toString());
+        returnDict.put("category", productCategory.getName());
+        returnDict.put("supplier", supplier.getName());
+        returnDict.put("description", description);
+        return returnDict;
     }
 }
