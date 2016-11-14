@@ -1,14 +1,14 @@
 // controller objects
 $('document').ready(function(){
 
-var dataManager = {
-    currentCategory: "all",
-    currentSupplier: "all",
-    allCategories: null,
-    allSuppliers: null,
-    allProducts: null,
-    cart: null
-}
+// var dataManager = {
+//     currentCategory: "all",
+//     currentSupplier: "all",
+//     allCategories: null,
+//     allSuppliers: null,
+//     allProducts: null,
+//     cart: null
+// }
 
 var displayHandler = {
 

@@ -10,10 +10,6 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="Maven: com.google.code.gson:gson:2.2.4" level="project" />
-    <orderEntry type="library" name="knockout-2.2.1" level="application" />
-    <orderEntry type="library" name="bootstrap" level="application" />
-    <orderEntry type="library" name="jquery-1.9.0" level="application" />
     <orderEntry type="library" name="Maven: com.sparkjava:spark-core:2.5" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.13" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse.jetty:jetty-server:9.3.6.v20151106" level="project" />
@@ -37,5 +33,9 @@
     <orderEntry type="library" name="Maven: org.unbescape:unbescape:1.0" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-simple:1.7.21" level="project" />
     <orderEntry type="library" name="Maven: com.google.code.gson:gson:2.2.4" level="project" />
+    <orderEntry type="library" name="react" level="application" />
+    <orderEntry type="library" name="jquery-3.1.1" level="application" />
+    <orderEntry type="library" name="JSXTransformer" level="application" />
+    <orderEntry type="library" name="jquery" level="application" />
   </component>
 </module>

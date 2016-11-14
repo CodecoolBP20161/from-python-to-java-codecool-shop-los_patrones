@@ -47,8 +47,6 @@ public class ProductController {
 
         Cart cart = ProductController.setCart(req);
 
-
-
         ArrayList<String> names = new ArrayList<>();
         ArrayList<String> prices = new ArrayList<>();
         ArrayList<Integer> quantities = new ArrayList<>();
