@@ -14,7 +14,6 @@ var displayHandler = {
 
     renderCartItems: function () {
         var carticon = document.getElementById("items");
-        console.log(dataManager.cart);
         carticon.innerHTML = dataManager.cart.totalquantity[0];
     },
 
@@ -43,6 +42,7 @@ var displayHandler = {
         var products = dataManager.allProducts["Products"];
         var container = document.getElementById("products");
         container.innerHTML = "";
+
         for (i in products) {
             var thumbnail = document.createElement("DIV");
             thumbnail.className = "item col-xs-4 col-sm-4 col-md-4 col-lg-4 thumbnail";
