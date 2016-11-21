@@ -3,15 +3,19 @@ package com.codecool.shop.controller;
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.SupplierDao;
-import com.codecool.shop.dao.implementation.*;
-import com.codecool.shop.model.*;
-import com.codecool.shop.services.SessionLogger;
-import com.google.gson.Gson;
-import spark.ModelAndView;
+import com.codecool.shop.dao.implementation.LineItem;
+import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
+import com.codecool.shop.dao.implementation.ProductDaoMem;
+import com.codecool.shop.dao.implementation.SupplierDaoMem;
+import com.codecool.shop.model.Cart;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
+import com.codecool.shop.services.CartService;
+import com.codecool.shop.services.SessionLogger;
+import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 
@@ -23,15 +27,6 @@ import java.util.Map;
 public class ProductController {
     public static SessionLogger logger = new SessionLogger("log.txt");
 
-    public static Cart setCart(Request request) {
-        if(request.session().attribute("cart") == null){
-            Cart cart = new Cart();
-            request.session().attribute("cart", cart);
-            return cart;
-        }else{
-            return request.session().attribute("cart");
-        }
-    }
 
     public static ModelAndView renderIndex(Request req, Response res) {
         HashMap params = new HashMap();
@@ -39,55 +34,26 @@ public class ProductController {
     }
 
     public static ModelAndView renderPay(Request req, Response res) {
-        System.out.println("vege");
         HashMap params = new HashMap();
         return new ModelAndView(params, "product/pay");
     }
 
     public static String cart(Request req, Response res){
 
-        Cart cart = ProductController.setCart(req);
-
-        ArrayList<String> names = new ArrayList<>();
-        ArrayList<String> prices = new ArrayList<>();
-        ArrayList<Integer> quantities = new ArrayList<>();
-        ArrayList<Float> totalprice = new ArrayList<>();
-        ArrayList<Integer> totalquantity = new ArrayList<>();
-        ArrayList<Integer> id = new ArrayList<>();
-
-        for(LineItem Item : cart.getItems()){
-            names.add(Item.getProduct().getName());
-            prices.add(Item.getProduct().getPrice());
-            quantities.add(Item.getQuantity());
-            id.add(Item.getProduct().getId());
-        }
-
-        totalprice.add(cart.getTotalPrice());
-        totalquantity.add(cart.getTotalItemNumber());
-
-
-        HashMap<String, ArrayList> result = new HashMap<>();
-        result.put("names", names);
-        result.put("prices", prices);
-        result.put("quantites", quantities);
-        result.put("totalprice", totalprice);
-        result.put("totalquantity", totalquantity);
-        result.put("id", id);
-
-        Gson gson = new Gson();
-
-        return gson.toJson(result);
+        CartService cartService = new CartService();
+        Cart cart = cartService.setCart(req);
+        cartService.cartToJson(cart, req);
+        return "";
 
     }
 
     public static void toCart(Request req, HashMap json){
 
+        CartService cartService = new CartService();
         ProductDao productDataStore = ProductDaoMem.getInstance();
-        Cart cart = ProductController.setCart(req);
-        int id = 0;
-        for (Object value : json.values()) {
-            id = Integer.parseInt(value.toString());
-        }
+        Cart cart = cartService.setCart(req);
+
+        int id = Integer.parseInt(json.values().toString());
         Product product = productDataStore.find(id);
         LineItem item = new LineItem(product);
         cart.add(item);
@@ -95,8 +61,9 @@ public class ProductController {
     }
 
     public static void fromCart(Request req, HashMap json){
+        CartService cartService = new CartService();
         ProductDao productDataStore = ProductDaoMem.getInstance();
-        Cart cart = ProductController.setCart(req);
+        Cart cart = cartService.setCart(req);
         int id = 0;
         for (Object value : json.values()) {
             id = Integer.parseInt(value.toString());
