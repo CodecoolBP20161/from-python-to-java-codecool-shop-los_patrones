@@ -3,12 +3,12 @@ import com.codecool.shop.controller.ProductController;
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.SupplierDao;
-import com.codecool.shop.model.Product;
-import com.codecool.shop.model.ProductCategory;
-import com.codecool.shop.model.Supplier;
 import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.dao.implementation.SupplierDaoMem;
+import com.codecool.shop.model.Product;
+import com.codecool.shop.model.ProductCategory;
+import com.codecool.shop.model.Supplier;
 import com.google.gson.Gson;
 import spark.Request;
 import spark.Response;
@@ -88,6 +88,7 @@ public class Main {
         get("/pay", ProductController::renderPay, new ThymeleafTemplateEngine());
 
     }
+
 
 
     private static void populateData() {

@@ -25,7 +25,7 @@ var controller = {
                 console.log(model.products[i]);
                 // ProductComponent.product = product;
                 // console.log(ProductComponent.product);
-                React.render("ezmegaz", <ProductComponent />, document.getElementById('products'));
+                React.render(<ProductComponent firstName={JSON.stringify(model.products[i])}/>, document.getElementById('products'));
             }
 
             // for(product in model.products){
@@ -38,16 +38,16 @@ var controller = {
 
 var ProductComponent = React.createClass({
     render: function(product) {
-        console.log("cica");
-        console.log(product);
+
         return (
             <div className="item col-xs-4 col-sm-4 col-md-4 col-lg-4 thumbnail">
-                <img className="group list-group-image" src="'/img/product/'+ {products[i]['id']} + '.jgp'" />
+                <img className="group list-group-image" src="" />
                 <div className="caption">
-                    <h4 className="group inner list-group-item-heading">{product.name}</h4>
-                    <p className="group inner list-group-item-text">{product.description}</p>
+                    <h4 className="group inner list-group-item-heading">cica név</h4>
+                    <p className="group inner list-group-item-text">cica leírás</p>
                     <p>
-                        <span>{product.price + ' ' + product.currency}</span>
+                        <span>cica ár és currency</span>
+                        <span>{this.props.firstName}</span>
                         <button id="'getProduct/' + {product.id}" className="btn btn-success">Add to cart</button>
                     </p>
                 </div>

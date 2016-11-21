@@ -23,6 +23,7 @@ import java.util.Map;
 public class ProductController {
     private static SessionLogger logger = new SessionLogger("log.txt");
 
+    //service, ez clean, nem kell alapvetően átírni
     public static Cart setCart(Request request) {
         if(request.session().attribute("cart") == null){
             Cart cart = new Cart();
@@ -33,6 +34,7 @@ public class ProductController {
         }
     }
 
+    //ez a kettő clean
     public static ModelAndView renderIndex(Request req, Response res) {
         HashMap params = new HashMap();
         return new ModelAndView(params, "product/index");
@@ -42,6 +44,7 @@ public class ProductController {
         HashMap params = new HashMap();
         return new ModelAndView(params, "product/pay");
     }
+
 
     public static String cart(Request req){
 
