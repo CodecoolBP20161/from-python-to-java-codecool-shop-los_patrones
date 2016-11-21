@@ -3,14 +3,13 @@ import com.codecool.shop.controller.ProductController;
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.SupplierDao;
-import com.codecool.shop.model.Product;
-import com.codecool.shop.model.ProductCategory;
-import com.codecool.shop.model.Supplier;
 import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.dao.implementation.SupplierDaoMem;
+import com.codecool.shop.model.Product;
+import com.codecool.shop.model.ProductCategory;
+import com.codecool.shop.model.Supplier;
 import com.google.gson.Gson;
-import com.codecool.shop.services.SessionLogger;
 import spark.Request;
 import spark.Response;
 import spark.Route;
@@ -42,10 +41,10 @@ public class Main {
         });
 
 
-        post("/tocart", new Route(){
+        post("/updatecart", new Route(){
             @Override
             public String handle(Request request, Response response) throws Exception {
-                ProductController.toCart(request, gson.fromJson(request.body(), HashMap.class));
+                ProductController.updateCart(request, gson.fromJson(request.body(), HashMap.class));
                 return ProductController.cart(request, response);
             }
         });
@@ -53,14 +52,6 @@ public class Main {
         get("/cart", new Route(){
             @Override
             public String handle(Request request, Response response) throws Exception {
-                return ProductController.cart(request, response);
-            }
-        });
-
-        post("/fromcart", new Route(){
-            @Override
-            public String handle(Request request, Response response) throws Exception {
-                ProductController.fromCart(request, gson.fromJson(request.body(), HashMap.class));
                 return ProductController.cart(request, response);
             }
         });

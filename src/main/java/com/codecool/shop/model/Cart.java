@@ -61,7 +61,6 @@ public class Cart{
     public void add(LineItem item){
         for(LineItem currentItem : this.items){
             if(item.getProduct().getName() == currentItem.getProduct().getName()){
-                System.out.println("add");
                 currentItem.incrementQuantity();
                 this.process();
                 return;

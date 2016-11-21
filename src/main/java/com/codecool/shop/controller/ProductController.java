@@ -7,11 +7,9 @@ import com.codecool.shop.dao.implementation.LineItem;
 import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.dao.implementation.SupplierDaoMem;
-import com.codecool.shop.model.Cart;
-import com.codecool.shop.model.Product;
-import com.codecool.shop.model.ProductCategory;
-import com.codecool.shop.model.Supplier;
+import com.codecool.shop.model.*;
 import com.codecool.shop.services.CartService;
+import com.codecool.shop.services.JsonTransformer;
 import com.codecool.shop.services.SessionLogger;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -22,6 +20,7 @@ import spark.Response;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 
 public class ProductController {
@@ -42,65 +41,36 @@ public class ProductController {
 
         CartService cartService = new CartService();
         Cart cart = cartService.setCart(req);
-        cartService.cartToJson(cart, req);
-        return "";
+        return cartService.cartToJson(cart, req);
 
     }
 
-    public static void toCart(Request req, HashMap json){
+    public static void updateCart(Request req, HashMap json){
 
         CartService cartService = new CartService();
-        ProductDao productDataStore = ProductDaoMem.getInstance();
         Cart cart = cartService.setCart(req);
-
-        int id = Integer.parseInt(json.values().toString());
-        Product product = productDataStore.find(id);
+        ProductDao dao = ProductDaoMem.getInstance();
+        Product product = dao.find(Integer.parseInt(json.get("id").toString()));
         LineItem item = new LineItem(product);
-        cart.add(item);
+        if (json.get("method").toString().equals("add")) {
+            cart.add(item);
+        }
+        if (json.get("method").toString().equals("remove")) {
+            cart.remove(item);
+        }
         logger.logPutIntoCartEvent(req.body() ,req.session().id());
     }
 
-    public static void fromCart(Request req, HashMap json){
-        CartService cartService = new CartService();
-        ProductDao productDataStore = ProductDaoMem.getInstance();
-        Cart cart = cartService.setCart(req);
-        int id = 0;
-        for (Object value : json.values()) {
-            id = Integer.parseInt(value.toString());
-        }
-
-        Product product = productDataStore.find(id);
-        LineItem item = new LineItem(product);
-        cart.remove(item);
-        logger.logDeleteFromCartEvent(req.body() ,req.session().id());
-    }
-
     public static String getCategories (Request req, Response res) {
-        Gson gson = new GsonBuilder().disableHtmlEscaping().create();
-        Map responseData = new HashMap<>();
-        ArrayList categoryParams = new ArrayList<ProductCategory>();
-        for (int i=0; i<ProductCategoryDaoMem.getDATA().size(); i++) {
-            Map oneCategory = new HashMap<>();
-            oneCategory.put("name", ProductCategoryDaoMem.getDATA().get(i).getName());
-            oneCategory.put("id", ProductCategoryDaoMem.getDATA().get(i).getId());
-            categoryParams.add(oneCategory);
-        }
-        responseData.put("Category", categoryParams);
-        return gson.toJson(responseData);
+        JsonTransformer transformer = new JsonTransformer();
+        ArrayList categoryParams = ProductCategoryDaoMem.getDATA().stream().map(BaseModel::getName).collect(Collectors.toCollection(ArrayList::new));
+        return transformer.render(categoryParams);
     }
 
     public static String getSuppliers (Request req, Response res) {
-        Gson gson = new GsonBuilder().disableHtmlEscaping().create();
-        Map responseData = new HashMap<>();
-        ArrayList supplierParams = new ArrayList<Supplier>();
-        for (int i=0; i<SupplierDaoMem.getDATA().size(); i++) {
-            Map oneSupplier = new HashMap<>();
-            oneSupplier.put("name", SupplierDaoMem.getDATA().get(i).getName());
-            oneSupplier.put("id", SupplierDaoMem.getDATA().get(i).getId());
-            supplierParams.add(oneSupplier);
-        }
-        responseData.put("Supplier", supplierParams);
-        return gson.toJson(responseData);
+        JsonTransformer transformer = new JsonTransformer();
+        ArrayList supplierParams = SupplierDaoMem.getDATA().stream().map(BaseModel::getName).collect(Collectors.toCollection(ArrayList::new));
+        return transformer.render(supplierParams);
     }
 
     public static String getProducts (Request req, Response res) {
