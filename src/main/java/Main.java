@@ -31,20 +31,20 @@ public class Main {
 
         populateData();
 
-        get("/createOrder", new Route(){
+        post("/createOrder", new Route(){
             @Override
             public String handle(Request request, Response response) throws Exception {
                 CartController.createOrder(request, gson.fromJson(request.body(), HashMap.class));
-                response.redirect("/pay");
                 return "";
             }
+
         });
 
 
-        post("/tocart", new Route(){
+        post("/updatecart", new Route(){
             @Override
             public String handle(Request request, Response response) throws Exception {
-                ProductController.toCart(request, gson.fromJson(request.body(), HashMap.class));
+                ProductController.updateCart(request, gson.fromJson(request.body(), HashMap.class));
                 return ProductController.cart(request);
             }
         });
@@ -52,14 +52,6 @@ public class Main {
         get("/cart", new Route(){
             @Override
             public String handle(Request request, Response response) throws Exception {
-                return ProductController.cart(request);
-            }
-        });
-
-        post("/fromcart", new Route(){
-            @Override
-            public String handle(Request request, Response response) throws Exception {
-                ProductController.fromCart(request, gson.fromJson(request.body(), HashMap.class));
                 return ProductController.cart(request);
             }
         });

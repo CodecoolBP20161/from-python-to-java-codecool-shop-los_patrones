@@ -1,12 +1,11 @@
 package com.codecool.shop.model;
 
-import com.codecool.shop.dao.implementation.LineItem;
-
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.HashMap;
 
 
-public class Cart {
+public class Cart{
     private ArrayList<LineItem> items = new ArrayList<>();
     private String status;
     private int id;
@@ -33,8 +32,8 @@ public class Cart {
 
     public void add(LineItem item){
         for(LineItem currentItem : this.items){
-            if(Objects.equals(item.getProduct().getName(), currentItem.getProduct().getName())){
-                System.out.println("add");
+
+            if(item.getProduct().getName() == currentItem.getProduct().getName()){
                 currentItem.incrementQuantity();
                 this.process();
                 return;
@@ -79,6 +78,18 @@ public class Cart {
 
     public float getTotalPrice(){
         return this.totalPrice;
+    }
+
+    public HashMap toDict() {
+        HashMap returnDict = new HashMap<>();
+        ArrayList products = new ArrayList();
+        for (LineItem item: items) {
+            products.add(item.getProduct().toDict());
+        }
+        returnDict.put("products", products);
+        returnDict.put("totalQuantity", getTotalItemNumber());
+        returnDict.put("totalPrice", getTotalPrice());
+        return returnDict;
     }
 
     public String toString(){
