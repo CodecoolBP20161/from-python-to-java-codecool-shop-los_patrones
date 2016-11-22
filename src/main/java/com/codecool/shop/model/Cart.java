@@ -1,7 +1,5 @@
 package com.codecool.shop.model;
 
-import com.codecool.shop.dao.implementation.LineItem;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 

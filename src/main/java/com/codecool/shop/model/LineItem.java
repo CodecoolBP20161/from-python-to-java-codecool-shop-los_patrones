@@ -1,7 +1,4 @@
-package com.codecool.shop.dao.implementation;
-
-import com.codecool.shop.model.Product;
-
+package com.codecool.shop.model;
 
 public class LineItem {
     private Product product;
