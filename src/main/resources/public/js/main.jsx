@@ -43,6 +43,9 @@ $('#products').on('click', 'button', function(event) {
     console.log(event.target.id);
 });
 
+$('#cartModal').on('click', 'button', function(event) {
+    console.log(event.target.id);
+});
 
 
 
