@@ -16,10 +16,10 @@ var controller = {
         // Main controller logic starts when all data are loaded in
         $.when(getCartData, getCategoryData, getSupplierData, getProdcuts
         ).done( function( cart, categories, suppliers, products ) {
-            var model = new Model(cart, categories, suppliers, JSON.parse(products[0]));
+            var model = new Model(cart, categories, JSON.parse(suppliers[0]), JSON.parse(products[0]));
             React.render(<ProductComponent data={model}/>, document.getElementById('products'));
-            React.render(<SupplierBarComponent/>, document.getElementById('searchSupplier'));
-            React.render(<CategoryBarComponent/>, document.getElementById('searchCategory'));
+            React.render(<SupplierBarComponent data={model.suppliers}/>, document.getElementById('searchSupplier'));
+            React.render(<CategoryBarComponent data={model.categories}/>, document.getElementById('searchCategory'));
 
 
         });
@@ -28,12 +28,28 @@ var controller = {
 
 var SupplierBarComponent = React.createClass({
     render: function() {
+        const supplierData = this.props.data;
+        console.log(supplierData);
+        console.log(typeof supplierData);
 
+
+        const suppliers = supplierData.map(function(supplier){
+            return (
+                <option>{supplier.name}</option>
+            );
+        });
+
+        return(
+            <div>{suppliers}</div>
+        );
     }
 });
 
 var CategoryBarComponent = React.createClass({
     render: function() {
+        return(
+            <p>mica</p>
+        );
 
     }
 });
@@ -42,7 +58,7 @@ var ProductComponent = React.createClass({
     render: function() {
 
         const products = this.props.data.products;
-
+        console.log(products);
         const currentProducts = products.map(function(product){
             return(
                 <div className="item col-xs-4 col-sm-4 col-md-4 col-lg-4 thumbnail">
