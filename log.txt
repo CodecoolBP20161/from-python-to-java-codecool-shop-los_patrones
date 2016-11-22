@@ -295,3 +295,6 @@ Put product into the cart from id: 15bvl8ebu3dt01ff1uakypth4a {"id":"6"}
 Put product into the cart from id: 15bvl8ebu3dt01ff1uakypth4a {"id":"6"}
 Deleted product into the cart from id: 15bvl8ebu3dt01ff1uakypth4a {"id":"6"}
 Deleted product into the cart from id: 15bvl8ebu3dt01ff1uakypth4a {"id":"6"}
+
+
+
