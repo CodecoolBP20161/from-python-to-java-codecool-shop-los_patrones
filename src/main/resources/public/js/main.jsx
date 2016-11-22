@@ -18,11 +18,25 @@ var controller = {
         ).done( function( cart, categories, suppliers, products ) {
             var model = new Model(cart, categories, suppliers, JSON.parse(products[0]));
             React.render(<ProductComponent data={model}/>, document.getElementById('products'));
+            React.render(<SupplierBarComponent/>, document.getElementById('searchSupplier'));
+            React.render(<CategoryBarComponent/>, document.getElementById('searchCategory'));
 
 
         });
     }
 };
+
+var SupplierBarComponent = React.createClass({
+    render: function() {
+
+    }
+});
+
+var CategoryBarComponent = React.createClass({
+    render: function() {
+
+    }
+});
 
 var ProductComponent = React.createClass({
     render: function() {
