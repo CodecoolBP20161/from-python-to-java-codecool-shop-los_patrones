@@ -194,66 +194,66 @@
 //
 // // event handling
 //
-document.body.addEventListener("click", function(event) {
-    if (event.target.tagName == "SELECT") {
-        if (inputHandler.convertId(event.target.value)[0] == "category") {
-            dataManager.currentCategory = inputHandler.convertId(event.target.value)[1];
-        }
-        if (inputHandler.convertId(event.target.value)[0] == "supplier") {
-            dataManager.currentSupplier = inputHandler.convertId(event.target.value)[1];
-        }
-        apiHandler.getByParams()
-    }
-    if (inputHandler.convertId(event.target.id)[0] == "getProduct") {
-        console.log(inputHandler.convertId(event.target.id)[1]);
-        console.log(typeof inputHandler.convertId(event.target.id)[1]);
-        apiHandler.getProduct(inputHandler.convertId(event.target.id)[1]);
-    }
-
-
-    if(event.target.id[0] == '-'){
-        console.log(globalresult.id[event.target.id[1]]);
-        console.log(typeof globalresult.id[event.target.id[1]]);
-        apiHandler.removeProduct(String(globalresult.id[event.target.id[1]]));
-        refreshModal();
-    }
-
-    if(event.target.id[0] == '+'){
-        apiHandler.getProduct(String(globalresult.id[event.target.id[1]]));
-        refreshModal();
-    }
-    if(event.target.id == 'checkoutstart') {
-        console.log(dataManager.cart.prices)
-        if (dataManager.cart.prices.length > 0) {
-            $('#cartModal').modal('hide');
-            $('#checkoutModal').modal('show');
-        }
-    }
-
-    if(event.target.id == 'pay'){
-        console.log(dataManager.cart);
-        var list = checkInput.checkform();
-        if (list.length == 12) {
-            var returnData = {
-                firstName : list[0],
-                lastName : list[1],
-                email : list[2],
-                phoneNumber : list[3],
-                billingCountry : list[4],
-                billingCity : list[5],
-                billingZip : list[6],
-                billingAddress : list[7],
-                shippingCountry : list[8],
-                shippingCity : list[9],
-                shippingZip : list[10],
-                shippingAddress : list[11],
-                id: dataManager.cart.id[0]
-            }
-            apiHandler.sendCheckout(JSON.stringify(returnData));
-        }
-
-    }
-});
+// document.body.addEventListener("click", function(event) {
+//     if (event.target.tagName == "SELECT") {
+//         if (inputHandler.convertId(event.target.value)[0] == "category") {
+//             dataManager.currentCategory = inputHandler.convertId(event.target.value)[1];
+//         }
+//         if (inputHandler.convertId(event.target.value)[0] == "supplier") {
+//             dataManager.currentSupplier = inputHandler.convertId(event.target.value)[1];
+//         }
+//         apiHandler.getByParams()
+//     }
+//     if (inputHandler.convertId(event.target.id)[0] == "getProduct") {
+//         console.log(inputHandler.convertId(event.target.id)[1]);
+//         console.log(typeof inputHandler.convertId(event.target.id)[1]);
+//         apiHandler.getProduct(inputHandler.convertId(event.target.id)[1]);
+//     }
+//
+//
+//     if(event.target.id[0] == '-'){
+//         console.log(globalresult.id[event.target.id[1]]);
+//         console.log(typeof globalresult.id[event.target.id[1]]);
+//         apiHandler.removeProduct(String(globalresult.id[event.target.id[1]]));
+//         refreshModal();
+//     }
+//
+//     if(event.target.id[0] == '+'){
+//         apiHandler.getProduct(String(globalresult.id[event.target.id[1]]));
+//         refreshModal();
+//     }
+//     if(event.target.id == 'checkoutstart') {
+//         console.log(dataManager.cart.prices)
+//         if (dataManager.cart.prices.length > 0) {
+//             $('#cartModal').modal('hide');
+//             $('#checkoutModal').modal('show');
+//         }
+//     }
+//
+//     if(event.target.id == 'pay'){
+//         console.log(dataManager.cart);
+//         var list = checkInput.checkform();
+//         if (list.length == 12) {
+//             var returnData = {
+//                 firstName : list[0],
+//                 lastName : list[1],
+//                 email : list[2],
+//                 phoneNumber : list[3],
+//                 billingCountry : list[4],
+//                 billingCity : list[5],
+//                 billingZip : list[6],
+//                 billingAddress : list[7],
+//                 shippingCountry : list[8],
+//                 shippingCity : list[9],
+//                 shippingZip : list[10],
+//                 shippingAddress : list[11],
+//                 id: dataManager.cart.id[0]
+//             }
+//             apiHandler.sendCheckout(JSON.stringify(returnData));
+//         }
+//
+//     }
+// });
 //
 // var globalresult = "";
 //

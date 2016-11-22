@@ -29,20 +29,22 @@ var controller = {
     }
 };
 
-document.body.addEventListener("click", function(event) {
-    console.log("sfwegfweg");
+$('#searchSupplier').change(function() {
+    var val = $('#searchSupplier').find('option:selected').text();
+    console.log(val);
+});
+
+$('#searchCategory').change(function() {
+    var val = $('#searchCategory').find('option:selected').text();
+    console.log(val);
+});
+
+$('#products').on('click', 'button', function(event) {
     console.log(event.target.id);
 });
 
-// $(document.body).on('click', '#supplier1', function() {
-//     //do something
-//     console.log("supplier1 clicked");
-// });
-//
-// $(document.body).on('click', '#supplier2', function() {
-//     //do something
-//     console.log("supplier2 clicked");
-// });
+
+
 
 
 
