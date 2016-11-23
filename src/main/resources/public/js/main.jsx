@@ -3,6 +3,8 @@ var model = {
     categories : null,
     suppliers : null,
     products : null,
+    totalPrice: 0,
+    totalQuantity: 0,
 
     initModel: function(cart, categories, suppliers, products){
         this.cart = cart;
@@ -13,8 +15,17 @@ var model = {
 };
 
 var view = {
+    refreshView: function(){
+        this.refreshModal();
+        this.refreshNumberOfItemsinCart();
+    },
+
     refreshModal: function() {
         React.render(<CartComponent data={model.cart}/>, document.getElementById('items-table'));
+    },
+
+    refreshNumberOfItemsinCart: function(){
+        document.getElementById("numberOfItems").innerHTML = model.totalQuantity.toString();
     }
 };
 
@@ -30,6 +41,7 @@ var controller = {
         ).done( function( cart, categories, suppliers, products ) {
 
             model.initModel(JSON.parse(cart[0]), JSON.parse(categories[0]), JSON.parse(suppliers[0]), JSON.parse(products[0]));
+            // console.log(model.cart);
             React.render(<ProductComponent data={model.products}/>, document.getElementById('products'));
             React.render(<SupplierBarComponent data={model.suppliers}/>, document.getElementById('searchSupplier'));
             React.render(<CategoryBarComponent data={model.categories}/>, document.getElementById('searchCategory'));
@@ -46,8 +58,11 @@ var controller = {
 
     refreshCartContent: function(){
         $.when($.ajax({ url: '/cart' })).done(function(cart){
+            console.log(cart);
+            console.log(typeof cart);
             model.cart = JSON.parse(cart).products;
-            view.refreshModal();
+            model.totalQuantity = model.cart.length;
+            view.refreshView();
         })
     },
 
@@ -56,8 +71,6 @@ var controller = {
             id: id,
             method: 'add'
         };
-        console.log(updateMessage);
-
         $.when($.ajax({url: '/updatecart', type: 'POST', data: JSON.stringify(updateMessage)})).done(function(){
             controller.refreshCartContent();
         })
@@ -68,7 +81,6 @@ var controller = {
             id: id,
             method: 'remove'
         };
-        console.log(updateMessage);
         $.when($.ajax({url: '/updatecart', type: 'POST', data: JSON.stringify(updateMessage)})).done(function(){
             controller.refreshCartContent();
         })
@@ -92,7 +104,7 @@ $('#products').on('click', 'button', function(event) {
 
 
 $('#cartModalButton').click(function(){
-    view.refreshModal();
+    view.refreshView();
 });
 
 $('#cartModal').on('click', 'button', function(event) {

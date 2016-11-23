@@ -14,7 +14,10 @@ var SupplierBarComponent = React.createClass({
         }, this);
 
         return(
-            <div>{suppliers}</div>
+            <div>
+                <option>All suppliers</option>
+                {suppliers}
+            </div>
         );
 
     }
@@ -30,7 +33,10 @@ var CategoryBarComponent = React.createClass({
         });
 
         return(
-            <div>{categories}</div>
+            <div>
+                <option>All categories</option>
+                {categories}
+            </div>
         );
 
     }
@@ -38,8 +44,6 @@ var CategoryBarComponent = React.createClass({
 
 var CartComponent = React.createClass({
     render: function() {
-        console.log(this.props.data);
-        console.log(this.props.data.products);
         const cartContent = this.props.data.map(function(cartRow){
             console.log(cartRow);
             return (
