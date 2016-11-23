@@ -1,11 +1,3 @@
-// function Model(cart, categories, suppliers, products){
-//
-//     this.cart = cart;
-//     this.categories = categories;
-//     this.suppliers = suppliers;
-//     this.products = products;
-// }
-
 var model = {
     cart : null,
     categories : null,
@@ -18,13 +10,14 @@ var model = {
         this.suppliers = suppliers;
         this.products = products;
     }
-}
+};
 
 var view = {
-    refreshModal: function(){
-        React.render(<CartComponent data={model.cart}/>, document.getElementById('modal-tbody'));
+    refreshModal: function() {
+        React.render(<CartComponent data={model.cart}/>, document.getElementById('items-table'));
     }
 };
+
 
 var controller = {
     initApp: function(){
@@ -37,17 +30,46 @@ var controller = {
         ).done( function( cart, categories, suppliers, products ) {
 
             model.initModel(JSON.parse(cart[0]), JSON.parse(categories[0]), JSON.parse(suppliers[0]), JSON.parse(products[0]));
-
             React.render(<ProductComponent data={model.products}/>, document.getElementById('products'));
             React.render(<SupplierBarComponent data={model.suppliers}/>, document.getElementById('searchSupplier'));
             React.render(<CategoryBarComponent data={model.categories}/>, document.getElementById('searchCategory'));
 
 
+
+
         });
     },
+
     selectSupplier: function(){
         console.log("selectSupplier");
+    },
+
+    refreshCartContent: function(){
+        $.when($.ajax({ url: '/cart' })).done(function(cart){
+            model.cart = JSON.parse(cart).products;
+        })
+    },
+
+    putToCart: function(id) {
+        var updateMessage = {
+            id: id,
+            method: 'add'
+        };
+        $.when($.ajax({url: '/updatecart', type: 'POST', data: JSON.stringify(updateMessage)})).done(function(){
+            controller.refreshCartContent();
+        })
+    },
+
+    removeFromCart: function(id) {
+        var updateMessage = {
+            id: id,
+            method: 'add'
+        };
+        $.when($.ajax({url: '/updatecart', type: 'POST', data: JSON.stringify(updateMessage)})).done(function(){
+            controller.refreshCartContent();
+        })
     }
+
 };
 
 $('#searchSupplier').change(function() {
@@ -61,16 +83,24 @@ $('#searchCategory').change(function() {
 });
 
 $('#products').on('click', 'button', function(event) {
-    console.log(event.target.id);
+    controller.putToCart(event.target.id);
 });
 
-$('#cartModal').on('click', 'button', function(event) {
-    console.log(event.target.id);
-});
 
 $('#cartModalButton').click(function(){
     view.refreshModal();
 });
+
+$('#cartModal').on('click', 'button', function(event) {
+
+    if(event.target.className.includes('plus')){
+        controller.putToCart(event.target.id);
+    }else if(event.target.className.includes('minus')){
+        controller.removeFromCart(event.target.id);
+    }
+});
+
+
 
 
 

@@ -84,7 +84,7 @@ public class Cart{
         HashMap returnDict = new HashMap<>();
         ArrayList products = new ArrayList();
         for (LineItem item: items) {
-            products.add(item.getProduct().toDict());
+            products.add(item.toDict());
         }
         returnDict.put("products", products);
         returnDict.put("totalQuantity", getTotalItemNumber());

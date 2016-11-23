@@ -152,7 +152,7 @@
 //
 //         request.open("POST", url, true);
 //         request.setRequestHeader("Content-Type", "application/json");
-//         request.send(JSON.stringify({id: productId}));
+//         request.send(JSON.stringify({id: productId, method: 'add or remove'}));
 //         request.onreadystatechange = function () {
 //             if (this.readyState == 4 && this.status == 200) {
 //                 dataManager.cart = JSON.parse(this.responseText);

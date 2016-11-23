@@ -9,7 +9,7 @@ var SupplierBarComponent = React.createClass({
     render: function() {
         const suppliers = this.props.data.map(function(supplier){
             return (
-                <option id={'supplier' + supplier.id} onClick={this.doSomething} key={supplier.id}>{supplier.name}</option>
+                <option id={'supplier' + supplier.id} onClick={controller.doSomething} key={supplier.id}>{supplier.name}</option>
             );
         }, this);
 
@@ -38,19 +38,22 @@ var CategoryBarComponent = React.createClass({
 
 var CartComponent = React.createClass({
     render: function() {
-        const cartContent = this.props.data.products.map(function(cartRow){
+        console.log(this.props.data);
+        console.log(this.props.data.products);
+        const cartContent = this.props.data.map(function(cartRow){
+            console.log(cartRow);
             return (
-                <tr>
+                <tr key={cartRow.id}>
                     <td>{cartRow.name}</td>
                     <td>{cartRow.quantity}</td>
                     <td id="quant">{cartRow.price}</td>
-                    <td><button type='button' class='button glyphicon glyphicon-minus' id={'-' + cartRow.id}></button></td>
-                    <td><button type='button' class='button glyphicon glyphicon-minus' id={'+' + cartRow.id}></button></td>
+                    <td><button type='button' className='button glyphicon glyphicon-minus' id={'-' + cartRow.id}></button></td>
+                    <td><button type='button' className='button glyphicon glyphicon-plus' id={'+' + cartRow.id}></button></td>
                 </tr>
             );
         });
         return(
-            <div>{cartContent}</div>
+            <tbody>{cartContent}</tbody>
         );
     }
 });
@@ -67,7 +70,7 @@ var ProductComponent = React.createClass({
                         <p className="group inner list-group-item-text">{product.description}</p>
                         <p>
                             <span>{product.price} {product.currency}</span>
-                            <button id={"getProduct/" + product.id} className="btn btn-success">Add to cart</button>
+                            <button id={product.id} className="btn btn-success">Add to cart</button>
                         </p>
                     </div>
                 </div>
