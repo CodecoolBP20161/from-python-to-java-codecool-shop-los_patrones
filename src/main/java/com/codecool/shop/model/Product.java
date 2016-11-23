@@ -43,7 +43,7 @@ public class Product extends BaseModel {
         return String.valueOf(this.defaultPrice) + " " + this.defaultCurrency.toString();
     }
 
-    public void setPrice(float price, String currency) {
+    private void setPrice(float price, String currency) {
         this.defaultPrice = price;
         this.defaultCurrency = Currency.getInstance(currency);
     }
@@ -52,7 +52,7 @@ public class Product extends BaseModel {
         return productCategory;
     }
 
-    public void setProductCategory(ProductCategory productCategory) {
+    private void setProductCategory(ProductCategory productCategory) {
         this.productCategory = productCategory;
         this.productCategory.addProduct(this);
     }

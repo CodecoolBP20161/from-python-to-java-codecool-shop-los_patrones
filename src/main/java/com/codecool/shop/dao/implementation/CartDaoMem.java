@@ -30,7 +30,7 @@ public class CartDaoMem implements CartDao {
 
     @Override
     public Cart find(int id) {
-        for(Cart cart : this.DATA){
+        for(Cart cart : DATA){
             if(cart.getId() == id){
                 return cart;
             }
