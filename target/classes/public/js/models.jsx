@@ -59,7 +59,7 @@ var ProductComponent = React.createClass({
     render: function() {
 
         const currentProducts = this.props.data.map(function(product){
-            console.log(product);
+
             return(
                 <div key={product.id} className="item col-xs-4 col-sm-4 col-md-4 col-lg-4 thumbnail">
                     <img className="group list-group-image" src={"/img/product_" + product.id + ".jpg"}/>

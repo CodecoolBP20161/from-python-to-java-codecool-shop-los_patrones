@@ -346,3 +346,17 @@ Put product into the cart from id: cc4kykoao35kdlkpk16k194f {"id":"2","method":"
 
 Put product into the cart from id: wnydi37s5xix19i5aewxytqt1 {"id":"3","method":"add"}
 
+
+Put product into the cart from id: 32atgwie0izq578qo6xmwn3o {"id":"3","method":"add"}
+
+Put product into the cart from id: 10uz5ep8x6wughuo0ga2e28lo {"id":"3","method":"add"}
+
+Put product into the cart from id: 1sowezvvzhttw8hjrbg37eqr9 {"id":"3","method":"add"}
+
+
+
+Put product into the cart from id: 9jrh6r08bjm21nw5t7rkjwqqo {"id":"3","method":"add"}
+
+Put product into the cart from id: 18opa5ruq43qnphgced2n97b6 {"id":"3","method":"add"}
+Put product into the cart from id: 18opa5ruq43qnphgced2n97b6 {"id":"3","method":"remove"}
+

@@ -28,6 +28,17 @@ var view = {
 
     refreshNumberOfItemsinCart: function(){
         document.getElementById("numberOfItems").innerHTML = model.totalQuantity.toString();
+    },
+
+    renderProducts: function(){
+        var data = controller.selectCategoryData(model.products);
+        data = controller.selectSupplierData(data);
+        React.render(<ProductComponent data={data}/>, document.getElementById('products'));
+    },
+
+    renderOptionBars: function() {
+        React.render(<SupplierBarComponent data={model.suppliers}/>, document.getElementById('searchSupplier'));
+        React.render(<CategoryBarComponent data={model.categories}/>, document.getElementById('searchCategory'));
     }
 };
 
@@ -43,19 +54,41 @@ var controller = {
         ).done( function( cart, categories, suppliers, products ) {
 
             model.initModel(JSON.parse(cart[0]), JSON.parse(categories[0]), JSON.parse(suppliers[0]), JSON.parse(products[0]));
-            // console.log(model.cart);
-            React.render(<ProductComponent data={model.products}/>, document.getElementById('products'));
-            React.render(<SupplierBarComponent data={model.suppliers}/>, document.getElementById('searchSupplier'));
-            React.render(<CategoryBarComponent data={model.categories}/>, document.getElementById('searchCategory'));
-
-
-
-
+            view.renderProducts();
+            view.renderOptionBars();
         });
     },
 
-    selectSupplier: function(){
-        console.log("selectSupplier");
+    selectSupplierData: function(products){
+        if(model.currentSupplier == 'All suppliers'){
+            return products;
+        }
+
+        var result = [];
+
+        for(var i = 0; i<products.length; i++){
+            if(model.currentSupplier == products[i].supplier){
+                result.push(products[i]);
+            }
+        }
+
+        return result;
+    },
+
+    selectCategoryData: function(products){
+        if(model.currentCategory == 'All categories'){
+            return products;
+        }
+
+        var result = [];
+        
+        for(var i = 0; i<products.length; i++){
+            if(model.currentCategory == products[i].category){
+                result.push(products[i]);
+            }
+        }
+        return result;
+
     },
 
     refreshCartContent: function(){
@@ -87,15 +120,16 @@ var controller = {
             controller.refreshCartContent();
         })
     }
-
 };
 
 $('#searchSupplier').change(function() {
     model.currentSupplier = $('#searchSupplier').find('option:selected').text();
+    view.renderProducts();
 });
 
 $('#searchCategory').change(function() {
     model.currentCategory = $('#searchCategory').find('option:selected').text();
+    view.renderProducts();
 });
 
 $('#products').on('click', 'button', function(event) {
@@ -110,10 +144,8 @@ $('#cartModalButton').click(function(){
 $('#cartModal').on('click', 'button', function(event) {
 
     if(event.target.className.includes('plus')){
-        console.log('plus');
         controller.putToCart(event.target.id);
     }else if(event.target.className.includes('minus')){
-        console.log('minus');
         controller.removeFromCart(event.target.id);
     }
 });
