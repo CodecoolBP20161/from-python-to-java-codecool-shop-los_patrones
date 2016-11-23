@@ -1,10 +1,4 @@
-var x = 10;
-
 var SupplierBarComponent = React.createClass({
-    doSomething: function () {
-        console.log("aaaaaaaah");
-        x = x+5;
-    },
 
     render: function() {
         const suppliers = this.props.data.map(function(supplier){
@@ -45,7 +39,6 @@ var CategoryBarComponent = React.createClass({
 var CartComponent = React.createClass({
     render: function() {
         const cartContent = this.props.data.map(function(cartRow){
-            console.log(cartRow);
             return (
                 <tr key={cartRow.id}>
                     <td>{cartRow.name}</td>
@@ -66,6 +59,7 @@ var ProductComponent = React.createClass({
     render: function() {
 
         const currentProducts = this.props.data.map(function(product){
+            console.log(product);
             return(
                 <div key={product.id} className="item col-xs-4 col-sm-4 col-md-4 col-lg-4 thumbnail">
                     <img className="group list-group-image" src={"/img/product_" + product.id + ".jpg"}/>

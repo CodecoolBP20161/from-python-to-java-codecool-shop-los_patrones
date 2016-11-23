@@ -5,6 +5,8 @@ var model = {
     products : null,
     totalPrice: 0,
     totalQuantity: 0,
+    currentCategory: 'All categories',
+    currentSupplier: 'All suppliers',
 
     initModel: function(cart, categories, suppliers, products){
         this.cart = cart;
@@ -89,13 +91,11 @@ var controller = {
 };
 
 $('#searchSupplier').change(function() {
-    var val = $('#searchSupplier').find('option:selected').text();
-    console.log(val);
+    model.currentSupplier = $('#searchSupplier').find('option:selected').text();
 });
 
 $('#searchCategory').change(function() {
-    var val = $('#searchCategory').find('option:selected').text();
-    console.log(val);
+    model.currentCategory = $('#searchCategory').find('option:selected').text();
 });
 
 $('#products').on('click', 'button', function(event) {
