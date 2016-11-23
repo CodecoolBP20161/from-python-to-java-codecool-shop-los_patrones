@@ -50,7 +50,18 @@ var CartComponent = React.createClass({
             );
         });
         return(
-            <tbody>{cartContent}</tbody>
+            <table id="items-table" className="table table-bordered table-striped table-hover">
+                <thead>
+                <tr>
+                    <th>Product name</th>
+                    <th>Desired quantity</th>
+                    <th>Price per item</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>{cartContent}</tbody>
+            </table>
         );
     }
 });

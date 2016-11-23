@@ -23,7 +23,7 @@ var view = {
     },
 
     refreshModal: function() {
-        React.render(<CartComponent data={model.cart}/>, document.getElementById('items-table'));
+        React.render(<CartComponent data={model.cart}/>, document.getElementById('modal-table'));
     },
 
     refreshNumberOfItemsinCart: function(){
