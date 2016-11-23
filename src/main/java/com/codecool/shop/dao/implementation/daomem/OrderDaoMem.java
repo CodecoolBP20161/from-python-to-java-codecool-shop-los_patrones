@@ -1,4 +1,4 @@
-package com.codecool.shop.dao.implementation;
+package com.codecool.shop.dao.implementation.daomem;
 
 
 import com.codecool.shop.dao.OrderDao;
@@ -6,7 +6,6 @@ import com.codecool.shop.model.Order;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class OrderDaoMem implements OrderDao {
 
@@ -31,8 +30,8 @@ public class OrderDaoMem implements OrderDao {
 
     @Override
     public Order find(String email) {
-        for(Order order : DATA){
-            if(Objects.equals(order.getEmail(), email)){
+        for(Order order : this.DATA){
+            if(order.getEmail() == email){
                 return order;
             }
         }

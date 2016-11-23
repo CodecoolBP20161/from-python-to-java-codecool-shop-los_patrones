@@ -1,4 +1,4 @@
-package com.codecool.shop.dao.implementation;
+package com.codecool.shop.dao.implementation.daomem;
 
 import com.codecool.shop.dao.SupplierDao;
 import com.codecool.shop.model.Supplier;
@@ -11,6 +11,8 @@ public class SupplierDaoMem implements SupplierDao {
     private static List<Supplier> DATA = new ArrayList<>();
     private static SupplierDaoMem instance = null;
 
+    /* A private Constructor prevents any other class from instantiating.
+     */
     private SupplierDaoMem() {
     }
 

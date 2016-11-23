@@ -1,7 +1,6 @@
 package com.codecool.shop.model;
 
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.HashMap;
 
 
@@ -11,6 +10,7 @@ public class Cart{
     private int id;
     private int totalQantity;
     private float totalPrice;
+    private static Cart instance = null;
 
     public void setId(int id) {
         this.id = id;
@@ -26,13 +26,38 @@ public class Cart{
         this.totalPrice = 0;
     }
 
+    public String increaseQuantity(int i){
+        System.out.println(this.items);
+        try{
+            this.items.get(i).incrementQuantity();
+            return "Successful";
+        }
+
+        catch(IndexOutOfBoundsException e){
+            e.printStackTrace();
+            return "No such LineItem exists!";
+        }
+
+
+    }
+
+    public void decreaseQuantity(int i){
+        this.items.get(i).decrementQuantity();
+    }
+
     public ArrayList<LineItem> getItems() {
         return items;
     }
 
+    public static Cart getInstance() {
+        if (instance == null) {
+            instance = new Cart();
+        }
+        return instance;
+    }
+
     public void add(LineItem item){
         for(LineItem currentItem : this.items){
-
             if(item.getProduct().getName() == currentItem.getProduct().getName()){
                 currentItem.incrementQuantity();
                 this.process();
@@ -45,7 +70,7 @@ public class Cart{
 
     public void remove(LineItem item){
         for(LineItem currentItem : this.items){
-            if(Objects.equals(item.getProduct().getName(), currentItem.getProduct().getName())){
+            if(item.getProduct().getName() == currentItem.getProduct().getName()){
                 currentItem.decrementQuantity();
                 this.process();
                 return;

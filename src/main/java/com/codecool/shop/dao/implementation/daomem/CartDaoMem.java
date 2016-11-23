@@ -1,4 +1,4 @@
-package com.codecool.shop.dao.implementation;
+package com.codecool.shop.dao.implementation.daomem;
 
 
 import com.codecool.shop.dao.CartDao;
@@ -30,7 +30,7 @@ public class CartDaoMem implements CartDao {
 
     @Override
     public Cart find(int id) {
-        for(Cart cart : DATA){
+        for(Cart cart : this.DATA){
             if(cart.getId() == id){
                 return cart;
             }

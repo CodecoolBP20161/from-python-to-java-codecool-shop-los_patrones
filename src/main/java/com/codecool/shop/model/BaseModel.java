@@ -57,9 +57,9 @@ public class BaseModel {
             try {
                 value = field.get(this);
                 if (value != null) {
-                    sb.append(field.getName()).append(":").append(value).append(",");
+                    sb.append(field.getName() + ":" + value + ",");
                 }
-            } catch (IllegalAccessException ignored) {
+            } catch (IllegalAccessException e) {
 
             }
         }
@@ -67,7 +67,8 @@ public class BaseModel {
     }
 
     public HashMap toDict() {
-        return new HashMap();
+        HashMap returnDict = new HashMap();
+        return returnDict;
     };
 
 }
