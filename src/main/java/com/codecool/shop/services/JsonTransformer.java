@@ -1,4 +1,4 @@
-package com.codecool.shop.controller;
+package com.codecool.shop.services;
 
 import com.google.gson.Gson;
 import spark.ResponseTransformer;

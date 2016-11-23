@@ -1,9 +1,9 @@
 package com.codecool.shop.controller;
 
 
-import com.codecool.shop.dao.implementation.CartDaoMem;
 import com.codecool.shop.model.Cart;
 import com.codecool.shop.model.Order;
+import com.codecool.shop.services.CartService;
 import com.codecool.shop.services.SessionLogger;
 import spark.Request;
 
@@ -13,9 +13,8 @@ public class CartController {
     public static SessionLogger logger = new SessionLogger("log.txt");
 
     public static void createOrder(Request request, HashMap data) {
-        System.out.println(1);
-        Cart cart = ProductController.setCart(request);
-        System.out.println(2);
+        CartService cartService = new CartService();
+        Cart cart = cartService.setCart(request);
         System.out.println(data.get("id").toString());
         System.out.println(Float.parseFloat(data.get("id").toString()));
         System.out.println((int) Float.parseFloat(data.get("id").toString()));

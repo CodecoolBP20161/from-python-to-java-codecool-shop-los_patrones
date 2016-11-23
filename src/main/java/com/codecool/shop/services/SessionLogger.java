@@ -1,22 +1,19 @@
 package com.codecool.shop.services;
 
 
-import com.codecool.shop.controller.ProductController;
-import com.codecool.shop.model.Product;
-
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 
 public class SessionLogger {
-    String path;
+    private String path;
 
     public SessionLogger(String path){
         this.path = path;
         this.writeToFile("");
     }
 
-    public void writeToFile(String message){
+    private void writeToFile(String message){
         try{
             FileWriter writer = new FileWriter(this.path, true);
             BufferedWriter bw = new BufferedWriter(writer);
@@ -29,12 +26,12 @@ public class SessionLogger {
     }
 
     public void logPutIntoCartEvent(String product, String id) {
-        String message = "Put product into the cart from id: " + id + " " + product.toString();
+        String message = "Put product into the cart from id: " + id + " " + product;
         this.writeToFile(message);
     }
 
     public void logDeleteFromCartEvent(String product, String id) {
-        String message = "Deleted product into the cart from id: " + id + " " + product.toString();
+        String message = "Deleted product into the cart from id: " + id + " " + product;
         this.writeToFile(message);
     }
 
