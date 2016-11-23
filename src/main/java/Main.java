@@ -44,6 +44,7 @@ public class Main {
         post("/updatecart", new Route(){
             @Override
             public String handle(Request request, Response response) throws Exception {
+                System.out.println("cica");
                 ProductController.updateCart(request, gson.fromJson(request.body(), HashMap.class));
                 return ProductController.cart(request);
             }

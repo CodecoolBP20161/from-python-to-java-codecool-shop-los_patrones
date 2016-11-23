@@ -47,8 +47,8 @@ var CartComponent = React.createClass({
                     <td>{cartRow.name}</td>
                     <td>{cartRow.quantity}</td>
                     <td id="quant">{cartRow.price}</td>
-                    <td><button type='button' className='button glyphicon glyphicon-minus' id={'-' + cartRow.id}></button></td>
-                    <td><button type='button' className='button glyphicon glyphicon-plus' id={'+' + cartRow.id}></button></td>
+                    <td><button type='button' className='button glyphicon glyphicon-minus' id={cartRow.id}></button></td>
+                    <td><button type='button' className='button glyphicon glyphicon-plus' id={cartRow.id}></button></td>
                 </tr>
             );
         });

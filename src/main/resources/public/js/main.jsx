@@ -47,6 +47,7 @@ var controller = {
     refreshCartContent: function(){
         $.when($.ajax({ url: '/cart' })).done(function(cart){
             model.cart = JSON.parse(cart).products;
+            view.refreshModal();
         })
     },
 
@@ -55,6 +56,8 @@ var controller = {
             id: id,
             method: 'add'
         };
+        console.log(updateMessage);
+
         $.when($.ajax({url: '/updatecart', type: 'POST', data: JSON.stringify(updateMessage)})).done(function(){
             controller.refreshCartContent();
         })
@@ -63,8 +66,9 @@ var controller = {
     removeFromCart: function(id) {
         var updateMessage = {
             id: id,
-            method: 'add'
+            method: 'remove'
         };
+        console.log(updateMessage);
         $.when($.ajax({url: '/updatecart', type: 'POST', data: JSON.stringify(updateMessage)})).done(function(){
             controller.refreshCartContent();
         })
@@ -94,8 +98,10 @@ $('#cartModalButton').click(function(){
 $('#cartModal').on('click', 'button', function(event) {
 
     if(event.target.className.includes('plus')){
+        console.log('plus');
         controller.putToCart(event.target.id);
     }else if(event.target.className.includes('minus')){
+        console.log('minus');
         controller.removeFromCart(event.target.id);
     }
 });
