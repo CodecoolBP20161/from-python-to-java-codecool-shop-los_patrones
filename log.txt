@@ -1,0 +1,5 @@
+
+Put product into the cart from id: o6zvy90h7kzd1mfip81odqgvi {"id":"1","method":"add"}
+Put product into the cart from id: o6zvy90h7kzd1mfip81odqgvi {"id":"2","method":"add"}
+
+Put product into the cart from id: 1nk3dmpmrekeb1674rkzw7pusz {"id":"3","method":"add"}

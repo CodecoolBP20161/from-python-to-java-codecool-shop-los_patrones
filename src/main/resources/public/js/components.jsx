@@ -1,3 +1,8 @@
+/**
+ * @fileOverview Various classes that we are rendering on the page using ReactJS
+ * *@requires react.js and JSXTransformer.js (from cdn in our case)
+ */
+
 var SupplierBarComponent = React.createClass({
 
     render: function() {
