@@ -7,7 +7,7 @@ public class Supplier extends BaseModel {
     private ArrayList<Product> products;
 
     public Supplier(String name, String description) {
-        super(name);
+        super(name, description);
         this.products = new ArrayList<>();
     }
 
@@ -19,7 +19,7 @@ public class Supplier extends BaseModel {
         return this.products;
     }
 
-    void addProduct(Product product) {
+    public void addProduct(Product product) {
         this.products.add(product);
     }
 
