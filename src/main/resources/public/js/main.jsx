@@ -1,10 +1,30 @@
-function Model(cart, categories, suppliers, products){
+// function Model(cart, categories, suppliers, products){
+//
+//     this.cart = cart;
+//     this.categories = categories;
+//     this.suppliers = suppliers;
+//     this.products = products;
+// }
 
-    this.cart = cart;
-    this.categories = categories;
-    this.suppliers = suppliers;
-    this.products = products;
+var model = {
+    cart : null,
+    categories : null,
+    suppliers : null,
+    products : null,
+
+    initModel: function(cart, categories, suppliers, products){
+        this.cart = cart;
+        this.categories = categories;
+        this.suppliers = suppliers;
+        this.products = products;
+    }
 }
+
+var view = {
+    refreshModal: function(){
+        React.render(<CartComponent data={model.cart}/>, document.getElementById('modal-tbody'));
+    }
+};
 
 var controller = {
     initApp: function(){
@@ -16,7 +36,8 @@ var controller = {
         $.when(getCartData, getCategoryData, getSupplierData, getProducts
         ).done( function( cart, categories, suppliers, products ) {
 
-            var model = new Model(cart, JSON.parse(categories[0]), JSON.parse(suppliers[0]), JSON.parse(products[0]));
+            model.initModel(JSON.parse(cart[0]), JSON.parse(categories[0]), JSON.parse(suppliers[0]), JSON.parse(products[0]));
+
             React.render(<ProductComponent data={model.products}/>, document.getElementById('products'));
             React.render(<SupplierBarComponent data={model.suppliers}/>, document.getElementById('searchSupplier'));
             React.render(<CategoryBarComponent data={model.categories}/>, document.getElementById('searchCategory'));
@@ -45,6 +66,10 @@ $('#products').on('click', 'button', function(event) {
 
 $('#cartModal').on('click', 'button', function(event) {
     console.log(event.target.id);
+});
+
+$('#cartModalButton').click(function(){
+    view.refreshModal();
 });
 
 

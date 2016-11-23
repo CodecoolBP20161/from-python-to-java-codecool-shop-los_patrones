@@ -36,6 +36,25 @@ var CategoryBarComponent = React.createClass({
     }
 });
 
+var CartComponent = React.createClass({
+    render: function() {
+        const cartContent = this.props.data.products.map(function(cartRow){
+            return (
+                <tr>
+                    <td>{cartRow.name}</td>
+                    <td>{cartRow.quantity}</td>
+                    <td id="quant">{cartRow.price}</td>
+                    <td><button type='button' class='button glyphicon glyphicon-minus' id={'-' + cartRow.id}></button></td>
+                    <td><button type='button' class='button glyphicon glyphicon-minus' id={'+' + cartRow.id}></button></td>
+                </tr>
+            );
+        });
+        return(
+            <div>{cartContent}</div>
+        );
+    }
+});
+
 var ProductComponent = React.createClass({
     render: function() {
 

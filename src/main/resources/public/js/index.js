@@ -255,37 +255,37 @@
 //     }
 // });
 //
-var globalresult = "";
-
-    function refreshModal(){
-        $.ajax({url: "/cart", success: function(result){
-
-            result = JSON.parse(result);
-            globalresult = result;
-            var table_body = document.getElementById("modal-tbody");
-            var total_price = document.getElementById("totalPrice");
-            total_price.innerHTML = "";
-            table_body.innerHTML = "";
-            total_price.innerHTML = result.totalprice[0] + " USD";
-            displayHandler.renderCartItems();
-
-            for(var i = 0; i < result.prices.length; i++){
-
-                var row = document.createElement("tr");
-                row.innerHTML = "<td>" + result.names[i] + "</td>" +
-                    "<td>" + result.quantites[i]+"</td>" +
-                    "<td id='quant'>" + result.prices[i] + "</td>" +
-                    "<td><button type='button' class='button glyphicon glyphicon-minus' id='-"+ i +"'></button></td>" +
-                    "<td><button type='button' class='button glyphicon glyphicon-plus' id='+" + i + "'></button></td>";
-                table_body.appendChild(row);
-
-            }
-        }});
-
-
-    }
-
-    $('#cartModalButton').click(function(){
-        refreshModal();
-    });
+// var globalresult = "";
+//
+//     function refreshModal(){
+//         $.ajax({url: "/cart", success: function(result){
+//
+//             result = JSON.parse(result);
+//             globalresult = result;
+//             var table_body = document.getElementById("modal-tbody");
+//             var total_price = document.getElementById("totalPrice");
+//             total_price.innerHTML = "";
+//             table_body.innerHTML = "";
+//             total_price.innerHTML = result.totalprice[0] + " USD";
+//             displayHandler.renderCartItems();
+//
+//             for(var i = 0; i < result.prices.length; i++){
+//
+//                 var row = document.createElement("tr");
+//                 row.innerHTML = "<td>" + result.names[i] + "</td>" +
+//                     "<td>" + result.quantites[i]+"</td>" +
+//                     "<td id='quant'>" + result.prices[i] + "</td>" +
+//                     "<td><button type='button' class='button glyphicon glyphicon-minus' id='-"+ i +"'></button></td>" +
+//                     "<td><button type='button' class='button glyphicon glyphicon-plus' id='+" + i + "'></button></td>";
+//                 table_body.appendChild(row);
+//
+//             }
+//         }});
+//
+//
+//     }
+//
+//     $('#cartModalButton').click(function(){
+//         refreshModal();
+//     });
 // });
