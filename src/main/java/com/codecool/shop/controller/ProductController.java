@@ -3,13 +3,10 @@ package com.codecool.shop.controller;
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.SupplierDao;
-import com.codecool.shop.model.LineItem;
 import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.dao.implementation.SupplierDaoMem;
-import com.codecool.shop.model.BaseModel;
-import com.codecool.shop.model.Cart;
-import com.codecool.shop.model.Product;
+import com.codecool.shop.model.*;
 import com.codecool.shop.services.CartService;
 import com.codecool.shop.services.JsonTransformer;
 import com.codecool.shop.services.SessionLogger;
@@ -24,8 +21,7 @@ import java.util.stream.Collectors;
 
 
 public class ProductController {
-    public static SessionLogger logger = new SessionLogger("log.txt");
-
+    private static SessionLogger logger = new SessionLogger("log.txt");
 
     public static ModelAndView renderIndex(Request req, Response res) {
         HashMap params = new HashMap();
@@ -37,12 +33,12 @@ public class ProductController {
         return new ModelAndView(params, "product/pay");
     }
 
-    public static String cart(Request req, Response res){
+
+    public static String cart(Request req){
 
         CartService cartService = new CartService();
         Cart cart = cartService.setCart(req);
         return cartService.cartToJson(cart, req);
-
     }
 
     public static void updateCart(Request req, HashMap json){
@@ -63,13 +59,25 @@ public class ProductController {
 
     public static String getCategories (Request req, Response res) {
         JsonTransformer transformer = new JsonTransformer();
-        ArrayList categoryParams = ProductCategoryDaoMem.getDATA().stream().map(BaseModel::getName).collect(Collectors.toCollection(ArrayList::new));
+        ArrayList categoryParams = new ArrayList();
+        for (ProductCategory category : ProductCategoryDaoMem.getDATA()) {
+            HashMap categoryData = new HashMap();
+            categoryData.put("id", category.getId());
+            categoryData.put("name", category.getName());
+            categoryParams.add(categoryData);
+        }
         return transformer.render(categoryParams);
     }
 
     public static String getSuppliers (Request req, Response res) {
         JsonTransformer transformer = new JsonTransformer();
-        ArrayList supplierParams = SupplierDaoMem.getDATA().stream().map(BaseModel::getName).collect(Collectors.toCollection(ArrayList::new));
+        ArrayList supplierParams = new ArrayList();
+        for (Supplier supplier : SupplierDaoMem.getDATA()) {
+            HashMap supplierData = new HashMap();
+            supplierData.put("id", supplier.getId());
+            supplierData.put("name", supplier.getName());
+            supplierParams.add(supplierData);
+        }
         return transformer.render(supplierParams);
     }
 

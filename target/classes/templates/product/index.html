@@ -1,5 +1,8 @@
 <!doctype html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<!--/*-------------------------------------------------------------------------------------------------------------*/-->
+
 <head>
     <meta charset="utf-8" />
     <meta name="author" content="Codecool" />
@@ -7,28 +10,42 @@
 
     <title>Codecool Shop</title>
 
-
-
     <!-- Latest compiled and minified Jquery -->
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"
             integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <!--<script type="text/jsx" src="react/jquery.js"></script>-->
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
+    <!--<link rel="stylesheet" type="/text/css" href="css/boostrap.min.css" />-->
 
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
           integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous" />
+    <!--<link rel="stylesheet" type="/text/css" href="css/boostrap-theme.min.css" />-->
 
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous"></script>
+    <!--<script type="text/jsx" src="js/bootstrap.min.js"></script>-->
 
-
+    <!-- Our own custom CSS stylesheets -->
     <link rel="stylesheet" type="text/css" href="/css/index.css" />
     <link rel="stylesheet" type="text/css" href="/css/freelancer.css" />
+
+    <!-- React JS and Jquery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>
+    <!--<script src="react/react.js"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>
+    <!--<script src="react/JSXTransformer.js"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <!--<script src="react/jquery.min.js"></script>-->
+
+    <!-- Own React Js source file -->
+    <script type="text/jsx" src="js/models.jsx"></script>
+    <script type="text/jsx" src="js/main.jsx"></script>
 </head>
 
 
@@ -49,7 +66,7 @@
                 <li>
                 <div class="basketcontainer">
                     <button id="cartModalButton" type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#cartModal">
-                        <span id="items"></span>
+                        <span id="numberOfItems">0</span>
                         <span class="glyphicon glyphicon-shopping-cart"></span>
                     </button>
                 </div>
@@ -60,6 +77,8 @@
     </div>
     <!-- /.container-fluid -->
 </nav>
+
+<!--/*-------------------------------------------------------------------------------------------------------------*/-->
 
 <div id="cartModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
@@ -80,7 +99,7 @@
                             <th></th>
                         </tr>
                     </thead>
-                    <tbody id="modal-tbody"></tbody>
+                    <!--<tbody id="modal-tbody"></tbody>-->
                 </table>
             </div>
 
@@ -179,48 +198,38 @@
         </div>
     </div>
 </div>
+
 <!--/*-------------------------------------------------------------------------------------------------------------*/-->
 
-
-<div class="container main">
-
-
-
-
-    <!--<div class="btn-group">-->
-        <!--<button id="searchdCategory" class="btn btn-secondary btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
-            <!--<option value="category/all">All</option>-->
-        <!--</button>-->
-    <!--</div>-->
+<div class="container main container-fluid">
 
         <div class="dropdown">
+
             <div class="btn-group">
                 <select class="selectpicker btn-warning" id="searchCategory" data-toggle="dropdown">
                     <option value="category/all">All Categories</option>
                     <span class="caret"></span></select>
             </div>
+
             <div class="btn-group">
                 <select class="selectpicker btn-warning" id="searchSupplier" data-toggle="dropdown">
                     <option value="supplier/all">All Suppliers</option>
                     <span class="caret"></span></select>
             </div>
-        <!--<button id="searchSupplier" class="btn btn-secondary btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
-            <!--<option value="supplier/all">All</option>-->
-        <!--</button>-->
-            </div>
-    </div>
+
+        </div>
 
 
-    <div id="products" class="row list-group">
-    </div>
+    <div id="products" class="row list-group"></div>
+    <div id="example" class="row list-group"></div>
+    <button id="cicamica" type="button">Click me!</button>
+</div>
 
+<!--/*-------------------------------------------------------------------------------------------------------------*/-->
 
 <script src="js/validator.js"></script>
 <script src="js/index.js"></script>
 <script src="js/freelancer.js"></script>
-
-
-
 
 </body>
 </html>

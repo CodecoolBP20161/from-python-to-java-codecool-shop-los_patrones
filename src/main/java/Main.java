@@ -22,9 +22,9 @@ import static spark.Spark.*;
 public class Main {
 
     public static void main(String[] args) {
+
         Gson gson = new Gson();
 
-        // default server settings
         exception(Exception.class, (e, req, res) -> e.printStackTrace());
         staticFileLocation("/public");
         port(8888);
@@ -44,15 +44,16 @@ public class Main {
         post("/updatecart", new Route(){
             @Override
             public String handle(Request request, Response response) throws Exception {
+                System.out.println("cica");
                 ProductController.updateCart(request, gson.fromJson(request.body(), HashMap.class));
-                return ProductController.cart(request, response);
+                return ProductController.cart(request);
             }
         });
 
         get("/cart", new Route(){
             @Override
             public String handle(Request request, Response response) throws Exception {
-                return ProductController.cart(request, response);
+                return ProductController.cart(request);
             }
         });
 
@@ -82,7 +83,8 @@ public class Main {
     }
 
 
-    public static void populateData() {
+
+    private static void populateData() {
 
         ProductDao productDataStore = ProductDaoMem.getInstance();
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
