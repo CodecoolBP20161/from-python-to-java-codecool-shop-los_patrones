@@ -9,7 +9,6 @@ import com.codecool.shop.model.Supplier;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Locale;
 
 public class ProductORM {
 
