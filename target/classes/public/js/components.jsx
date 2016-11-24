@@ -1,3 +1,8 @@
+/**
+ * @fileOverview Various classes that we are rendering on the page using ReactJS
+ * *@requires react.js and JSXTransformer.js (from cdn in our case)
+ */
+
 var SupplierBarComponent = React.createClass({
 
     render: function() {
@@ -50,7 +55,18 @@ var CartComponent = React.createClass({
             );
         });
         return(
-            <tbody>{cartContent}</tbody>
+            <table id="items-table" className="table table-bordered table-striped table-hover">
+                <thead>
+                <tr>
+                    <th>Product name</th>
+                    <th>Desired quantity</th>
+                    <th>Price per item</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>{cartContent}</tbody>
+            </table>
         );
     }
 });
