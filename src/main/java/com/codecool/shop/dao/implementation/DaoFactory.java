@@ -13,7 +13,7 @@ import com.codecool.shop.dao.implementation.daomem.SupplierDaoMem;
 
 public class DaoFactory {
 
-    public static String daoType = "database";
+    public static String daoType;
 
     public ProductDao getProductDao() {
         if (daoType.equals("database")) {

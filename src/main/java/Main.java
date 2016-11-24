@@ -18,8 +18,9 @@ public class Main {
         staticFileLocation("/public");
         port(8888);
 
+        // DATABASE SETTINGS -> "database" or empty string
         AppInit initializer = new AppInit();
-        initializer.initApp("");
+        initializer.initApp("database");
 
         post("/createOrder", new Route(){
             @Override

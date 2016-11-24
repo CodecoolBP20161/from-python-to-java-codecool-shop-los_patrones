@@ -413,3 +413,6 @@ Put product into the cart from id: l8zlr68uo0romkkszavu8hmz {"id":"3","method":"
 Put product into the cart from id: l8zlr68uo0romkkszavu8hmz {"id":"3","method":"remove"}
 Put product into the cart from id: l8zlr68uo0romkkszavu8hmz {"id":"2","method":"add"}
 Put product into the cart from id: l8zlr68uo0romkkszavu8hmz {"id":"3","method":"add"}
+
+Put product into the cart from id: g92bx43m5p5ejrkm3eelbzaf {"id":"3","method":"add"}
+Put product into the cart from id: g92bx43m5p5ejrkm3eelbzaf {"id":"2","method":"add"}

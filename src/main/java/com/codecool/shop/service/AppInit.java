@@ -14,8 +14,10 @@ public class AppInit {
     public void initApp (String dataBaseType) {
         DaoFactory.daoType = dataBaseType;
         if (DaoFactory.daoType.equals("database")) {
+            System.out.println("create tables");
             createTables();
         }
+        System.out.println("populate data");
         populateData();
     }
 
@@ -57,7 +59,7 @@ public class AppInit {
 
     private static void populateData(){
 
-        if (!isEmpty() && DaoFactory.daoType.equals("database")) {
+        if (DaoFactory.daoType.equals("database") && !isEmpty()) {
             return;
         }
 
