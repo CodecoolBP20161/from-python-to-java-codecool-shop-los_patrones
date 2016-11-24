@@ -69,7 +69,6 @@ var controller = {
 
         $.when(getCartData, getCategoryData, getSupplierData, getProducts
         ).done( function( cart, categories, suppliers, products ) {
-
             model.initModel(JSON.parse(cart[0]), JSON.parse(categories[0]), JSON.parse(suppliers[0]), JSON.parse(products[0]));
             view.renderProducts();
             view.renderOptionBars();
@@ -110,10 +109,8 @@ var controller = {
 
     refreshCartContent: function(){
         $.when($.ajax({ url: '/cart' })).done(function(cart){
-            console.log(cart);
-            console.log(typeof cart);
             model.cart = JSON.parse(cart).products;
-            model.totalQuantity = model.cart.length;
+            model.totalQuantity = JSON.parse(cart).totalQuantity;
             view.refreshView();
         })
     },
