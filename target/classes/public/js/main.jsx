@@ -34,6 +34,7 @@ var view = {
     refreshView: function(){
         this.refreshModal();
         this.refreshNumberOfItemsinCart();
+        this.refreshTotalPrice();
     },
 
     refreshModal: function() {
@@ -42,6 +43,10 @@ var view = {
 
     refreshNumberOfItemsinCart: function(){
         document.getElementById("numberOfItems").innerHTML = model.totalQuantity.toString();
+    },
+
+    refreshTotalPrice: function(){
+        document.getElementById("totalPrice").innerHTML = model.totalPrice.toString() + "USD";
     },
 
     renderProducts: function(){
@@ -111,6 +116,7 @@ var controller = {
         $.when($.ajax({ url: '/cart' })).done(function(cart){
             model.cart = JSON.parse(cart).products;
             model.totalQuantity = JSON.parse(cart).totalQuantity;
+            model.totalPrice = JSON.parse(cart).totalPrice;
             view.refreshView();
         })
     },
