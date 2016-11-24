@@ -117,8 +117,6 @@
 
 
 
-
-
 Put product into the cart from id: bobj173jn6k9pz7kh41ukohs {"id":"3","method":"add"}
 Put product into the cart from id: bobj173jn6k9pz7kh41ukohs {"id":"3","method":"add"}
 Put product into the cart from id: bobj173jn6k9pz7kh41ukohs {"id":"5","method":"add"}
@@ -413,3 +411,13 @@ Put product into the cart from id: l8zlr68uo0romkkszavu8hmz {"id":"3","method":"
 Put product into the cart from id: l8zlr68uo0romkkszavu8hmz {"id":"3","method":"remove"}
 Put product into the cart from id: l8zlr68uo0romkkszavu8hmz {"id":"2","method":"add"}
 Put product into the cart from id: l8zlr68uo0romkkszavu8hmz {"id":"3","method":"add"}
+=======
+Put product into the cart from id: 1nk3dmpmrekeb1674rkzw7pusz {"id":"3","method":"add"}
+>>>>>>> 34f96ee5f9acd14c99f28fc61ede9228087f0bfe
+
+Put product into the cart from id: py6rcn2rfjjovk8rpkzlcpfi {"id":"1","method":"add"}
+Put product into the cart from id: py6rcn2rfjjovk8rpkzlcpfi {"id":"2","method":"add"}
+Put product into the cart from id: py6rcn2rfjjovk8rpkzlcpfi {"id":"1","method":"add"}
+Put product into the cart from id: py6rcn2rfjjovk8rpkzlcpfi {"id":"1","method":"add"}
+Put product into the cart from id: py6rcn2rfjjovk8rpkzlcpfi {"id":"1","method":"remove"}
+Put product into the cart from id: py6rcn2rfjjovk8rpkzlcpfi {"id":"2","method":"remove"}

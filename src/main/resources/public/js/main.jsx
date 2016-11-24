@@ -1,3 +1,13 @@
+/**
+ * @fileOverview Front-end application of our Codecool Shop. It contains model, view and controller logic and is<br>
+ *     self-contained except for rendered React components.
+ *@requires react.js and JSXTransformer.js (from cdn in our case) and components.jxs
+ */
+
+
+/**
+ * Stores the data needed by the client side to render the pages.
+ */
 var model = {
     cart : null,
     categories : null,
@@ -16,6 +26,10 @@ var model = {
     }
 };
 
+
+/**
+ * Handles all operations related to changing the look of a rendered page.
+ */
 var view = {
     refreshView: function(){
         this.refreshModal();
@@ -23,7 +37,7 @@ var view = {
     },
 
     refreshModal: function() {
-        React.render(<CartComponent data={model.cart}/>, document.getElementById('items-table'));
+        React.render(<CartComponent data={model.cart}/>, document.getElementById('modal-table'));
     },
 
     refreshNumberOfItemsinCart: function(){
@@ -43,6 +57,9 @@ var view = {
 };
 
 
+/**
+ * Does the necessary calculations and handles AJAX requests and updates the model class with the results.
+ */
 var controller = {
     initApp: function(){
         var getCartData = $.ajax({ url: '/cart' }),
@@ -122,38 +139,38 @@ var controller = {
     }
 };
 
-$('#searchSupplier').change(function() {
-    model.currentSupplier = $('#searchSupplier').find('option:selected').text();
-    view.renderProducts();
-});
+/**
+ * Contains jquery event listeners.
+ */
+$(function(){
+    $('#searchSupplier').change(function() {
+        model.currentSupplier = $('#searchSupplier').find('option:selected').text();
+        view.renderProducts();
+    });
 
-$('#searchCategory').change(function() {
-    model.currentCategory = $('#searchCategory').find('option:selected').text();
-    view.renderProducts();
-});
+    $('#searchCategory').change(function() {
+        model.currentCategory = $('#searchCategory').find('option:selected').text();
+        view.renderProducts();
+    });
 
-$('#products').on('click', 'button', function(event) {
-    controller.putToCart(event.target.id);
-});
-
-
-$('#cartModalButton').click(function(){
-    view.refreshView();
-});
-
-$('#cartModal').on('click', 'button', function(event) {
-
-    if(event.target.className.includes('plus')){
+    $('#products').on('click', 'button', function(event) {
         controller.putToCart(event.target.id);
-    }else if(event.target.className.includes('minus')){
-        controller.removeFromCart(event.target.id);
-    }
+    });
+
+
+    $('#cartModalButton').click(function(){
+        view.refreshView();
+    });
+
+    $('#cartModal').on('click', 'button', function(event) {
+
+        if(event.target.className.includes('plus')){
+            controller.putToCart(event.target.id);
+        }else if(event.target.className.includes('minus')){
+            controller.removeFromCart(event.target.id);
+        }
+    });
 });
 
-
-
-
-
-
-
+/** Main logic starts here.*/
 controller.initApp();
