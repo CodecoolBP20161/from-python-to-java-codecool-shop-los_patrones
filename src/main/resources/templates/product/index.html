@@ -1,13 +1,14 @@
 <!doctype html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<!--/*-------------------------------------------------------------------------------------------------------------*/-->
+
 <head>
     <meta charset="utf-8" />
     <meta name="author" content="Codecool" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Codecool Shop</title>
-
-
 
     <!-- Latest compiled and minified Jquery -->
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"
@@ -26,11 +27,16 @@
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous"></script>
 
-
+    <!-- Our own custom CSS stylesheets -->
     <link rel="stylesheet" type="text/css" href="/css/index.css" />
     <link rel="stylesheet" type="text/css" href="/css/freelancer.css" />
-</head>
 
+    <!-- React JS and Jquery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+</head>
 
 <!--/*-------------------------------------------------------------------------------------------------------------*/-->
 <body id="page-top" class="index">
@@ -49,7 +55,7 @@
                 <li>
                 <div class="basketcontainer">
                     <button id="cartModalButton" type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#cartModal">
-                        <span id="items"></span>
+                        <span id="numberOfItems">0</span>
                         <span class="glyphicon glyphicon-shopping-cart"></span>
                     </button>
                 </div>
@@ -61,6 +67,8 @@
     <!-- /.container-fluid -->
 </nav>
 
+<!--/*-------------------------------------------------------------------------------------------------------------*/-->
+
 <div id="cartModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -69,27 +77,14 @@
                 <h4 class="modal-title">Cart summary:</h4>
             </div>
 
-            <div class="modal-body">
-                <table id="items-table" class="table table-bordered table-striped table-hover">
-                    <thead>
-                        <tr>
-                            <th>Product name</th>
-                            <th>Desired quantity</th>
-                            <th>Price per item</th>
-                            <th></th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody id="modal-tbody"></tbody>
-                </table>
-            </div>
+            <div class="modal-body" id="modal-table"></div>
 
             <div class="modal-footer">
                 <div>
                     <button id="checkoutstart" class="btn btn-success checkout" type="button">Checkout</button>
                 </div>
                 Total:
-                <div id="totalPrice"></div>
+                <div id="totalPrice">0</div>
             </div>
         </div>
     </div>
@@ -179,48 +174,35 @@
         </div>
     </div>
 </div>
+
 <!--/*-------------------------------------------------------------------------------------------------------------*/-->
 
-
-<div class="container main">
-
-
-
-
-    <!--<div class="btn-group">-->
-        <!--<button id="searchdCategory" class="btn btn-secondary btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
-            <!--<option value="category/all">All</option>-->
-        <!--</button>-->
-    <!--</div>-->
+<div class="container main container-fluid">
 
         <div class="dropdown">
+
             <div class="btn-group">
                 <select class="selectpicker btn-warning" id="searchCategory" data-toggle="dropdown">
                     <option value="category/all">All Categories</option>
                     <span class="caret"></span></select>
             </div>
+
             <div class="btn-group">
                 <select class="selectpicker btn-warning" id="searchSupplier" data-toggle="dropdown">
                     <option value="supplier/all">All Suppliers</option>
                     <span class="caret"></span></select>
             </div>
-        <!--<button id="searchSupplier" class="btn btn-secondary btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
-            <!--<option value="supplier/all">All</option>-->
-        <!--</button>-->
-            </div>
-    </div>
+
+        </div>
 
 
-    <div id="products" class="row list-group">
-    </div>
+    <div id="products" class="row list-group"></div>
 
+</div>
 
-<script src="js/validator.js"></script>
-<script src="js/index.js"></script>
-<script src="js/freelancer.js"></script>
-
-
-
+<!--/*-------------------------------------------------------------------------------------------------------------*/-->
+<script type="text/jsx" src="js/components.jsx"></script>
+<script type="text/jsx" src="js/main.jsx"></script>
 
 </body>
 </html>
