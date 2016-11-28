@@ -17,11 +17,11 @@ import java.util.stream.Collectors;
 public class SearchApi extends Api{
 
     public static String getCategories (Request req, Response res) {
-        ArrayList categoryParams = new ArrayList();
+        ArrayList<HashMap<String, java.io.Serializable>> categoryParams = new ArrayList<>();
         DaoFactory factory = new DaoFactory();
         ProductCategoryDao dao = factory.getCategoryDao();
         for (ProductCategory category : dao.getAll()) {
-            HashMap categoryData = new HashMap();
+            HashMap<String, java.io.Serializable> categoryData = new HashMap<>();
             categoryData.put("id", category.getId());
             categoryData.put("name", category.getName());
             categoryParams.add(categoryData);
@@ -30,11 +30,11 @@ public class SearchApi extends Api{
     }
 
     public static String getSuppliers (Request req, Response res) {
-        ArrayList supplierParams = new ArrayList();
+        ArrayList<HashMap<String, java.io.Serializable>> supplierParams = new ArrayList<>();
         DaoFactory factory = new DaoFactory();
         SupplierDao dao = factory.getSupplierDao();
         for (Supplier supplier : dao.getAll()) {
-            HashMap supplierData = new HashMap();
+            HashMap<String, java.io.Serializable> supplierData = new HashMap<>();
             supplierData.put("id", supplier.getId());
             supplierData.put("name", supplier.getName());
             supplierParams.add(supplierData);

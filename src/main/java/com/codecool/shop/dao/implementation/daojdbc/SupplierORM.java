@@ -1,10 +1,10 @@
 package com.codecool.shop.dao.implementation.daojdbc;
 
-import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
 
 public class SupplierORM {
 

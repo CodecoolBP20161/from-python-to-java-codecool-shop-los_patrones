@@ -9,11 +9,11 @@ import spark.template.thymeleaf.ThymeleafTemplateEngine;
 
 import static spark.Spark.*;
 
+
 public class Main {
 
     public static void main(String[] args) {
 
-        // default server settings
         exception(Exception.class, (e, req, res) -> e.printStackTrace());
         staticFileLocation("/public");
         port(8888);
@@ -70,5 +70,4 @@ public class Main {
         get("/", TemplateController::renderIndex, new ThymeleafTemplateEngine());
 
     }
-
 }

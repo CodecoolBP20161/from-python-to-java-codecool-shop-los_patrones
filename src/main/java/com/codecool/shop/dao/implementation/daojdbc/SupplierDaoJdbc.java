@@ -7,9 +7,7 @@ import com.codecool.shop.util.SqlFacade;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by balint on 22.11.16.
- */
+
 public class SupplierDaoJdbc implements SupplierDao {
 
     SqlFacade sqlHelper;

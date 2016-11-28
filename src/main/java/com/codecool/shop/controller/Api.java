@@ -2,7 +2,6 @@ package com.codecool.shop.controller;
 
 import com.google.gson.Gson;
 import spark.Request;
-import spark.ResponseTransformer;
 
 import java.util.HashMap;
 
