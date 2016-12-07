@@ -90,9 +90,9 @@ var controller = {
             }
         }
         request.send(JSON.stringify({
-            username: document.getElementById("signup-username"),
-            email: document.getElementById("signup-email"),
-            password: document.getElementById("signup-password"),
+            username: document.getElementById("signup-username").value,
+            email: document.getElementById("signup-email").value,
+            password: document.getElementById("signup-password").value,
         }));
     },
 
