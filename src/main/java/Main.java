@@ -37,6 +37,14 @@ public class Main {
             }
         });
 
+        post("/sign-in", new Route(){
+            @Override
+            public String handle(Request request, Response response) throws Exception {
+                UserController.register(request);
+                return "";
+            }
+        });
+
         get("/cart", new Route(){
             @Override
             public String handle(Request request, Response response) throws Exception {
@@ -64,6 +72,7 @@ public class Main {
                 return SearchApi.getProducts(request, response);
             }
         });
+
 
         get("/pay", TemplateController::renderPay, new ThymeleafTemplateEngine());
 
