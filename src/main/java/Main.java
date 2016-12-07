@@ -2,6 +2,7 @@ import com.codecool.shop.controller.CartApi;
 import com.codecool.shop.controller.SearchApi;
 import com.codecool.shop.controller.TemplateController;
 import com.codecool.shop.service.AppInit;
+import com.codecool.shop.util.HashFacade;
 import spark.Request;
 import spark.Response;
 import spark.Route;
@@ -12,7 +13,7 @@ import static spark.Spark.*;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws HashFacade.CannotPerformOperationException, HashFacade.InvalidHashException {
 
         exception(Exception.class, (e, req, res) -> e.printStackTrace());
         staticFileLocation("/public");
@@ -40,7 +41,7 @@ public class Main {
         post("/sign-in", new Route(){
             @Override
             public String handle(Request request, Response response) throws Exception {
-                UserController.register(request);
+//                UserController.register(request);
                 return "";
             }
         });
