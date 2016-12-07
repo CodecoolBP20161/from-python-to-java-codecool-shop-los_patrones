@@ -80,6 +80,22 @@ var controller = {
         });
     },
 
+    signUp: function() {
+        var request = new XMLHttpRequest();
+        request.open("POST", "/addUser", true);
+        request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        request.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                var returnData = JSON.parse(this.responseText);
+            }
+        }
+        request.send(JSON.stringify({
+            username: document.getElementById("signup-username"),
+            email: document.getElementById("signup-email"),
+            password: document.getElementById("signup-password"),
+        }));
+    },
+
     selectSupplierData: function(products){
         if(model.currentSupplier == 'All suppliers'){
             return products;
@@ -162,6 +178,11 @@ $(function(){
 
 
     $('#cartModalButton').click(function(){
+        view.refreshView();
+    });
+
+    $('#signUp-confirm').click(function(){
+        controller.signUp();
         view.refreshView();
     });
 
