@@ -86,7 +86,15 @@ var controller = {
         request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         request.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
-                console.log(JSON.parse(this.responseText));
+                var status = this.responseText;
+                if (status=="Email already in use") {
+                    $('#signup-fail').show();
+                }
+                else {
+                    $('#signup-completed').show();
+                    $('#signup-form').hide();
+                    $('#signup-confirm').hide();
+                }
             };
         };
         var data = JSON.stringify({
@@ -185,6 +193,13 @@ $(function(){
     $('#signup-confirm').click(function(){
         controller.signUp();
         view.refreshView();
+    });
+
+    $('#signup-modal-button').click(function(){
+        $('#signup-completed').hide();
+        $('#signup-form').show();
+        $('#signup-fail').hide();
+        $('#signup-confirm').show();
     });
 
     $('#cartModal').on('click', 'button', function(event) {

@@ -216,12 +216,27 @@
                 <h4 class="modal-title">Sign Up:</h4>
             </div>
 
-            <div class="modal-body" id="signup-modal-body"></div>
+            <div class="modal-body" id="signup-modal-body">
+                <div class="signup-form" id="signup-form">
+                    <div class="alert alert-danger" role="alert" id="signup-fail">Email already in use!</div>
+                    <p>
+                       Name: <input type="text" id="signup-name"/>
+                    </p>
+                    <p>
+                        Email: <input type="text" id="signup-email"/>
+                    </p>
+                    <p>
+                        Password: <input type="text" id="signup-pw"/>
+                    </p>
+                    <p>
+                        Password again: <input type="text" id="signup-pw-again"/>
+                    </p>
+                </div>
+                <div class="completed" id="signup-completed">
+                    <div class="alert alert-success" role="alert">Sign up completed</div>
+                </div>
 
-                <input type="text" id="signup-name"/>
-                <input type="text" id="signup-email"/>
-                <input type="text" id="signup-pw"/>
-                <input type="text" id="signup-pw-again"/>
+            </div>
 
             <div class="modal-footer">
                 <div>

@@ -40,29 +40,28 @@ public class SqlFacade {
     public int executeUserUpdate(String pst, String name, String email, String pw) {
         String query = pst;
 
-           try (
-                PreparedStatement statement = getConnection().prepareStatement(query,
-                Statement.RETURN_GENERATED_KEYS)
-           ) {
+        try (
+             PreparedStatement statement = getConnection().prepareStatement(query,
+             Statement.RETURN_GENERATED_KEYS)
+        ) {
             statement.setString(1, name);
             statement.setString(2, email);
             statement.setString(3, pw);
+            System.out.println(statement.toString());
 
             try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
-                if (generatedKeys.next()) {
+                while (generatedKeys.next()) {
+                    System.out.println(1);
+    //              return generatedKeys.getInt(1);
                     return 1;
-//                    return generatedKeys.getInt(1);
-                } else {
-                    return 0;
                 }
             } catch (Exception e) {
-                System.out.println("ez a baj" + e.getClass());
                 return 0;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
                return 0;
         }
+        return 0;
     }
 
     public ArrayList executeSelectQuery(String query) {

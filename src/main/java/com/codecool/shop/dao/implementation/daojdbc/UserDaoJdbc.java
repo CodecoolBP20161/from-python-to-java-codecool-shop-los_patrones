@@ -13,16 +13,24 @@ public class UserDaoJdbc implements UserDao {
 
     SqlFacade sqlHelper;
 
+    public UserDaoJdbc () {
+        this.sqlHelper = new SqlFacade();
+    }
+
     @Override
     public void add(User user) {
-        String query = "insert into user values(?,?,?)";
-        int Id = sqlHelper.executeUserUpdate(query, user.getName(), user.getEmail(), user.getPassword());
-        user.setID(Id);
+        String query = "Insert into users " +
+                "(name, email, password) " +
+                "values (" +
+                "\'" + user.getName() + "\'" + ", " +
+                "\'" + user.getEmail() + "\'" + ", " +
+                "\'" + user.getPassword() + "\'" + ")";
+        sqlHelper.executeUpdateQuery(query);
     }
 
     @Override
     public User find(int id) {
-        String query = "Select * from user where id = " + id;
+        String query = "Select * from users where id = " + id;
         ArrayList data = sqlHelper.executeSelectQuery(query);
         UserORM builder = new UserORM(data);
         return builder.buildUserObjects().get(0);
@@ -35,13 +43,13 @@ public class UserDaoJdbc implements UserDao {
 
     @Override
     public User findByEmail(String email) {
-        String query = "Select * from user where email = " + email;
-        try {
-            ArrayList data = sqlHelper.executeSelectQuery(query);
-            UserORM builder = new UserORM(data);
-            return builder.buildUserObjects().get(0);
-        } catch (NullPointerException e) {
+        String query = "Select * from users where email = \'" + email + "\'";
+        ArrayList data = sqlHelper.executeSelectQuery(query);
+        UserORM builder = new UserORM(data);
+        ArrayList<User> users = builder.buildUserObjects();
+        if (users.size() < 1) {
             return null;
         }
+        return users.get(0);
     }
 }
