@@ -41,6 +41,10 @@ var view = {
         React.render(<CartComponent data={model.cart}/>, document.getElementById('modal-table'));
     },
 
+    emptyCartModal: function(){
+        React.render(<WarningComponent data={model.cart}/>, document.getElementById('modal-table'));
+    },
+
     refreshNumberOfItemsinCart: function(){
         document.getElementById("numberOfItems").innerHTML = model.totalQuantity.toString();
     },
@@ -144,6 +148,14 @@ var controller = {
         $.when($.ajax({url: '/updatecart', type: 'POST', data: JSON.stringify(updateMessage)})).done(function(){
             controller.refreshCartContent();
         })
+    },
+
+    startCheckout: function() {
+        if(model.totalQuantity == 0){
+            view.emptyCartModal();
+        }else{
+            view.changeModalWindow();
+        }
     }
 };
 
@@ -177,7 +189,7 @@ $(function(){
         }else if(event.target.className.includes('minus')){
             controller.removeFromCart(event.target.id);
         }else if(event.target.className.includes('checkout')){
-            view.changeModalWindow();
+            controller.startCheckout();
         }
     });
 });

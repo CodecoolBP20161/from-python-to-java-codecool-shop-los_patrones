@@ -3,6 +3,17 @@
  * *@requires react.js and JSXTransformer.js (from cdn in our case)
  */
 
+var WarningComponent = React.createClass({
+
+    render: function() {
+        return(
+            <div className="alert alert-warning">
+                <strong>Warning!</strong> Your cart is empty.
+            </div>
+        );
+    }
+});
+
 var SupplierBarComponent = React.createClass({
 
     render: function() {
@@ -42,6 +53,7 @@ var CategoryBarComponent = React.createClass({
 });
 
 var CartComponent = React.createClass({
+
     render: function() {
         const cartContent = this.props.data.map(function(cartRow){
             return (

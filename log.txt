@@ -502,3 +502,15 @@ Put product into the cart from id: 1q0ljo4i706bq8yk8epkcmnnr {"id":"3","method":
 
 Put product into the cart from id: ojhlyblapjqd1lt5q075wcts5 {"id":"3","method":"add"}
 Put product into the cart from id: ojhlyblapjqd1lt5q075wcts5 {"id":"3","method":"remove"}
+
+Put product into the cart from id: ltlt9jcnv21n14d5k09sbkkfj {"id":"3","method":"add"}
+
+Put product into the cart from id: 10m7apxuo4s8d1bs2vfdcuwq8d {"id":"3","method":"add"}
+Put product into the cart from id: 10m7apxuo4s8d1bs2vfdcuwq8d {"id":"3","method":"remove"}
+
+Put product into the cart from id: eofekpw27j8v18lr2mqmc3vcq {"id":"3","method":"add"}
+Put product into the cart from id: eofekpw27j8v18lr2mqmc3vcq {"id":"3","method":"remove"}
+
+Put product into the cart from id: uf76nsxaczo2umqpwew9avco {"id":"3","method":"add"}
+Put product into the cart from id: uf76nsxaczo2umqpwew9avco {"id":"3","method":"remove"}
+
