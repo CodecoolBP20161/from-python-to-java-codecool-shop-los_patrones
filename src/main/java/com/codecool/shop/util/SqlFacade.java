@@ -6,9 +6,9 @@ import java.util.HashMap;
 
 public class SqlFacade {
 
-    private static final String DATABASE = "jdbc:postgresql://localhost:5432/codecoolshop";
-    private static final String DB_USER = "postgres";
-    private static final String DB_PASSWORD = "postgres";
+    private static final String DATABASE = "jdbc:postgresql://localhost:5432/postgres";
+    private static final String DB_USER = "balint";
+    private static final String DB_PASSWORD = "Fuzzwktrka88bcykjypt";
 
     public Connection getConnection() throws SQLException {
         return DriverManager.getConnection(
@@ -34,6 +34,34 @@ public class SqlFacade {
         } catch (SQLException e) {
             e.printStackTrace();
             return 0;
+        }
+    }
+
+    public int executeUserUpdate(String pst, String name, String email, String pw) {
+        String query = pst;
+
+           try (
+                PreparedStatement statement = getConnection().prepareStatement(query,
+                Statement.RETURN_GENERATED_KEYS)
+           ) {
+            statement.setString(1, name);
+            statement.setString(2, email);
+            statement.setString(3, pw);
+
+            try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    return 1;
+//                    return generatedKeys.getInt(1);
+                } else {
+                    return 0;
+                }
+            } catch (Exception e) {
+                System.out.println("ez a baj" + e.getClass());
+                return 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+               return 0;
         }
     }
 

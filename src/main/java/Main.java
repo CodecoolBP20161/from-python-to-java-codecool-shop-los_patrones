@@ -20,7 +20,7 @@ public class Main {
         port(8888);
 
         AppInit initializer = new AppInit();
-        initializer.initApp("");
+        initializer.initApp("database");
 
         post("/createOrder", new Route(){
             @Override
@@ -66,7 +66,7 @@ public class Main {
             }
         });
 
-        get("/signup", new Route(){
+        post("/signup", new Route(){
             @Override
             public String handle(Request request, Response response) throws Exception {
                 UserController controller = new UserController(request, response);

@@ -82,18 +82,19 @@ var controller = {
 
     signUp: function () {
         var request = new XMLHttpRequest();
-        request.open("POST", "/signup", true);
+        request.open("post", "http://127.0.0.1:8888/signup", true);
         request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         request.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 console.log(JSON.parse(this.responseText));
             };
         };
-        request.send(JSON.stringify(
-            document.getElementById("signup-name").value,
-            document.getElementById("signup-email").value,
-            document.getElementById("signup-pw").value
-        ))
+        var data = JSON.stringify({
+            name: document.getElementById("signup-name").value,
+            email: document.getElementById("signup-email").value,
+            password: document.getElementById("signup-pw").value
+        })
+        request.send(data);
     },
 
     selectSupplierData: function(products){

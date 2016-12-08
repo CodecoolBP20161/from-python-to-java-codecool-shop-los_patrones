@@ -10,4 +10,5 @@ public interface UserDao {
     void add(User product);
     User find(int id);
     void remove(int id);
+    User findByEmail(String email);
 }

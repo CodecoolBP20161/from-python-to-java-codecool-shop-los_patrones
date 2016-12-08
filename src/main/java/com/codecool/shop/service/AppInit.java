@@ -45,9 +45,17 @@ public class AppInit {
                 "supplier int references SUPPLIER(ID)," +
                 "description text not null)";
 
+        String createUserTable =
+                "CREATE TABLE IF NOT EXISTS USERS" +
+                "(ID serial primary key," +
+                "name text not null," +
+                "email text not null UNIQUE," +
+                "password text not null)";
+
         sqlHelper.executeUpdateQuery(createCategoryTable);
         sqlHelper.executeUpdateQuery(createSupplierTable);
         sqlHelper.executeUpdateQuery(createProductTable);
+        sqlHelper.executeUpdateQuery(createUserTable);
     }
 
     private static Boolean isEmpty () {
