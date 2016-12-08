@@ -1,6 +1,12 @@
+html {
+    overflow: -moz-scrollbars-vertical;
+    overflow-y: scroll;
+}
+
 .main {
     margin-top: 100px;
 }
+
 
 .thumbnail
 {

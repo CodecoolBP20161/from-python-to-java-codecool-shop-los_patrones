@@ -520,3 +520,9 @@ Put product into the cart from id: 117hlpn3p69yn17u53fs8j6uod {"id":"3","method"
 
 Put product into the cart from id: vtn88xuaapga1380q4bgix7lb {"id":"3","method":"add"}
 Put product into the cart from id: vtn88xuaapga1380q4bgix7lb {"id":"3","method":"add"}
+
+Put product into the cart from id: 1eukua5skecnj17fu0qtunwub0 {"id":"3","method":"add"}
+
+Put product into the cart from id: q9910s69qr6y10monmfuvhn0 {"id":"3","method":"add"}
+
+Put product into the cart from id: x5gllt0eje6wv2p5494zifo5 {"id":"3","method":"add"}
