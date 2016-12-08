@@ -1,5 +1,6 @@
 package com.codecool.shop.controller;
 
+import com.codecool.shop.service.RegLogService;
 import spark.Request;
 import spark.Response;
 
@@ -17,6 +18,8 @@ public class UserController {
     }
 
     public String manageRegProcess() {
-        return "";
+        RegLogService service = new RegLogService(request);
+        String result = service.registerUser();
+        return result;
     }
 }
