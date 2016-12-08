@@ -199,7 +199,12 @@ $(function(){
 
     $('#checkoutModal').on('click', 'button', function(event){
        if (event.target.className.includes('pay')){
-           controller.loadPayPage();
+           // controller.loadPayPage();
+           // var list = checkInput.checkform();
+           // console.log(list);
+           // console.log(document.forms["checkout"]);
+           console.log(document.forms["checkout"]["fname"]);
+           console.log(document.forms["checkout"]["fname"].value);
        }
     });
 });
