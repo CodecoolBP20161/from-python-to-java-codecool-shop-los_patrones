@@ -6,9 +6,9 @@ import java.util.HashMap;
 
 public class SqlFacade {
 
-    private static final String DATABASE = "jdbc:postgresql://localhost:5432/codecoolshop";
-    private static final String DB_USER = "postgres";
-    private static final String DB_PASSWORD = "postgres";
+    private static final String DATABASE = "jdbc:postgresql://localhost:5432/postgres";
+    private static final String DB_USER = "balint";
+    private static final String DB_PASSWORD = "Fuzzwktrka88bcykjypt";
 
     public Connection getConnection() throws SQLException {
         return DriverManager.getConnection(
