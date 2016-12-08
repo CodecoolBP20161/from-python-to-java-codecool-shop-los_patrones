@@ -58,6 +58,11 @@ var view = {
     renderOptionBars: function() {
         React.render(<SupplierBarComponent data={model.suppliers}/>, document.getElementById('searchSupplier'));
         React.render(<CategoryBarComponent data={model.categories}/>, document.getElementById('searchCategory'));
+    },
+
+    changeModalWindow: function() {
+        $('#cartModal').modal('hide');
+        $('#checkoutModal').modal('show');
     }
 };
 
@@ -171,9 +176,44 @@ $(function(){
             controller.putToCart(event.target.id);
         }else if(event.target.className.includes('minus')){
             controller.removeFromCart(event.target.id);
+        }else if(event.target.className.includes('checkout')){
+            view.changeModalWindow();
         }
     });
 });
 
 /** Main logic starts here.*/
 controller.initApp();
+
+
+// if(event.target.id == 'checkoutstart') {
+//     console.log(dataManager.cart.prices)
+//     if (dataManager.cart.prices.length > 0) {
+//         $('#cartModal').modal('hide');
+//         $('#checkoutModal').modal('show');
+//     }
+// }
+
+// if(event.target.id == 'pay'){
+//     console.log(dataManager.cart);
+//     var list = checkInput.checkform();
+//     if (list.length == 12) {
+//         var returnData = {
+//             firstName : list[0],
+//             lastName : list[1],
+//             email : list[2],
+//             phoneNumber : list[3],
+//             billingCountry : list[4],
+//             billingCity : list[5],
+//             billingZip : list[6],
+//             billingAddress : list[7],
+//             shippingCountry : list[8],
+//             shippingCity : list[9],
+//             shippingZip : list[10],
+//             shippingAddress : list[11],
+//             id: dataManager.cart.id[0]
+//         }
+//         apiHandler.sendCheckout(JSON.stringify(returnData));
+//     }
+//
+// }
