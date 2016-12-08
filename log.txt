@@ -548,3 +548,5 @@ Put product into the cart from id: 10z7fjo0t7mbf1djhqjd5uw98i {"id":"3","method"
 Put product into the cart from id: 6s33mgd3sd2yusqh2ekwkzi9 {"id":"3","method":"add"}
 
 Put product into the cart from id: f6fii7w13d7mc9u0sa5pj3j1 {"id":"3","method":"add"}
+
+Put product into the cart from id: nn0qalhq6e8b7mparcy8t32d {"id":"3","method":"add"}

@@ -203,6 +203,7 @@ $(function(){
            // var list = checkInput.checkform();
            // console.log(list);
            // console.log(document.forms["checkout"]);
+           console.log(document.forms["checkout"]);
            console.log(document.forms["checkout"]["fname"]);
            console.log(document.forms["checkout"]["fname"].value);
        }
