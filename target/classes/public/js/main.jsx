@@ -9,7 +9,7 @@
  * Stores the data needed by the client side to render the pages.
  */
 var model = {
-    cart : "",
+    cart : null,
     categories : null,
     suppliers : null,
     products : null,
@@ -156,6 +156,10 @@ var controller = {
         }else{
             view.changeModalWindow();
         }
+    },
+
+    loadPayPage: function() {
+        document.location.href = "/pay";
     }
 };
 
@@ -192,22 +196,18 @@ $(function(){
             controller.startCheckout();
         }
     });
+
+    $('#checkoutModal').on('click', 'button', function(event){
+       if (event.target.className.includes('pay')){
+           controller.loadPayPage();
+       }
+    });
 });
 
 /** Main logic starts here.*/
 controller.initApp();
 
-
-// if(event.target.id == 'checkoutstart') {
-//     console.log(dataManager.cart.prices)
-//     if (dataManager.cart.prices.length > 0) {
-//         $('#cartModal').modal('hide');
-//         $('#checkoutModal').modal('show');
-//     }
-// }
-
 // if(event.target.id == 'pay'){
-//     console.log(dataManager.cart);
 //     var list = checkInput.checkform();
 //     if (list.length == 12) {
 //         var returnData = {
