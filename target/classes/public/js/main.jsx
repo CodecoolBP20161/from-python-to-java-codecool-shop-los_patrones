@@ -208,6 +208,10 @@ $(function(){
            console.log(document.forms["checkout"]["fname"].value);
        }
     });
+
+    $("#fname").on('change keydown paste input', function(){
+        validator.validateFirstName($('#fname').val());
+    });
 });
 
 /** Main logic starts here.*/

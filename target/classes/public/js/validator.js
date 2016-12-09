@@ -1,17 +1,40 @@
 var formData = {
-    firstName : null,
-    lastName : null,
-    email : null,
-    phoneNumber : null,
-    country: null,
-    city : null,
-    zipCode : null,
-    address : null
+    firstName: null,
+    lastName: null,
+    email: null,
+    phoneNumber: null,
+    billingCountry: null,
+    billingCity: null,
+    billingZipCode: null,
+    billingAddress: null,
+    shippingCountry: null,
+    shippingCity: null,
+    shippingZipCode: null,
+    shippingAddress: null
 };
 
+
+
 var validator = {
+    validateFirstName : function(str){
+        if(criteriaChecker.isEmpty(str)){
+            console.log("empty");
+        }else{
+            console.log("not empty");
+        }
+    }
 
+};
 
+var criteriaChecker = {
+    isEmpty : function(str){
+        str = str.toString();
+        if (str.length > 0){
+            return false;
+        }else{
+            return true;
+        }
+    }
 };
 
 

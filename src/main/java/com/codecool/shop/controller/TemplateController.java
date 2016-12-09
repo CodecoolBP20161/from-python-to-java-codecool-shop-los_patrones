@@ -15,6 +15,6 @@ public class TemplateController {
 
     public static ModelAndView renderPay(Request req, Response res) {
         HashMap params = new HashMap();
-        return new ModelAndView(params, "product/pay");
+        return new ModelAndView(params, "product/payment");
     }
 }

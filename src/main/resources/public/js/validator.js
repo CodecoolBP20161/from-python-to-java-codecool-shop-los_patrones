@@ -13,9 +13,28 @@ var formData = {
     shippingAddress: null
 };
 
+
+
 var validator = {
+    validateFirstName : function(str){
+        if(criteriaChecker.isEmpty(str)){
+            console.log("empty");
+        }else{
+            console.log("not empty");
+        }
+    }
 
+};
 
+var criteriaChecker = {
+    isEmpty : function(str){
+        str = str.toString();
+        if (str.length > 0){
+            return false;
+        }else{
+            return true;
+        }
+    }
 };
 
 
