@@ -1,6 +1,7 @@
 import com.codecool.shop.controller.CartApi;
 import com.codecool.shop.controller.SearchApi;
 import com.codecool.shop.controller.TemplateController;
+import com.codecool.shop.controller.UserController;
 import com.codecool.shop.service.AppInit;
 import spark.Request;
 import spark.Response;
@@ -19,7 +20,7 @@ public class Main {
         port(8888);
 
         AppInit initializer = new AppInit();
-        initializer.initApp("");
+        initializer.initApp("database");
 
         post("/createOrder", new Route(){
             @Override
@@ -34,6 +35,14 @@ public class Main {
             public String handle(Request request, Response response) throws Exception {
                 CartApi.updateCart(request);
                 return CartApi.cart(request, response);
+            }
+        });
+
+        post("/sign-in", new Route(){
+            @Override
+            public String handle(Request request, Response response) throws Exception {
+                UserController.register(request);
+                return "";
             }
         });
 
@@ -64,6 +73,7 @@ public class Main {
                 return SearchApi.getProducts(request, response);
             }
         });
+
 
         get("/pay", TemplateController::renderPay, new ThymeleafTemplateEngine());
 
