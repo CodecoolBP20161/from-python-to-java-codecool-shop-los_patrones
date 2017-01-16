@@ -502,3 +502,10 @@ Put product into the cart from id: 1c70w2mkxrmrkcot4u3ptslgg {"id":"3","method":
 
 Put product into the cart from id: 1o92cnqp3z32c1l876vdzeo6jm {"id":"3","method":"add"}
 Put product into the cart from id: 1o92cnqp3z32c1l876vdzeo6jm {"id":"3","method":"add"}
+
+Put product into the cart from id: 10k82yxo31edv125irf40jzpup {"id":"3","method":"add"}
+Put product into the cart from id: 10k82yxo31edv125irf40jzpup {"id":"3","method":"add"}
+Put product into the cart from id: 10k82yxo31edv125irf40jzpup {"id":"3","method":"add"}
+Put product into the cart from id: 10k82yxo31edv125irf40jzpup {"id":"3","method":"remove"}
+Put product into the cart from id: 10k82yxo31edv125irf40jzpup {"id":"3","method":"remove"}
+Put product into the cart from id: 10k82yxo31edv125irf40jzpup {"id":"3","method":"remove"}
