@@ -45,9 +45,9 @@ public class AppInit {
                 "supplier int references SUPPLIER(ID)," +
                 "description text not null)";
 
-        sqlHelper.executeUpdateQuery(createCategoryTable);
-        sqlHelper.executeUpdateQuery(createSupplierTable);
-        sqlHelper.executeUpdateQuery(createProductTable);
+        sqlHelper.executeUpdateQuery(createCategoryTable+";--");
+        sqlHelper.executeUpdateQuery(createSupplierTable+";--");
+        sqlHelper.executeUpdateQuery(createProductTable+";--");
     }
 
     private static Boolean isEmpty () {
@@ -57,7 +57,7 @@ public class AppInit {
 
     private static void populateData(){
 
-        if (!isEmpty() && DaoFactory.daoType.equals("database")) {
+        if (DaoFactory.daoType.equals("database") && !isEmpty()) {
             return;
         }
 

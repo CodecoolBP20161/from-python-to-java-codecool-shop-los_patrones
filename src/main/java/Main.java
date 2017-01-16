@@ -19,7 +19,7 @@ public class Main {
         port(8888);
 
         AppInit initializer = new AppInit();
-        initializer.initApp("");
+        initializer.initApp("database");
 
         post("/createOrder", new Route(){
             @Override

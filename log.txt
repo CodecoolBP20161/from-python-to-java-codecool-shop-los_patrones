@@ -483,3 +483,19 @@ Put product into the cart from id: 19xo4imrmh8jvtmzvqv6x0j5r {"id":"3","method":
 Put product into the cart from id: 19xo4imrmh8jvtmzvqv6x0j5r {"id":"3","method":"add"}
 Put product into the cart from id: 19xo4imrmh8jvtmzvqv6x0j5r {"id":"3","method":"add"}
 Put product into the cart from id: 19xo4imrmh8jvtmzvqv6x0j5r {"id":"2","method":"add"}
+
+Put product into the cart from id: 1c70w2mkxrmrkcot4u3ptslgg {"id":"3","method":"add"}
+Put product into the cart from id: 1c70w2mkxrmrkcot4u3ptslgg {"id":"3","method":"add"}
+Put product into the cart from id: 1c70w2mkxrmrkcot4u3ptslgg {"id":"3","method":"add"}
+Put product into the cart from id: 1c70w2mkxrmrkcot4u3ptslgg {"id":"3","method":"add"}
+Put product into the cart from id: 1c70w2mkxrmrkcot4u3ptslgg {"id":"3","method":"add"}
+Put product into the cart from id: 1c70w2mkxrmrkcot4u3ptslgg {"id":"3","method":"add"}
+Put product into the cart from id: 1c70w2mkxrmrkcot4u3ptslgg {"id":"3","method":"remove"}
+Put product into the cart from id: 1c70w2mkxrmrkcot4u3ptslgg {"id":"3","method":"remove"}
+Put product into the cart from id: 1c70w2mkxrmrkcot4u3ptslgg {"id":"3","method":"remove"}
+Put product into the cart from id: 1c70w2mkxrmrkcot4u3ptslgg {"id":"3","method":"remove"}
+Put product into the cart from id: 1c70w2mkxrmrkcot4u3ptslgg {"id":"3","method":"add"}
+Put product into the cart from id: 1c70w2mkxrmrkcot4u3ptslgg {"id":"1","method":"add"}
+Put product into the cart from id: 1c70w2mkxrmrkcot4u3ptslgg {"id":"1","method":"add"}
+Put product into the cart from id: 1c70w2mkxrmrkcot4u3ptslgg {"id":"1","method":"add"}
+Put product into the cart from id: 1c70w2mkxrmrkcot4u3ptslgg {"id":"3","method":"add"}
