@@ -24,7 +24,7 @@ public class ConfigReaderValues {
 
         try {
             Properties prop = new Properties();
-            String propFileName = "config/app.properties";
+            String propFileName = "formspree/config/app.properties";
 
             inputStream = getClass().getClassLoader().getResourceAsStream(propFileName);
 

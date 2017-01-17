@@ -60,7 +60,7 @@ public class Utils {
         if(referer == null){
             htmlBuilder.append("<h4 align='center'>Someone just submitted a form. Here's what they have to say:</h4>");
         }else{
-            htmlBuilder.append("<h4 align='center'>Someone just submitted a form on " + referer + "Here's what they have to say:</h4>");
+            htmlBuilder.append("<h4 align='center'>Someone just submitted a form on (" + referer + "). Here's what they have to say:</h4>");
         }
         htmlBuilder.append("<br>");
         htmlBuilder.append("<table align='center' style='font-family: arial, sans-serif;border-collapse: collapse;width: 90%;'>");

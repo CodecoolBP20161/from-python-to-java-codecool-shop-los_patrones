@@ -3,16 +3,16 @@ package services.formspree;
 import static spark.Spark.post;
 import static spark.Spark.staticFileLocation;
 
-public class Main {
+public class FormspreeService {
     public static void main(String[] args) {
-        staticFileLocation("/");
+        staticFileLocation("/formspree");
         post("/:email", (request, response) -> {
             try{
                 Utils.sendMessage(request, request.params(":email"));
-                response.redirect("html/success.html");
+                response.redirect("/html/success.html");
             }catch(Exception e){
                 e.printStackTrace();
-                response.redirect("html/failure.html");
+                response.redirect("/html/failure.html");
             }
             return "";
         });
