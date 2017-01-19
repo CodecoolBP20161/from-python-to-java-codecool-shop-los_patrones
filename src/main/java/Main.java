@@ -39,10 +39,10 @@ public class Main {
         });
 
         get("/review", new Route(){
-
             @Override
             public Object handle(Request request, Response response) throws Exception {
-                return ReviewFinderController.sendReview(request);
+                return ReviewFinderController.parseReview(ReviewFinderController.sendReview(request), request);
+//                return ReviewFinderController.sendReview(request);
             }
         });
 
