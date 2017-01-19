@@ -42,7 +42,6 @@ public class Main {
             @Override
             public Object handle(Request request, Response response) throws Exception {
                 return ReviewFinderController.parseReview(ReviewFinderController.sendReview(request), request);
-//                return ReviewFinderController.sendReview(request);
             }
         });
 

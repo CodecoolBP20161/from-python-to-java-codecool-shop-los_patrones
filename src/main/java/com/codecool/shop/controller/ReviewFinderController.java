@@ -1,5 +1,6 @@
 package com.codecool.shop.controller;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -28,7 +29,7 @@ public class ReviewFinderController {
         return Request.Get(uri).execute().returnContent().asString();
     }
 
-    public static HashMap<String, Object> parseReview(String s, spark.Request request) {
+    public static String parseReview(String s, spark.Request request) {
         HashMap<String, Object> mymap = new HashMap<>();
         ArrayList<JsonElement> mylist = new ArrayList<>();
 
@@ -36,13 +37,17 @@ public class ReviewFinderController {
         JsonElement element = parser.parse(s);
         JsonObject obj = element.getAsJsonObject(); //since you know it's a JsonObject
         Set<Map.Entry<String, JsonElement>> entries = obj.entrySet();//will return members of your object
+
         for (Map.Entry<String, JsonElement> entry: entries) {
             JsonElement elem = parser.parse(String.valueOf(entry.getValue()));
             JsonObject objasd = elem.getAsJsonObject(); //since you know it's a JsonObject
             mylist.add(objasd.get("url"));
         }
+
         mymap.put("product", request.queryParams("name"));
         mymap.put("recommendations", mylist);
-        return mymap;
+        Gson gson = new Gson();
+        String json = gson.toJson(mymap);
+        return json;
     }
 }
