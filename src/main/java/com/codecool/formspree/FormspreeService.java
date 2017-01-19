@@ -1,4 +1,4 @@
-package services.formspree;
+package com.codecool.formspree;
 
 import static spark.Spark.post;
 import static spark.Spark.staticFileLocation;

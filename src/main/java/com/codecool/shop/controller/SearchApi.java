@@ -65,6 +65,10 @@ public class SearchApi extends Api{
         }
 
         ArrayList returnData = allProducts.stream().map(Product::toDict).collect(Collectors.toCollection(ArrayList::new));
-        return stringify(returnData);
+        HashMap<String, Object> returnMap = new HashMap<>();
+        returnMap.put("category", category);
+        returnMap.put("supplier", supplier);
+        returnMap.put("products", returnData);
+        return stringify(returnMap);
     }
 }

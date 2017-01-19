@@ -1,4 +1,4 @@
-package services.formspree;
+package com.codecool.formspree;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
