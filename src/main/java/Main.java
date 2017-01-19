@@ -1,4 +1,5 @@
 import com.codecool.shop.controller.CartApi;
+import com.codecool.shop.controller.ReviewFinderController;
 import com.codecool.shop.controller.SearchApi;
 import com.codecool.shop.controller.TemplateController;
 import com.codecool.shop.service.AppInit;
@@ -34,6 +35,14 @@ public class Main {
             public String handle(Request request, Response response) throws Exception {
                 CartApi.updateCart(request);
                 return CartApi.cart(request, response);
+            }
+        });
+
+        get("/review", new Route(){
+
+            @Override
+            public Object handle(Request request, Response response) throws Exception {
+                return ReviewFinderController.sendReview(request);
             }
         });
 
