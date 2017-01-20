@@ -11,6 +11,7 @@ import spark.Response;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 
@@ -51,20 +52,24 @@ public class SearchApi extends Api{
         String supplier = req.queryParams("supplier");
         List<Product> allProducts = null;
 
-        if (category != null && supplier != null) {
+        if (!Objects.equals(category, "all") && !Objects.equals(supplier, "all")) {
             allProducts = pDao.getBy(cDao.find(Integer.parseInt(category)), sDao.find(Integer.parseInt(supplier)));
         }
-        if (category != null && supplier == null) {
+        if (!Objects.equals(category, "all") && Objects.equals(supplier, "all")) {
             allProducts = pDao.getBy(cDao.find(Integer.parseInt(category)));
         }
-        if (category == null && supplier != null) {
+        if (Objects.equals(category, "all") && !Objects.equals(supplier, "all")) {
             allProducts = pDao.getBy(sDao.find(Integer.parseInt(supplier)));
         }
-        if (category == null && supplier == null) {
+        if (Objects.equals(category, "all") && Objects.equals(supplier, "all")) {
             allProducts = pDao.getAll();
         }
 
         ArrayList returnData = allProducts.stream().map(Product::toDict).collect(Collectors.toCollection(ArrayList::new));
-        return stringify(returnData);
+        HashMap<String, Object> returnMap = new HashMap<>();
+        returnMap.put("category", category);
+        returnMap.put("supplier", supplier);
+        returnMap.put("products", returnData);
+        return stringify(returnMap);
     }
 }

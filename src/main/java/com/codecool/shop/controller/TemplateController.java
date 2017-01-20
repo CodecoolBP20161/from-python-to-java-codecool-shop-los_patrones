@@ -10,7 +10,8 @@ public class TemplateController {
 
     public static ModelAndView renderIndex(Request req, Response res) {
         HashMap params = new HashMap();
-        return new ModelAndView(params, "product/index");
+        System.out.println("bela");
+        return new ModelAndView(params, "product/app");
     }
 
     public static ModelAndView renderPay(Request req, Response res) {
