@@ -1,0 +1,198 @@
+.webshop-modal {
+  position: fixed;
+  width: 60%;
+  left: 20%;
+  top: 100px;
+  z-index: 10;
+  background-color: white;
+  border: 10px solid #5bc0de;
+  border-radius: 20px;
+  height: 400px;
+  text-align: center;
+  padding: 30px;
+  animation: drop 1s ease forwards;
+}
+
+.webshop-modal-background {
+  position: fixed;
+  width: 100%;
+  z-index: 5;
+  background-color: #5bc0de;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  opacity: 0.5;
+  animation: appear 1s;
+}
+
+.disappear {
+  animation: flyaway 0.5s ease forwards;
+}
+
+.fadeaway {
+  animation: disappear 0.5s ease forwards;
+}
+
+@keyframes drop {
+  0% { transform: translateY(-2000px)}
+  70% { transform: translateY(100px)}
+  100% { transform: translateY(-50px)}
+}
+
+@keyframes appear {
+  0% {opacity: 0}
+  100% {opacity: 0.5}
+}
+
+@keyframes flyaway {
+  0% { transform: translateY(-50px)}
+  70% { transform: translateY(100px)}
+  100% { transform: translateY(-2000px)}
+}
+
+@keyframes disappear {
+  0% {opacity: 0.8}
+  100% {opacity: 0}
+}
+
+.modal-back-button {
+  margin: 0 5px;
+  background-color: #5bc0de;
+  color: white;
+  border: 1px solid #5bc0de;
+  border-radius: 20px;
+  padding: 5px;
+  width: 100px;
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+}
+
+.modal-back-button:focus {
+  outline:0;
+}
+
+.modal-back-button:active {
+  box-shadow: 0 0 20px black;
+}
+
+.modal-content {
+  width: 90%;
+  margin-left: 5%;
+  height: 300px;
+}
+
+.modal-loading {
+  color: #5bc0de;
+  margin-top: 100px;
+}
+
+.link-button {
+  margin: 3px 0;
+  background-color: #5bc0de;
+  color: white;
+  border: 1px solid #5bc0de;
+  border-radius: 20px;
+  padding: 10px;
+  width: 600px;
+  height: 55px;
+}
+
+.link-button:focus {
+  outline:0;
+}
+
+.link-button:active {
+  box-shadow: 0 0 20px black;
+}
+
+.modal-result {
+  width: 70%;
+  margin-left: 15%;
+  padding: 10px;
+  background-color: #999;
+  border: 1px solid #999;
+  border-radius: 10px;
+  color: white;
+}
+
+.modal-products {
+  width: 80%;
+  margin-left: 10%;
+  border: 1px solid #999;
+  border-radius: 10px;
+  padding: 10px 0px;
+  min-height: 50px;
+  margin-bottom: 20px;
+}
+
+.modal-number {
+  margin: 0 20px;
+  display: inline-block;
+}
+
+.lineitem-container {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.lineitem-info {
+  padding-left: 5%;
+  width: 40%;
+  display: inline-block;
+  text-align: left;
+  font-size: 1.2em;
+  color: blue;
+}
+
+.lineitem-price {
+  padding-left: 5%;
+  width: 5%;
+  display: inline-block;
+  text-align: center;
+  font-size: 1.2em;
+  color: blue;
+}
+
+.lineitem-controller {
+  padding-right: 5%;
+  width: 40%;
+  display: inline-block;
+  text-align: right;
+  font-size: 1.2em;
+  color: blue;
+}
+
+.cart-modifier {
+  margin: 0 15px;
+  background-color: #5bc0de;
+  color: white;
+  border: 1px solid #5bc0de;
+  border-radius: 20px;
+  padding: 1px;
+  width: 25px;
+  height: 25px;
+  font-weight: bold;
+}
+
+.cart-modifier:focus {
+  outline:0;
+}
+
+.cart-modifier:active {
+  box-shadow: 0 0 20px black;
+}
+
+.subtotal {
+  width: 30px;
+  display: inline-block;
+}
+
+.cart-modifier-container {
+  width: 30px;
+  display: inline-block;
+}
+
+.price {
+  margin-left: 20px;
+}
